@@ -1,0 +1,21 @@
+spring:
+    datasource:
+      url: jdbc:postgresql://localhost:5432/mobithink
+      username: mobithink
+      password: mobithink
+      driverClassName: org.postgresql.Driver
+    jpa:
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        database: POSTGRESQL
+        show-sql: true
+        properties:
+            hibernate.cache.use_second_level_cache: true
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: false
+            hibernate.dialect: org.hibernate.dialect.PostgreSQL82Dialect
+            generate-ddl: true
+            hibernate.ddl-auto: create-drop
+            hibernate.default_schema: public
+    cloud:
+        config:
+            enabled: true
