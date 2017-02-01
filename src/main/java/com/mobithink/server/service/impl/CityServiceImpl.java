@@ -3,7 +3,6 @@ package com.mobithink.server.service.impl;
 import com.mobithink.server.dao.CityRepository;
 import com.mobithink.server.entity.City;
 import com.mobithink.server.service.CityService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
