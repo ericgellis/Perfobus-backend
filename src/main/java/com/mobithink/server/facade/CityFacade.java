@@ -36,9 +36,7 @@ public class CityFacade {
     }
 
     @GetMapping(path = "/findAll", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
-    public ResponseEntity<List<City>> createCity (){
+    public ResponseEntity<List<CityDTO>> createCity (){
         return ResponseEntity.ok(cityService.findAllCity());
-
     }
-
 }

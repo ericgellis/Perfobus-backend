@@ -1,5 +1,6 @@
 package com.mobithink.server.service.impl;
 
+import com.mobithink.server.DTO.CityDTO;
 import com.mobithink.server.dao.CityRepository;
 import com.mobithink.server.entity.City;
 import com.mobithink.server.service.CityService;
@@ -34,12 +35,15 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public List<City> findAllCity() {
-        List<City> cityList = new ArrayList<>();
+    public List<CityDTO> findAllCity() {
+        List<CityDTO> cityList = new ArrayList<>();
         Iterable<City> cityIterable = cityRepository.findAll();
 
         for (City city : cityIterable){
-            cityList.add(city);
+            CityDTO cityDTO = new CityDTO();
+            cityDTO.setId(city.getId());
+            cityDTO.setName(city.getCityName());
+            cityList.add(cityDTO);
         }
 
         return cityList;

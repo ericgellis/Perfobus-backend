@@ -1,5 +1,6 @@
 package com.mobithink.server.service;
 
+import com.mobithink.server.DTO.CityDTO;
 import com.mobithink.server.entity.City;
 
 import java.util.List;
@@ -13,6 +14,6 @@ public interface CityService {
 
     City findOneCityById(Long id);
 
-    List<City> findAllCity();
+    List<CityDTO> findAllCity();
 
 }
