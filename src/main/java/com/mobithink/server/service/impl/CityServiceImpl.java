@@ -24,7 +24,7 @@ public class CityServiceImpl implements CityService {
     @Override
     public City createCity(String name) {
         City newCity = new City();
-        newCity.setCityName(name);
+        newCity.setName(name);
         return cityRepository.save(newCity);
     }
 
@@ -44,5 +44,10 @@ public class CityServiceImpl implements CityService {
             }
             return cityList;
         }else return null;
+    }
+
+    @Override
+    public City findOneByName(String name) {
+        return cityRepository.findOneByName(name);
     }
 }

@@ -16,4 +16,6 @@ public interface CityService {
 
     List<City> findAllCity();
 
+    City findOneByName(String name);
+
 }

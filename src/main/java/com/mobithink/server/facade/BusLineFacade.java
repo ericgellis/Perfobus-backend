@@ -29,7 +29,7 @@ public class BusLineFacade {
      *
      * POST. Register a new busline.
      *
-     * @param busLine
+     * @param busLine object
      *
      * @return text : "success" if create bus line
      *          text : "exist" if line name exist
@@ -38,9 +38,22 @@ public class BusLineFacade {
 
     @PostMapping(path = "/create", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
     public ResponseEntity<String> create(@Valid @RequestBody BusLine busLine) throws MobithinkBusinessException{
-        if(busLineService.findOneByName(busLine.getName().trim()) == null){
+        if(busLineService.findOneByName(busLine.getName()) == null){
             busLineService.createBusLine(busLine);
             return ResponseEntity.ok("succes");
         } return ResponseEntity.ok("exist");
     }
+
+    /**
+     *
+     * GET. find busline list in a city.
+     *
+     * @param {cityName}
+     *
+     * @return List<BusLine> or null
+     *
+     *
+     */
+
+
 }

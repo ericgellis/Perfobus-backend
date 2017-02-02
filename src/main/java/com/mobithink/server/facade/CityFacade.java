@@ -1,6 +1,7 @@
 package com.mobithink.server.facade;
 
 import com.mobithink.server.entity.City;
+import com.mobithink.server.exeption.MobithinkBusinessException;
 import com.mobithink.server.service.CityService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,14 +25,23 @@ public class CityFacade {
     @Resource
     private CityService cityService;
 
-    @GetMapping(path = "/create/{cityName}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
-    public ResponseEntity<String> createCity (@Valid @PathVariable String cityName){
-        City savedCity = cityService.createCity(cityName);
+    /**
+     *
+     * GET. Register a new city.
+     *
+     * @param cityName
+     *
+     * @return text : "success" if create
+     *          text : "exist" if this name exist
+     *
+     */
 
-        if (savedCity.getId() == null){
-            return ResponseEntity.ok("error");
-        }
-        return ResponseEntity.ok("success");
+    @GetMapping(path = "/create/{cityName}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
+    public ResponseEntity<String> createCity (@Valid @PathVariable String cityName) throws MobithinkBusinessException {
+        if (cityService.findOneByName(cityName) == null){
+            City savedCity = cityService.createCity(cityName);
+            return ResponseEntity.ok("success");
+        }else return ResponseEntity.ok("exist");
     }
 
     @GetMapping(path = "/findAll", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
