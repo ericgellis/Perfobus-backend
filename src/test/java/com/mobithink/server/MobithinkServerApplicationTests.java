@@ -9,6 +9,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -70,7 +71,7 @@ public class MobithinkServerApplicationTests {
 		city.setId(27L);
 		city.setName("Paris");
 		BusLine busLine = new BusLine();
-		busLine.setName("ligne 7");
+		busLine.setName("ligne test");
 		busLine.setCity(city);
 		busLine.setDateOfCreation(1111111L);
 
@@ -81,8 +82,15 @@ public class MobithinkServerApplicationTests {
 				//.andExpect(content().string("exist"))
 				//.andExpect(content().string("succes"))
 				.andExpect(status().isOk());
+	}
 
-
+	@Test
+	public void testGetFindAllLinesByCity() throws Exception {
+		restUserMockMvc.perform(get("/mobithink/busline/find/Paris")
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].cityDto.name").value("Paris"))
+				.andExpect(status().isOk());
 	}
 
 }

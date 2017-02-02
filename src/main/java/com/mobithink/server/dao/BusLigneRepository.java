@@ -14,4 +14,5 @@ public interface BusLigneRepository extends CrudRepository<BusLine, Long> {
 
     BusLine findOneByName(String name);
 
+    BusLine findByNameAndCityId(String name, Long cityId);
 }

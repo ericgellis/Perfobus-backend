@@ -16,7 +16,8 @@ public class Station {
     private Long id;
 
     @Column(name = "name")
-    private String stationName;
+    private String name;
+
 
     public Long getId() {
         return id;
@@ -26,11 +27,11 @@ public class Station {
         this.id = id;
     }
 
-    public String getStationName() {
-        return stationName;
+    public String getName() {
+        return name;
     }
 
-    public void setStationName(String stationName) {
-        this.stationName = stationName;
+    public void setName(String name) {
+        this.name = name;
     }
 }

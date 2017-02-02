@@ -1,5 +1,7 @@
 package com.mobithink.server.facade;
 
+import com.mobithink.server.DTO.CityDTO;
+import com.mobithink.server.DTO.ConverterOfDTO;
 import com.mobithink.server.entity.City;
 import com.mobithink.server.exeption.MobithinkBusinessException;
 import com.mobithink.server.service.CityService;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,6 +24,8 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/mobithink/city" )
 public class CityFacade {
+
+    ConverterOfDTO converterOfDTO = new ConverterOfDTO();
 
     @Resource
     private CityService cityService;
@@ -35,7 +40,6 @@ public class CityFacade {
      *          text : "exist" if this name exist
      *
      */
-
     @GetMapping(path = "/create/{cityName}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
     public ResponseEntity<String> createCity (@Valid @PathVariable String cityName) throws MobithinkBusinessException {
         if (cityService.findOneByName(cityName) == null){
@@ -44,8 +48,4 @@ public class CityFacade {
         }else return ResponseEntity.ok("exist");
     }
 
-    @GetMapping(path = "/findAll", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
-    public ResponseEntity<List<City>> createCity (){
-        return ResponseEntity.ok(cityService.findAllCity());
-    }
 }

@@ -12,7 +12,9 @@ public interface BusLineService {
 
     BusLine createBusLine(BusLine busLine);
 
-    List<BusLine> findOneByCityId(Long id);
+    List<BusLine> findByCityId(Long id);
 
     BusLine findOneByName(String name);
+
+    BusLine findByNameAndCityId(String name, Long cityId);
 }
