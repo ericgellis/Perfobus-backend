@@ -16,10 +16,22 @@ public class BusLine {
     private Long id;
 
     @Column(name = "name")
-    private String busLineName;
+    private String name;
 
     @Column(name = "creation_date")
     private Long dateOfCreation;
+
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
 
     public Long getId() {
         return id;
@@ -29,12 +41,12 @@ public class BusLine {
         this.id = id;
     }
 
-    public String getBusLineName() {
-        return busLineName;
+    public String getName() {
+        return name;
     }
 
-    public void setBusLineName(String busLineName) {
-        this.busLineName = busLineName;
+    public void setName(String Name) {
+        this.name = Name;
     }
 
     public Long getDateOfCreation() {

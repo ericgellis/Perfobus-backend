@@ -1,6 +1,5 @@
 package com.mobithink.server.facade;
 
-import com.mobithink.server.DTO.CityDTO;
 import com.mobithink.server.entity.City;
 import com.mobithink.server.service.CityService;
 import org.springframework.http.MediaType;
@@ -36,7 +35,7 @@ public class CityFacade {
     }
 
     @GetMapping(path = "/findAll", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
-    public ResponseEntity<List<CityDTO>> createCity (){
+    public ResponseEntity<List<City>> createCity (){
         return ResponseEntity.ok(cityService.findAllCity());
     }
 }
