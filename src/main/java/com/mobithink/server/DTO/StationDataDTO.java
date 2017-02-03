@@ -1,57 +1,18 @@
-package com.mobithink.server.entity;
-
-import javax.persistence.*;
+package com.mobithink.server.DTO;
 
 /**
- * Created by athiel on 01/02/2017.
+ * Created by athiel on 03/02/2017.
  */
+public class StationDataDTO {
 
-@Entity
-public class StationData {
-
-    @Id
-    @SequenceGenerator(name = "mobithink_uid", sequenceName = "mobithink_uid", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mobithink_uid")
-    @Column(name="id")
     private Long id;
-
-    @Column(name = "come_in")
     private int numberOfComeIn;
-
-    @Column(name = "go_out")
     private int numberOfGoOut;
-
-    @Column(name = "start_time")
     private Long startTime;
-
-    @Column(name = "end_time")
     private Long endTime;
-
-    @Column(name = "step")
     private Long stationStep;
-
-    @Column(name = "station_name")
     private String stationName;
-
-    @ManyToOne
-    @JoinColumn(name = "place_id")
-    private Place place;
-
-    public Place getPlace() {
-        return place;
-    }
-
-    public void setPlace(Place place) {
-        this.place = place;
-    }
-
-    public String getStationName() {
-        return stationName;
-    }
-
-    public void setStationName(String stationName) {
-        this.stationName = stationName;
-    }
+    private PlaceDTO placeDTO;
 
     public Long getId() {
         return id;
@@ -99,5 +60,21 @@ public class StationData {
 
     public void setStationStep(Long stationStep) {
         this.stationStep = stationStep;
+    }
+
+    public String getStationName() {
+        return stationName;
+    }
+
+    public void setStationName(String stationName) {
+        this.stationName = stationName;
+    }
+
+    public PlaceDTO getPlaceDTO() {
+        return placeDTO;
+    }
+
+    public void setPlaceDTO(PlaceDTO placeDTO) {
+        this.placeDTO = placeDTO;
     }
 }
