@@ -53,14 +53,24 @@ public class BusLineFacade {
      */
     @PostMapping(path = "/create", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
     public ResponseEntity<String> create(@Valid @RequestBody BusLineDTO busLineDto) throws MobithinkBusinessException{
+        Long cityId = null;
 
-        BusLine searchedBusLine = busLineService.findByNameAndCityId(busLineDto.getName(), busLineDto.getCityDto().getId());
+        if (busLineDto.getId() != null){
+            cityId = busLineDto.getId();
+        }
+
+        City city = cityService.findOneByName(busLineDto.getCityDto().getName());
+        if (city != null){
+            cityId = city.getId();
+        }
+
+        BusLine searchedBusLine = busLineService.findByNameAndCityId(busLineDto.getName(), cityId);
 
         if ( searchedBusLine != null){
             return ResponseEntity.ok("exist");
         } else {
             List<Station> stationList = savedStationDTO(busLineDto.getStationDTOList());
-            City savedCity = savedCity(converterOfDTO.convertCityDtoToCity(busLineDto.getCityDto()));
+            City savedCity = cityService.createOrLoadCity(converterOfDTO.convertCityDtoToCity(busLineDto.getCityDto()));
             BusLine savedBusLine = saveNewBusLine(busLineDto, savedCity);
             savelineStationLink(savedBusLine, stationList);
             return ResponseEntity.ok("success");
@@ -98,10 +108,6 @@ public class BusLineFacade {
         BusLine busLine = converterOfDTO.convertBusLineDtoToBusLine(busLineDto);
         busLine.setCity(city);
        return busLineService.createBusLine(busLine);
-    }
-
-    private City savedCity(City city){
-            return cityService.createCity(city);
     }
 
     private void savelineStationLink(BusLine savedBusLine, List<Station> stationList){

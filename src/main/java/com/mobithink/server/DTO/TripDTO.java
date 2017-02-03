@@ -1,6 +1,7 @@
 package com.mobithink.server.DTO;
 
 import com.mobithink.server.entity.RollingPoint;
+import com.mobithink.server.entity.StationData;
 
 import java.util.List;
 
@@ -16,11 +17,10 @@ public class TripDTO {
     private int atmo;
     private int temperature;
     private String weather;
-    private String direction;
     private int vehicleCapacity;
-    private String associatedBusLineName;
+    private String associatedBusLineDtoName;
     private String associatedCityName;
-    private List<StationDTO> stationDTOList;
+    private List<StationDataDTO> stationDataDTOList;
     private List<RollingPointDTO> rollingPointDTOList;
     private List<EventDTO> eventDTOList;
     private PlaceDTO startPlace;
@@ -98,14 +98,6 @@ public class TripDTO {
         this.weather = weather;
     }
 
-    public String getDirection() {
-        return direction;
-    }
-
-    public void setDirection(String direction) {
-        this.direction = direction;
-    }
-
     public int getVehicleCapacity() {
         return vehicleCapacity;
     }
@@ -114,12 +106,12 @@ public class TripDTO {
         this.vehicleCapacity = vehicleCapacity;
     }
 
-    public String getAssociatedBusLineName() {
-        return associatedBusLineName;
+    public String getAssociatedBusLineDtoName() {
+        return associatedBusLineDtoName;
     }
 
-    public void setAssociatedBusLineName(String associatedBusLineName) {
-        this.associatedBusLineName = associatedBusLineName;
+    public void setAssociatedBusLineDtoName(String associatedBusLineDtoName) {
+        this.associatedBusLineDtoName = associatedBusLineDtoName;
     }
 
     public String getAssociatedCityName() {
@@ -130,12 +122,12 @@ public class TripDTO {
         this.associatedCityName = associatedCityName;
     }
 
-    public List<StationDTO> getStationDTOList() {
-        return stationDTOList;
+    public List<StationDataDTO> getStationDataDTOList() {
+        return stationDataDTOList;
     }
 
-    public void setStationDTOList(List<StationDTO> stationDTOList) {
-        this.stationDTOList = stationDTOList;
+    public void setStationDataDTOList(List<StationDataDTO> stationDataDTOList) {
+        this.stationDataDTOList = stationDataDTOList;
     }
 
     public List<RollingPointDTO> getRollingPointDTOList() {

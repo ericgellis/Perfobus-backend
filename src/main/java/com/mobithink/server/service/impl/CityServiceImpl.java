@@ -48,4 +48,13 @@ public class CityServiceImpl implements CityService {
     public City findOneByName(String name) {
         return cityRepository.findOneByName(name);
     }
+
+    @Override
+    public City createOrLoadCity(City city) {
+        City savedCity = cityRepository.findOneByName(city.getName());
+        if (savedCity == null){
+            savedCity = cityRepository.save(city);
+        }
+        return savedCity ;
+    }
 }

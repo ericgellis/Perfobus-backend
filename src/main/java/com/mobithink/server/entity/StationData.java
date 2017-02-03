@@ -28,7 +28,7 @@ public class StationData {
     private Long endTime;
 
     @Column(name = "step")
-    private Long stationStep;
+    private int stationStep;
 
     @Column(name = "station_name")
     private String stationName;
@@ -36,6 +36,18 @@ public class StationData {
     @ManyToOne
     @JoinColumn(name = "place_id")
     private Place place;
+
+    @ManyToOne
+    @JoinColumn(name = "trip_id")
+    private Trip trip;
+
+    public Trip getTrip() {
+        return trip;
+    }
+
+    public void setTrip(Trip trip) {
+        this.trip = trip;
+    }
 
     public Place getPlace() {
         return place;
@@ -93,11 +105,11 @@ public class StationData {
         this.endTime = endTime;
     }
 
-    public Long getStationStep() {
+    public int getStationStep() {
         return stationStep;
     }
 
-    public void setStationStep(Long stationStep) {
+    public void setStationStep(int stationStep) {
         this.stationStep = stationStep;
     }
 }

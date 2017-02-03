@@ -1,5 +1,7 @@
 package com.mobithink.server.entity;
 
+import com.mobithink.server.DTO.PlaceDTO;
+
 import javax.persistence.*;
 
 /**
@@ -33,15 +35,22 @@ public class Trip {
     @Column(name = "weather")
     private String weather;
 
-    @Column(name = "direction")
-    private String direction;
-
     @Column(name = "vehicle_capacity")
     private int vehicleCapacity;
 
+    @Column(name = "bus_line_name")
+    private String busLineName;
+
+    @Column(name = "city_name")
+    private String cityName;
+
     @ManyToOne
-    @JoinColumn(name = "bus_line_id")
-    private BusLine busLine;
+    @JoinColumn(name = "start_place_id")
+    private Place startPlace;
+
+    @ManyToOne
+    @JoinColumn(name = "end_place_id")
+    private Place endPlace;
 
 
     public Long getId() {
@@ -100,12 +109,20 @@ public class Trip {
         this.weather = weather;
     }
 
-    public String getDirection() {
-        return direction;
+    public Place getStartPlace() {
+        return startPlace;
     }
 
-    public void setDirection(String direction) {
-        this.direction = direction;
+    public void setStartPlace(Place startPlace) {
+        this.startPlace = startPlace;
+    }
+
+    public Place getEndPlace() {
+        return endPlace;
+    }
+
+    public void setEndPlace(Place endPlace) {
+        this.endPlace = endPlace;
     }
 
     public int getVehicleCapacity() {
@@ -116,11 +133,19 @@ public class Trip {
         this.vehicleCapacity = vehicleCapacity;
     }
 
-    public BusLine getBusLine() {
-        return busLine;
+    public String getBusLineName() {
+        return busLineName;
     }
 
-    public void setBusLine(BusLine busLine) {
-        this.busLine = busLine;
+    public void setBusLineName(String busLineName) {
+        this.busLineName = busLineName;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 }

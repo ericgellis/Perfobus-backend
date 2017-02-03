@@ -25,6 +25,18 @@ public class RollingPoint {
     @Column(name = "traffic")
     private int traffic;
 
+    @ManyToOne
+    @JoinColumn(name = "trip_id")
+    private Trip trip;
+
+    public Trip getTrip() {
+        return trip;
+    }
+
+    public void setTrip(Trip trip) {
+        this.trip = trip;
+    }
+
     public Long getId() {
         return id;
     }

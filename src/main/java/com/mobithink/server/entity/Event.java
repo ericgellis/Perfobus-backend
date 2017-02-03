@@ -28,11 +28,22 @@ public class Event {
     @JoinColumn(name = "place_id")
     private Place place;
 
+    @ManyToOne
+    @JoinColumn(name = "station_data_id")
+    private StationData associatedStationData;
 
     @ManyToOne
-    @JoinColumn(name = "station_id")
-    private Station associatedStation;
+    @JoinColumn(name = "trip_id")
+    private Trip trip;
 
+
+    public Trip getTrip() {
+        return trip;
+    }
+
+    public void setTrip(Trip trip) {
+        this.trip = trip;
+    }
 
     public Long getId() {
         return id;
@@ -74,11 +85,11 @@ public class Event {
         this.place = place;
     }
 
-    public Station getAssociatedStation() {
-        return associatedStation;
+    public StationData getAssociatedStationData() {
+        return associatedStationData;
     }
 
-    public void setAssociatedStation(Station associatedStation) {
-        this.associatedStation = associatedStation;
+    public void setAssociatedStationData(StationData associatedStationData) {
+        this.associatedStationData = associatedStationData;
     }
 }

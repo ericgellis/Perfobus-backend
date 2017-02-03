@@ -3,6 +3,7 @@ package com.mobithink.server;
 import com.mobithink.server.DTO.BusLineDTO;
 import com.mobithink.server.DTO.CityDTO;
 import com.mobithink.server.DTO.StationDTO;
+import com.mobithink.server.DTO.TripDTO;
 import com.mobithink.server.entity.BusLine;
 import com.mobithink.server.entity.City;
 import com.mobithink.server.entity.Station;
@@ -54,9 +55,8 @@ public class MobithinkServerApplicationTests {
 	@Test
 	public void testSavedNewBusLineDTO() throws Exception{
 		CityDTO cityDTO = new CityDTO();
-		cityDTO.setName("Bordeaux");
-		cityDTO.setId(117L);
-
+		cityDTO.setName("Toulouse");
+		//cityDTO.setId(117L);
 
 		StationDTO station1 = new StationDTO();
 		station1.setStationName("station 1");
@@ -71,7 +71,7 @@ public class MobithinkServerApplicationTests {
 		stationDTOList.add(station3);
 
 		BusLineDTO busLineDTO = new BusLineDTO();
-		busLineDTO.setName("Ligne dto 12");
+		busLineDTO.setName("Ligne dto 14");
 		busLineDTO.setDateOfCreation(22222222L);
 		busLineDTO.setCityDto(cityDTO);
 		busLineDTO.setStationDTOList(stationDTOList);
@@ -83,7 +83,14 @@ public class MobithinkServerApplicationTests {
 				//.andExpect(content().string("exist"))
 				//.andExpect(content().string("succes"))
 				.andExpect(status().isOk());
-}
+	}
+
+	@Test
+	public void testSavedNewTripDto() throws Exception{
+//		BusLineDTO
+//		TripDTO tripDTO = new TripDTO();
+//		tripDTO.setAssociatedBusLineDto();
+	}
 
 	@Test
 	public void testFindAllCities() throws Exception {
@@ -98,16 +105,16 @@ public class MobithinkServerApplicationTests {
 
 	@Test
 	public void testGetFindAllLinesByCity() throws Exception {
-		restUserMockMvc.perform(get("/mobithink/busline/find/Paris")
+		restUserMockMvc.perform(get("/mobithink/busline/find/Toulouse")
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].cityDto.name").value("Paris"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].cityDto.name").value("Toulouse"))
 				.andExpect(status().isOk());
 	}
 
 	@Test
-	public void testGetFindStationAssociateWithCity() throws Exception{
-		restUserMockMvc.perform(get("/mobithink/station/find/70")
+	public void testGetFindStationAssociateWithBusLine() throws Exception{
+		restUserMockMvc.perform(get("/mobithink/station/find/142")
 		.accept(MediaType.APPLICATION_JSON))
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].stationName").value("station 1"))

@@ -5,42 +5,24 @@ package com.mobithink.server.DTO;
  */
 public class RollingPointDTO {
 
-    private Long startTime;
-    private Long endTime;
-    private PlaceDTO startPlace;
-    private PlaceDTO endPlace;
+    private Long pointTime;
+    private PlaceDTO placeDTO;
     private int trafficIndex;
 
-    public Long getStartTime() {
-        return startTime;
+    public Long getPointTime() {
+        return pointTime;
     }
 
-    public void setStartTime(Long startTime) {
-        this.startTime = startTime;
+    public void setPointTime(Long pointTime) {
+        this.pointTime = pointTime;
     }
 
-    public Long getEndTime() {
-        return endTime;
+    public PlaceDTO getPlaceDTO() {
+        return placeDTO;
     }
 
-    public void setEndTime(Long endTime) {
-        this.endTime = endTime;
-    }
-
-    public PlaceDTO getStartPlace() {
-        return startPlace;
-    }
-
-    public void setStartPlace(PlaceDTO startPlace) {
-        this.startPlace = startPlace;
-    }
-
-    public PlaceDTO getEndPlace() {
-        return endPlace;
-    }
-
-    public void setEndPlace(PlaceDTO endPlace) {
-        this.endPlace = endPlace;
+    public void setPlaceDTO(PlaceDTO placeDTO) {
+        this.placeDTO = placeDTO;
     }
 
     public int getTrafficIndex() {

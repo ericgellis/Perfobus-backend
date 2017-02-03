@@ -2,6 +2,7 @@ package com.mobithink.server.DTO;
 
 import com.mobithink.server.entity.BusLine;
 import com.mobithink.server.entity.City;
+import com.mobithink.server.entity.Place;
 import com.mobithink.server.entity.Station;
 
 /**
@@ -65,5 +66,16 @@ public class ConverterOfDTO {
         station.setName(stationDTO.getStationName());
 
         return station;
+    }
+
+    public Place convertPlaceDtoToPlace(PlaceDTO placeDto){
+        Place place = new Place();
+        if (placeDto.getId() != null){
+            place.setId(placeDto.getId());
+        }
+        place.setGpsLat(placeDto.getGpsLat());
+        place.setGpsLong(placeDto.getGpsLong());
+
+        return place;
     }
 }

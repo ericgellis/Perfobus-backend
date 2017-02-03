@@ -11,9 +11,8 @@ public class EventDTO {
     private String eventName;
     private Long startTime;
     private Long endTime;
-    private PlaceDTO startPlace;
-    private PlaceDTO endPlace;
-    private StationDTO associatedStation;
+    private PlaceDTO place;
+    private String associatedStationDtoName;
 
     public Long getId() {
         return id;
@@ -47,27 +46,19 @@ public class EventDTO {
         this.endTime = endTime;
     }
 
-    public PlaceDTO getStartPlace() {
-        return startPlace;
+    public PlaceDTO getPlace() {
+        return place;
     }
 
-    public void setStartPlace(PlaceDTO startPlace) {
-        this.startPlace = startPlace;
+    public void setPlace(PlaceDTO place) {
+        this.place = place;
     }
 
-    public PlaceDTO getEndPlace() {
-        return endPlace;
+    public String getAssociatedStationDtoName() {
+        return associatedStationDtoName;
     }
 
-    public void setEndPlace(PlaceDTO endPlace) {
-        this.endPlace = endPlace;
-    }
-
-    public StationDTO getAssociatedStation() {
-        return associatedStation;
-    }
-
-    public void setAssociatedStation(StationDTO associatedStation) {
-        this.associatedStation = associatedStation;
+    public void setAssociatedStationDtoName(String associatedStationDtoName) {
+        this.associatedStationDtoName = associatedStationDtoName;
     }
 }
