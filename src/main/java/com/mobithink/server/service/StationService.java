@@ -1,5 +1,6 @@
 package com.mobithink.server.service;
 
+import com.mobithink.server.DTO.StationDTO;
 import com.mobithink.server.entity.LineStationLink;
 import com.mobithink.server.entity.Station;
 
@@ -12,9 +13,9 @@ public interface StationService {
 
     Station createStation (String name);
 
-    List<LineStationLink> findLineStationLinkByLineId (Long id);
-
     LineStationLink createLineStationLink (LineStationLink lineStationLink);
 
     Station findByName (String name);
+
+    List<Station> findStationAssociatedWithBusLine(Long busLineId);
 }

@@ -41,17 +41,15 @@ public class StationFacade {
      * @return list<StationDTO> or null
      *
      */
-    @GetMapping(path = "/find/{line_id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
-    public ResponseEntity<List<StationDTO>> createCity (@Valid @PathVariable Long lineId) throws MobithinkBusinessException {
-
-        List<LineStationLink> lineStationLinks = stationService.findLineStationLinkByLineId(lineId);
-        if (lineStationLinks != null){
+    @GetMapping(path = "/find/{lineIdString}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
+    public ResponseEntity<List<StationDTO>> createCity (@Valid @PathVariable String lineIdString) throws MobithinkBusinessException {
+        Long lineId = Long.parseLong(lineIdString);
+        List<Station> stationList = stationService.findStationAssociatedWithBusLine(lineId);
+        if (stationList != null){
             List<StationDTO> stationDTOList = new ArrayList<>();
-            for (LineStationLink lineStationLink : lineStationLinks){
-                stationDTOList.add(converterOfDTO.convertStationToDTO(lineStationLink.getStation()));
-            }
-            return ResponseEntity.ok(stationDTOList);
-        }
-        return null;
+            for (Station station : stationList){
+                stationDTOList.add(converterOfDTO.convertStationToDTO(station));
+            }return ResponseEntity.ok(stationDTOList);
+        }else return null;
     }
 }

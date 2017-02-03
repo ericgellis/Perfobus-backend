@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,11 +35,6 @@ public class StationServiceImpl implements StationService{
     }
 
     @Override
-    public List<LineStationLink> findLineStationLinkByLineId(Long id) {
-        return lineStationLinkRepository.findByBusLineId(id);
-    }
-
-    @Override
     public LineStationLink createLineStationLink(LineStationLink lineStationLink) {
         return lineStationLinkRepository.save(lineStationLink);
     }
@@ -46,5 +42,17 @@ public class StationServiceImpl implements StationService{
     @Override
     public Station findByName(String name) {
         return stationRepository.findByName(name);
+    }
+
+    @Override
+    public List<Station> findStationAssociatedWithBusLine(Long busLineId) {
+        List<LineStationLink> lineStationLinkList = lineStationLinkRepository.findByBusLineId(busLineId);
+        if (lineStationLinkList != null){
+            List<Station> stationList = new ArrayList<>();
+            for (LineStationLink lineStationLink : lineStationLinkList){
+                stationList.add(lineStationLink.getStation());
+            }
+            return stationList;
+        }else return null;
     }
 }

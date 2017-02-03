@@ -83,17 +83,6 @@ public class MobithinkServerApplicationTests {
 				.andExpect(status().isOk());
 }
 
-//	@Test
-//	public void testGetCreateCity() throws Exception {
-//		restUserMockMvc.perform(get("/mobithink/city/create/test")
-//				.accept(MediaType.APPLICATION_JSON))
-//				//.andExpect(content().string("exist"))
-//				//.andExpect(content().string("succes"))
-//				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-//				.andExpect(status().isOk());
-//
-//	}
-
 	@Test
 	public void testFindAllCities() throws Exception {
 		ResultActions result = restUserMockMvc.perform(get("/mobithink/city/findAll")
@@ -103,7 +92,27 @@ public class MobithinkServerApplicationTests {
 				;
 	}
 
-//	@Test
+
+
+	@Test
+	public void testGetFindAllLinesByCity() throws Exception {
+		restUserMockMvc.perform(get("/mobithink/busline/find/Paris")
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].cityDto.name").value("Paris"))
+				.andExpect(status().isOk());
+	}
+
+	@Test
+	public void testGetFindStationAssociateWithCity() throws Exception{
+		restUserMockMvc.perform(get("/mobithink/station/find/70")
+		.accept(MediaType.APPLICATION_JSON))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].stationName").value("station 1"))
+				.andExpect(status().isOk());
+	}
+
+	//	@Test
 //	public void testPostCreateBusLine() throws Exception{
 //		City city = new City();
 //		city.setId(27L);
@@ -122,13 +131,15 @@ public class MobithinkServerApplicationTests {
 //				.andExpect(status().isOk());
 //	}
 
-	@Test
-	public void testGetFindAllLinesByCity() throws Exception {
-		restUserMockMvc.perform(get("/mobithink/busline/find/Paris")
-				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].cityDto.name").value("Paris"))
-				.andExpect(status().isOk());
-	}
 
+//	@Test
+//	public void testGetCreateCity() throws Exception {
+//		restUserMockMvc.perform(get("/mobithink/city/create/test")
+//				.accept(MediaType.APPLICATION_JSON))
+//				//.andExpect(content().string("exist"))
+//				//.andExpect(content().string("succes"))
+//				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+//				.andExpect(status().isOk());
+//
+//	}
 }
