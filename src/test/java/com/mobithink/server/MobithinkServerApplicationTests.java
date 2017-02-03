@@ -54,7 +54,9 @@ public class MobithinkServerApplicationTests {
 	@Test
 	public void testSavedNewBusLineDTO() throws Exception{
 		CityDTO cityDTO = new CityDTO();
-		cityDTO.setName("Toulouse");
+		cityDTO.setName("Bordeaux");
+		cityDTO.setId(117L);
+
 
 		StationDTO station1 = new StationDTO();
 		station1.setStationName("station 1");
@@ -69,7 +71,7 @@ public class MobithinkServerApplicationTests {
 		stationDTOList.add(station3);
 
 		BusLineDTO busLineDTO = new BusLineDTO();
-		busLineDTO.setName("Ligne dto 3");
+		busLineDTO.setName("Ligne dto 12");
 		busLineDTO.setDateOfCreation(22222222L);
 		busLineDTO.setCityDto(cityDTO);
 		busLineDTO.setStationDTOList(stationDTOList);

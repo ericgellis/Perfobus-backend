@@ -39,11 +39,10 @@ public class Trip {
     @Column(name = "vehicle_capacity")
     private int vehicleCapacity;
 
-    @Column(name = "bus_line_name")
-    private String associatedBusLineName;
+    @ManyToOne
+    @JoinColumn(name = "bus_line_id")
+    private BusLine busLine;
 
-    @Column(name = "city_name")
-    private String associatedCityName;
 
     public Long getId() {
         return id;
@@ -115,5 +114,13 @@ public class Trip {
 
     public void setVehicleCapacity(int vehicleCapacity) {
         this.vehicleCapacity = vehicleCapacity;
+    }
+
+    public BusLine getBusLine() {
+        return busLine;
+    }
+
+    public void setBusLine(BusLine busLine) {
+        this.busLine = busLine;
     }
 }

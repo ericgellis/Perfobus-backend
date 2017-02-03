@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface CityService {
 
-    City createCity (String name);
+    City createCity (City city);
 
     City findOneCityById(Long id);
 

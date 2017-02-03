@@ -22,10 +22,8 @@ public class CityServiceImpl implements CityService {
     private CityRepository cityRepository;
 
     @Override
-    public City createCity(String name) {
-        City newCity = new City();
-        newCity.setName(name);
-        return cityRepository.save(newCity);
+    public City createCity(City city) {
+        return cityRepository.save(city);
     }
 
     @Override

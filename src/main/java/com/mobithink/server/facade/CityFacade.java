@@ -30,23 +30,6 @@ public class CityFacade {
     @Resource
     private CityService cityService;
 
-    /**
-     *
-     * GET. Register a new city.
-     *
-     * @param cityName
-     *
-     * @return text : "success" if create
-     *          text : "exist" if this name exist
-     *
-     */
-    @GetMapping(path = "/create/{cityName}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
-    public ResponseEntity<String> createCity (@Valid @PathVariable String cityName) throws MobithinkBusinessException {
-        if (cityService.findOneByName(cityName) == null){
-            City savedCity = cityService.createCity(cityName);
-            return ResponseEntity.ok("success");
-        }else return ResponseEntity.ok("exist");
-    }
 
     /**
      *

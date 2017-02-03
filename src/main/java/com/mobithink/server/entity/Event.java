@@ -25,12 +25,9 @@ public class Event {
     private Long endTime;
 
     @ManyToOne
-    @JoinColumn(name = "start_place_id")
-    private Place startPlace;
+    @JoinColumn(name = "place_id")
+    private Place place;
 
-    @ManyToOne
-    @JoinColumn(name = "end_place_id")
-    private Place endPlace;
 
     @ManyToOne
     @JoinColumn(name = "station_id")
@@ -69,20 +66,12 @@ public class Event {
         this.endTime = endTime;
     }
 
-    public Place getStartPlace() {
-        return startPlace;
+    public Place getPlace() {
+        return place;
     }
 
-    public void setStartPlace(Place startPlace) {
-        this.startPlace = startPlace;
-    }
-
-    public Place getEndPlace() {
-        return endPlace;
-    }
-
-    public void setEndPlace(Place endPlace) {
-        this.endPlace = endPlace;
+    public void setPlace(Place place) {
+        this.place = place;
     }
 
     public Station getAssociatedStation() {
