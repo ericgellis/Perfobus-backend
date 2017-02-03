@@ -48,4 +48,25 @@ public class CityFacade {
         }else return ResponseEntity.ok("exist");
     }
 
+    /**
+     *
+     * GET. find all cities.
+     *
+     *
+     * @return  List<CityDTO> or null
+     *
+     *
+     */
+    @GetMapping(path = "/findAll", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
+    public ResponseEntity<List<CityDTO>> findAllCity() throws MobithinkBusinessException {
+        List<City> cityList = cityService.findAllCity();
+        List<CityDTO> cityDTOList = new ArrayList<>();
+        if (cityList != null){
+            for(City city : cityList){
+                cityDTOList.add(converterOfDTO.convertCityToDTO(city));
+            }
+            return ResponseEntity.ok(cityDTOList);
+        } else return null;
+    }
+
 }
