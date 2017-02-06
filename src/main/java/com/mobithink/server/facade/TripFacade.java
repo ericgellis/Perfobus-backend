@@ -52,8 +52,8 @@ public class TripFacade {
     public ResponseEntity<String> create(@Valid @RequestBody TripDTO tripDTO) throws MobithinkBusinessException {
 
         Trip savedTrip = saveNewTrip(tripDTO);
-        saveStationDataList(savedTrip, tripDTO.getStationDataDTOList());
-        saveEventList(savedTrip, tripDTO.getEventDTOList());
+        List<StationData> stationDataList = saveStationDataList(savedTrip, tripDTO.getStationDataDTOList());
+        saveEventList(savedTrip, tripDTO.getEventDTOList(), stationDataList);
         saveRollingPointList(savedTrip, tripDTO.getRollingPointDTOList());
 
         return ResponseEntity.ok("success");
@@ -73,7 +73,7 @@ public class TripFacade {
         }
     }
 
-    private void saveEventList(Trip savedTrip, List<EventDTO> eventDTOList) {
+    private void saveEventList(Trip savedTrip, List<EventDTO> eventDTOList, List<StationData> stationDataList) {
         Event event = new Event();
         event.setTrip(savedTrip);
         for (EventDTO eventDto : eventDTOList) {
@@ -81,8 +81,11 @@ public class TripFacade {
             event.setStartTime(eventDto.getStartTime());
             event.setEventName(eventDto.getEventName());
             if (eventDto.getStationName() != null) {
-                StationData stationData = stationDataService.findStationDataByStationName(eventDto.getStationName());
-                event.setStationData(stationData);
+                for (StationData stationData : stationDataList){
+                    if(stationData.getStationName().equals(eventDto.getStationName())){
+                        event.setStationData(stationData);
+                    }
+                }
             }
             event.setGpsLat(eventDto.getGpsLat());
             event.setGpsLong(eventDto.getGpsLong());

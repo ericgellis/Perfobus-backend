@@ -147,7 +147,7 @@ public class MobithinkServerApplicationTests {
 		tripDTO.setEndTime(333333333L);
 		tripDTO.setTemperature(20);
 		tripDTO.setVehicleCapacity(55);
-		tripDTO.setTripName("Enregistrement 1");
+		tripDTO.setTripName("Enregistrement 2");
 		tripDTO.setWeather("Ensoleillé");
 		tripDTO.setEventDTOList(eventDTOList);
 		tripDTO.setRollingPointDTOList(rollingPointDTOList);
@@ -185,7 +185,7 @@ public class MobithinkServerApplicationTests {
 
 	@Test
 	public void testGetFindStationAssociateWithBusLine() throws Exception{
-		restUserMockMvc.perform(get("/mobithink/station/find/142")
+		restUserMockMvc.perform(get("/mobithink/station/find/199")
 		.accept(MediaType.APPLICATION_JSON))
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].stationName").value("station 1"))
