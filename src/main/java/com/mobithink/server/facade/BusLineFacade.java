@@ -29,8 +29,6 @@ import java.util.List;
 @RequestMapping(value = "/mobithink/busline" )
 public class BusLineFacade {
 
-    ConverterOfDTO converterOfDTO = new ConverterOfDTO();
-
     @Resource
     private BusLineService busLineService;
 
@@ -70,7 +68,7 @@ public class BusLineFacade {
             return ResponseEntity.ok("exist");
         } else {
             List<Station> stationList = savedStationDTO(busLineDto.getStationDTOList());
-            City savedCity = cityService.createOrLoadCity(converterOfDTO.convertCityDtoToCity(busLineDto.getCityDto()));
+            City savedCity = cityService.createOrLoadCity(ConverterOfDTO.convertCityDtoToCity(busLineDto.getCityDto()));
             BusLine savedBusLine = saveNewBusLine(busLineDto, savedCity);
             savelineStationLink(savedBusLine, stationList);
             return ResponseEntity.ok("success");
@@ -97,7 +95,7 @@ public class BusLineFacade {
             if (busLineIterable != null) {
                 List<BusLineDTO> busLineDTOList = new ArrayList<>();
                 for (BusLine busLine : busLineIterable) {
-                    busLineDTOList.add(converterOfDTO.convertBusLineToDTO(busLine));
+                    busLineDTOList.add(ConverterOfDTO.convertBusLineToDTO(busLine));
                 }
                 return ResponseEntity.ok(busLineDTOList);
             } else return null;
@@ -105,7 +103,7 @@ public class BusLineFacade {
     }
 
     private BusLine saveNewBusLine(BusLineDTO busLineDto, City city){
-        BusLine busLine = converterOfDTO.convertBusLineDtoToBusLine(busLineDto);
+        BusLine busLine = ConverterOfDTO.convertBusLineDtoToBusLine(busLineDto);
         busLine.setCity(city);
        return busLineService.createBusLine(busLine);
     }

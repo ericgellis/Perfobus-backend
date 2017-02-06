@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * Created by athiel on 03/02/2017.
@@ -23,4 +24,11 @@ public class TripServiceImpl implements TripService {
     public Trip createTrip(Trip trip) {
         return tripRepository.save(trip);
     }
+
+    @Override
+    public List<Trip> findTripListByBusLineNameAndcityName(String busLineName, String cityName) {
+        return tripRepository.findByBusLineNameAndCityName(busLineName, cityName);
+    }
+
+
 }

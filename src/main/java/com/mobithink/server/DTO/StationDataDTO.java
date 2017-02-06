@@ -15,6 +15,21 @@ public class StationDataDTO {
     private Long gpsLat;
     private Long gpsLong;
 
+    public StationDataDTO() {
+    }
+
+    public StationDataDTO(Long id, int numberOfComeIn, int numberOfGoOut, Long startTime, Long endTime, int stationStep, String stationName, Long gpsLat, Long gpsLong) {
+        this.id = id;
+        this.numberOfComeIn = numberOfComeIn;
+        this.numberOfGoOut = numberOfGoOut;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.stationStep = stationStep;
+        this.stationName = stationName;
+        this.gpsLat = gpsLat;
+        this.gpsLong = gpsLong;
+    }
+
     public Long getId() {
         return id;
     }

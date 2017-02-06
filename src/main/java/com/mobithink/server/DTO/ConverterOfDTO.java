@@ -1,15 +1,15 @@
 package com.mobithink.server.DTO;
 
-import com.mobithink.server.entity.BusLine;
-import com.mobithink.server.entity.City;
-import com.mobithink.server.entity.Station;
+import com.mobithink.server.entity.*;
+
+import java.util.List;
 
 /**
  * Created by athiel on 02/02/2017.
  */
 public class ConverterOfDTO {
 
-    public BusLineDTO convertBusLineToDTO(BusLine busLine){
+    public static BusLineDTO convertBusLineToDTO(BusLine busLine){
         BusLineDTO busLineDTO = new BusLineDTO();
         busLineDTO.setId(busLine.getId());
         busLineDTO.setName(busLine.getName());
@@ -19,7 +19,7 @@ public class ConverterOfDTO {
         return busLineDTO;
     }
 
-    public CityDTO convertCityToDTO(City city){
+    public static CityDTO convertCityToDTO(City city){
         CityDTO cityDTO = new CityDTO();
         cityDTO.setId(city.getId());
         cityDTO.setName(city.getName());
@@ -27,7 +27,7 @@ public class ConverterOfDTO {
         return cityDTO;
     }
 
-    public StationDTO convertStationToDTO(Station station){
+    public static StationDTO convertStationToDTO(Station station){
         StationDTO stationDTO = new StationDTO();
         stationDTO.setId(station.getId());
         stationDTO.setStationName(station.getName());
@@ -35,7 +35,7 @@ public class ConverterOfDTO {
         return stationDTO;
     }
 
-    public City convertCityDtoToCity (CityDTO cityDTO){
+    public static City convertCityDtoToCity (CityDTO cityDTO){
         City city = new City();
         if (cityDTO.getId() != null){
             city.setId(cityDTO.getId());
@@ -45,7 +45,7 @@ public class ConverterOfDTO {
         return city;
     }
 
-    public BusLine convertBusLineDtoToBusLine(BusLineDTO busLineDTO){
+    public static BusLine convertBusLineDtoToBusLine(BusLineDTO busLineDTO){
         BusLine busLine = new BusLine();
         if (busLineDTO.getId()!= null){
             busLine.setId(busLineDTO.getId());
@@ -57,7 +57,7 @@ public class ConverterOfDTO {
         return busLine;
     }
 
-    public Station convertStationDtoToStation(StationDTO stationDTO){
+    public static Station convertStationDtoToStation(StationDTO stationDTO){
         Station station = new Station();
         if (stationDTO.getId() != null){
             station.setId(stationDTO.getId());
@@ -67,5 +67,33 @@ public class ConverterOfDTO {
         return station;
     }
 
+    public static TripDTO convertTripToTripDTO(Trip trip, List<StationDataDTO> stationDataDTOList, List<EventDTO> eventDTOList,
+                                        List<RollingPointDTO> rollingPointDTOList){
+        TripDTO tripDTO = new TripDTO(trip.getId(), trip.getTripName(),trip.getStartTime(),trip.getEndTime(),trip.getAtmo(),
+                trip.getTemperature(),trip.getWeather(), trip.getVehicleCapacity(),trip.getBusLineName(), trip.getCityName(),
+                stationDataDTOList, rollingPointDTOList, eventDTOList, trip.getStartGpsLat(), trip.getStartGpsLong(), trip.getEndGpsLat(),
+                trip.getEndGpsLong() );
 
+        return tripDTO;
+    }
+
+    public static StationDataDTO convertStationDataToDto(StationData stationData){
+        StationDataDTO stationDataDTO = new StationDataDTO(stationData.getId(), stationData.getNumberOfComeIn(), stationData.getNumberOfGoOut(),
+                stationData.getStartTime(),stationData.getEndTime(),stationData.getStationStep(), stationData.getStationName(), stationData.getGpsLat(),
+                stationData.getGpsLong());
+        return stationDataDTO;
+    }
+
+    public static EventDTO convertEventToDto(Event event){
+        EventDTO eventDTO = new EventDTO(event.getId(),event.getEventName(),event.getStartTime(),event.getEndTime(), event.getGpsLat(),
+                event.getGpsLong(), event.getStationData().getStationName());
+        return eventDTO;
+    }
+
+    public static RollingPointDTO convretRollingPointToDto(RollingPoint rollingPoint){
+        RollingPointDTO rollingPointDTO = new RollingPointDTO(rollingPoint.getId(), rollingPoint.getTimeOfRollingPoint(), rollingPoint.getGpsLat(),
+                rollingPoint.getGpsLong(), rollingPoint.getTraffic());
+
+        return rollingPointDTO;
+    }
 }

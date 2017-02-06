@@ -136,7 +136,7 @@ public class MobithinkServerApplicationTests {
 		stationDataDTOList.add(stationDataDTO2);
 
 		TripDTO tripDTO = new TripDTO();
-		tripDTO.setBusLineDtoName("Ligne DTO 1");
+		tripDTO.setBusLineDtoName("LigneDTO1");
 		tripDTO.setCityDtoName("Toulouse");
 		tripDTO.setAtmo(5);
 		tripDTO.setStartGpsLat(951L);

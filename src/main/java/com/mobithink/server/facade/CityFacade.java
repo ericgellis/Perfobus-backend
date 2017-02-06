@@ -25,8 +25,6 @@ import java.util.List;
 @RequestMapping(value = "/mobithink/city" )
 public class CityFacade {
 
-    ConverterOfDTO converterOfDTO = new ConverterOfDTO();
-
     @Resource
     private CityService cityService;
 
@@ -46,7 +44,7 @@ public class CityFacade {
         List<CityDTO> cityDTOList = new ArrayList<>();
         if (cityList != null){
             for(City city : cityList){
-                cityDTOList.add(converterOfDTO.convertCityToDTO(city));
+                cityDTOList.add(ConverterOfDTO.convertCityToDTO(city));
             }
             return ResponseEntity.ok(cityDTOList);
         } else return null;

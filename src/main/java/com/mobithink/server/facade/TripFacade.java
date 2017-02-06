@@ -6,10 +6,7 @@ import com.mobithink.server.exeption.MobithinkBusinessException;
 import com.mobithink.server.service.*;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -23,8 +20,6 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/mobithink/trip" )
 public class TripFacade {
-
-    ConverterOfDTO converterOfDTO = new ConverterOfDTO();
 
     @Resource
     TripService tripService;
@@ -58,6 +53,45 @@ public class TripFacade {
 
         return ResponseEntity.ok("success");
     }
+
+    /**
+     *
+     * GET. find TripDTO associeted at city and line.
+     *
+     * @param cityName and lineName
+     *
+     * @return List<TripDTO> or null if not exist Trip saved for this busLine
+     *
+     */
+    @GetMapping(path = "/find/{cityName}/{lineName}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
+    public ResponseEntity<List<TripDTO>> create(@Valid @PathVariable String cityName , @PathVariable String lineName) throws MobithinkBusinessException {
+
+        String busLine = lineName;
+        String city = cityName;
+        List<Trip> tripList = tripService.findTripListByBusLineNameAndcityName(lineName, cityName);
+        List<TripDTO> tripDTOList = new ArrayList<>();
+
+        if (tripList != null){
+            for (Trip trip : tripList){
+                TripDTO tripDTO = createTripDTO(trip);
+                tripDTOList.add(tripDTO);
+            }
+            return ResponseEntity.ok(tripDTOList);
+        } else return null;
+    }
+
+
+    private TripDTO createTripDTO(Trip trip) {
+
+        List<StationDataDTO> stationDataDTOList = stationDataService.findAllStationDataDtoByTripId(trip.getId());
+        List<EventDTO> eventDTOList = eventService.findAllEventDTObyTripId(trip.getId());
+        List<RollingPointDTO> rollingPointDTOList = rollingPointService.findRollingPOintDtoListByTripId(trip.getId());
+
+        TripDTO tripDTO = ConverterOfDTO.convertTripToTripDTO(trip, stationDataDTOList, eventDTOList, rollingPointDTOList);
+
+        return tripDTO;
+    }
+
 
     private void saveRollingPointList(Trip savedTrip, List<RollingPointDTO> rollingPointDTOList) {
 

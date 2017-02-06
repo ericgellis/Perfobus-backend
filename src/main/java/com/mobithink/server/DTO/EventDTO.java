@@ -13,6 +13,19 @@ public class EventDTO {
     private Long gpsLong;
     private String stationName;
 
+    public EventDTO() {
+    }
+
+    public EventDTO(Long id, String eventName, Long startTime, Long endTime, Long gpsLat, Long gpsLong, String stationName) {
+        this.id = id;
+        this.eventName = eventName;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.gpsLat = gpsLat;
+        this.gpsLong = gpsLong;
+        this.stationName = stationName;
+    }
+
     public Long getId() {
         return id;
     }

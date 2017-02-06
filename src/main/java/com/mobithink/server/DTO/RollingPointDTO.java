@@ -5,10 +5,31 @@ package com.mobithink.server.DTO;
  */
 public class RollingPointDTO {
 
+    private Long id;
     private Long pointTime;
     private Long gpsLat;
     private Long gpsLong;
     private int trafficIndex;
+
+
+    public RollingPointDTO() {
+    }
+
+    public RollingPointDTO(Long id, Long pointTime, Long gpsLat, Long gpsLong, int trafficIndex) {
+        this.id = id;
+        this.pointTime = pointTime;
+        this.gpsLat = gpsLat;
+        this.gpsLong = gpsLong;
+        this.trafficIndex = trafficIndex;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Long getPointTime() {
         return pointTime;

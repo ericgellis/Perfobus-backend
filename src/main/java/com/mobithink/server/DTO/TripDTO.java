@@ -28,6 +28,28 @@ public class TripDTO {
     private Long endGpsLat;
     private Long endGpsLong;
 
+    public TripDTO() {
+    }
+
+    public TripDTO(Long id, String tripName, Long startTime, Long endTime, int atmo, int temperature, String weather, int vehicleCapacity, String busLineDtoName, String cityDtoName, List<StationDataDTO> stationDataDTOList, List<RollingPointDTO> rollingPointDTOList, List<EventDTO> eventDTOList, Long startGpsLat, Long startGpsLong, Long endGpsLat, Long endGpsLong) {
+        this.id = id;
+        this.tripName = tripName;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.atmo = atmo;
+        this.temperature = temperature;
+        this.weather = weather;
+        this.vehicleCapacity = vehicleCapacity;
+        this.busLineDtoName = busLineDtoName;
+        this.cityDtoName = cityDtoName;
+        this.stationDataDTOList = stationDataDTOList;
+        this.rollingPointDTOList = rollingPointDTOList;
+        this.eventDTOList = eventDTOList;
+        this.startGpsLat = startGpsLat;
+        StartGpsLong = startGpsLong;
+        this.endGpsLat = endGpsLat;
+        this.endGpsLong = endGpsLong;
+    }
 
     public String getBusLineDtoName() {
         return busLineDtoName;
