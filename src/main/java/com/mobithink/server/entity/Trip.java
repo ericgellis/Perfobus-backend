@@ -1,7 +1,5 @@
 package com.mobithink.server.entity;
 
-import com.mobithink.server.DTO.PlaceDTO;
-
 import javax.persistence.*;
 
 /**
@@ -44,13 +42,17 @@ public class Trip {
     @Column(name = "city_name")
     private String cityName;
 
-    @ManyToOne
-    @JoinColumn(name = "start_place_id")
-    private Place startPlace;
+    @Column(name = "start_gps_lat")
+    private Long startGpsLat;
 
-    @ManyToOne
-    @JoinColumn(name = "end_place_id")
-    private Place endPlace;
+    @Column(name = "start_gps_long")
+    private Long startGpsLong;
+
+    @Column(name = "end_gps_lat")
+    private Long endGpsLat;
+
+    @Column(name = "end_gps_long")
+    private Long endGpsLong;
 
 
     public Long getId() {
@@ -109,20 +111,36 @@ public class Trip {
         this.weather = weather;
     }
 
-    public Place getStartPlace() {
-        return startPlace;
+    public Long getStartGpsLat() {
+        return startGpsLat;
     }
 
-    public void setStartPlace(Place startPlace) {
-        this.startPlace = startPlace;
+    public void setStartGpsLat(Long startGpsLat) {
+        this.startGpsLat = startGpsLat;
     }
 
-    public Place getEndPlace() {
-        return endPlace;
+    public Long getStartGpsLong() {
+        return startGpsLong;
     }
 
-    public void setEndPlace(Place endPlace) {
-        this.endPlace = endPlace;
+    public void setStartGpsLong(Long startGpsLong) {
+        this.startGpsLong = startGpsLong;
+    }
+
+    public Long getEndGpsLat() {
+        return endGpsLat;
+    }
+
+    public void setEndGpsLat(Long endGpsLat) {
+        this.endGpsLat = endGpsLat;
+    }
+
+    public Long getEndGpsLong() {
+        return endGpsLong;
+    }
+
+    public void setEndGpsLong(Long endGpsLong) {
+        this.endGpsLong = endGpsLong;
     }
 
     public int getVehicleCapacity() {

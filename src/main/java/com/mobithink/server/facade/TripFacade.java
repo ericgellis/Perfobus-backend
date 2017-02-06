@@ -27,9 +27,6 @@ public class TripFacade {
     ConverterOfDTO converterOfDTO = new ConverterOfDTO();
 
     @Resource
-    PlaceService placeService;
-
-    @Resource
     TripService tripService;
 
     @Resource
@@ -55,8 +52,8 @@ public class TripFacade {
     public ResponseEntity<String> create(@Valid @RequestBody TripDTO tripDTO) throws MobithinkBusinessException {
 
         Trip savedTrip = saveNewTrip(tripDTO);
-        List<StationData> stationDataList = saveStationDataList(savedTrip, tripDTO.getStationDataDTOList());
-        saveEventList(savedTrip, tripDTO.getEventDTOList(), stationDataList);
+        saveStationDataList(savedTrip, tripDTO.getStationDataDTOList());
+        saveEventList(savedTrip, tripDTO.getEventDTOList());
         saveRollingPointList(savedTrip, tripDTO.getRollingPointDTOList());
 
         return ResponseEntity.ok("success");
@@ -67,7 +64,8 @@ public class TripFacade {
         for (RollingPointDTO rollingPointDto : rollingPointDTOList){
             RollingPoint rollingPoint = new RollingPoint();
             rollingPoint.setTrip(savedTrip);
-            rollingPoint.setRollingPlace(converterOfDTO.convertPlaceDtoToPlace(rollingPointDto.getPlaceDTO()));
+            rollingPoint.setGpsLat(rollingPointDto.getGpsLat());
+            rollingPoint.setGpsLong(rollingPointDto.getGpsLong());
             rollingPoint.setTimeOfRollingPoint(rollingPointDto.getPointTime());
             rollingPoint.setTraffic(rollingPointDto.getTrafficIndex());
 
@@ -75,28 +73,19 @@ public class TripFacade {
         }
     }
 
-    private void saveEventList(Trip savedTrip, List<EventDTO> eventDTOList, List<StationData> stationDataList) {
+    private void saveEventList(Trip savedTrip, List<EventDTO> eventDTOList) {
         Event event = new Event();
         event.setTrip(savedTrip);
         for (EventDTO eventDto : eventDTOList) {
             event.setEndTime(eventDto.getEndTime());
             event.setStartTime(eventDto.getStartTime());
             event.setEventName(eventDto.getEventName());
-
-            Place place = new Place();
-            if (eventDto.getAssociatedStationDtoName() != null) {
-                for (StationData stationData : stationDataList) {
-                    if (stationData.getStationName().equals(eventDto.getAssociatedStationDtoName())) {
-                        place = stationData.getPlace();
-                        event.setAssociatedStationData(stationData);
-                    }
-                }
-
-            } else {
-                place = placeService.createPlace(converterOfDTO.convertPlaceDtoToPlace(eventDto.getPlace()));
+            if (eventDto.getStationName() != null) {
+                StationData stationData = stationDataService.findStationDataByStationName(eventDto.getStationName());
+                event.setStationData(stationData);
             }
-
-            event.setPlace(place);
+            event.setGpsLat(eventDto.getGpsLat());
+            event.setGpsLong(eventDto.getGpsLong());
 
             eventService.createEvent(event);
         }
@@ -108,7 +97,6 @@ public class TripFacade {
         List<StationData> stationDataList = new ArrayList<>();
 
         for (StationDataDTO stationDataDTO : stationDataDTOList ){
-            Place place = placeService.createPlace(converterOfDTO.convertPlaceDtoToPlace(stationDataDTO.getPlaceDTO()));
 
             StationData stationData = new StationData();
             stationData.setStationName(stationDataDTO.getStationName());
@@ -116,7 +104,8 @@ public class TripFacade {
             stationData.setStartTime(stationDataDTO.getStartTime());
             stationData.setNumberOfComeIn(stationDataDTO.getNumberOfComeIn());
             stationData.setNumberOfGoOut(stationDataDTO.getNumberOfGoOut());
-            stationData.setPlace(place);
+            stationData.setGpsLat(stationDataDTO.getGpsLat());
+            stationData.setGpsLong(stationDataDTO.getGpsLong());
             stationData.setStationStep(counter);
             stationData.setTrip(savedTrip);
 
@@ -127,14 +116,16 @@ public class TripFacade {
     }
 
     private Trip saveNewTrip(TripDTO tripDTO) {
-        Place startTripPlace = placeService.createPlace(converterOfDTO.convertPlaceDtoToPlace(tripDTO.getStartPlace()));
-        Place endTripPlace = placeService.createPlace(converterOfDTO.convertPlaceDtoToPlace(tripDTO.getEndPlace()));
+
         Trip savedTrip = new Trip();
+        savedTrip.setWeather(tripDTO.getWeather());
         savedTrip.setAtmo(tripDTO.getAtmo());
-        savedTrip.setBusLineName(tripDTO.getAssociatedBusLineDtoName());
-        savedTrip.setCityName(tripDTO.getAssociatedCityName());
-        savedTrip.setEndPlace(endTripPlace);
-        savedTrip.setStartPlace(startTripPlace);
+        savedTrip.setBusLineName(tripDTO.getBusLineDtoName());
+        savedTrip.setCityName(tripDTO.getCityDtoName());
+        savedTrip.setStartGpsLat(tripDTO.getStartGpsLat());
+        savedTrip.setStartGpsLong(tripDTO.getStartGpsLong());
+        savedTrip.setEndGpsLat(tripDTO.getEndGpsLat());
+        savedTrip.setEndGpsLong(tripDTO.getEndGpsLong());
         savedTrip.setStartTime(tripDTO.getStartTime());
         savedTrip.setEndTime(tripDTO.getEndTime());
         savedTrip.setTemperature(tripDTO.getTemperature());

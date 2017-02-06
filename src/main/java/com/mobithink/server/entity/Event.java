@@ -24,13 +24,15 @@ public class Event {
     @Column(name = "end_time")
     private Long endTime;
 
-    @ManyToOne
-    @JoinColumn(name = "place_id")
-    private Place place;
+   @Column(name = "gps_lat")
+   private Long gpsLat;
+
+   @Column(name = "gps_long")
+   private Long gpsLong;
 
     @ManyToOne
     @JoinColumn(name = "station_data_id")
-    private StationData associatedStationData;
+    private StationData stationData;
 
     @ManyToOne
     @JoinColumn(name = "trip_id")
@@ -77,19 +79,27 @@ public class Event {
         this.endTime = endTime;
     }
 
-    public Place getPlace() {
-        return place;
+    public Long getGpsLat() {
+        return gpsLat;
     }
 
-    public void setPlace(Place place) {
-        this.place = place;
+    public void setGpsLat(Long gpsLat) {
+        this.gpsLat = gpsLat;
     }
 
-    public StationData getAssociatedStationData() {
-        return associatedStationData;
+    public Long getGpsLong() {
+        return gpsLong;
     }
 
-    public void setAssociatedStationData(StationData associatedStationData) {
-        this.associatedStationData = associatedStationData;
+    public void setGpsLong(Long gpsLong) {
+        this.gpsLong = gpsLong;
+    }
+
+    public StationData getStationData() {
+        return stationData;
+    }
+
+    public void setStationData(StationData stationData) {
+        this.stationData = stationData;
     }
 }

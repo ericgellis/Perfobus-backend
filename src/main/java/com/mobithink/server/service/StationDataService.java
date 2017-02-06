@@ -1,6 +1,5 @@
 package com.mobithink.server.service;
 
-import com.mobithink.server.entity.Station;
 import com.mobithink.server.entity.StationData;
 
 /**
@@ -9,4 +8,6 @@ import com.mobithink.server.entity.StationData;
 public interface StationDataService {
 
     StationData createStationData(StationData stationData);
+
+    StationData findStationDataByStationName (String stationName);
 }

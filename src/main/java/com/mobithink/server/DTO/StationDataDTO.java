@@ -10,9 +10,10 @@ public class StationDataDTO {
     private int numberOfGoOut;
     private Long startTime;
     private Long endTime;
-    private Long stationStep;
+    private int stationStep;
     private String stationName;
-    private PlaceDTO placeDTO;
+    private Long gpsLat;
+    private Long gpsLong;
 
     public Long getId() {
         return id;
@@ -54,11 +55,11 @@ public class StationDataDTO {
         this.endTime = endTime;
     }
 
-    public Long getStationStep() {
+    public int getStationStep() {
         return stationStep;
     }
 
-    public void setStationStep(Long stationStep) {
+    public void setStationStep(int stationStep) {
         this.stationStep = stationStep;
     }
 
@@ -70,11 +71,19 @@ public class StationDataDTO {
         this.stationName = stationName;
     }
 
-    public PlaceDTO getPlaceDTO() {
-        return placeDTO;
+    public Long getGpsLat() {
+        return gpsLat;
     }
 
-    public void setPlaceDTO(PlaceDTO placeDTO) {
-        this.placeDTO = placeDTO;
+    public void setGpsLat(Long gpsLat) {
+        this.gpsLat = gpsLat;
+    }
+
+    public Long getGpsLong() {
+        return gpsLong;
+    }
+
+    public void setGpsLong(Long gpsLong) {
+        this.gpsLong = gpsLong;
     }
 }

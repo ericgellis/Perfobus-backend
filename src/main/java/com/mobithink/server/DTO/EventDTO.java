@@ -1,7 +1,5 @@
 package com.mobithink.server.DTO;
 
-import com.mobithink.server.entity.Station;
-
 /**
  * Created by athiel on 03/02/2017.
  */
@@ -11,8 +9,9 @@ public class EventDTO {
     private String eventName;
     private Long startTime;
     private Long endTime;
-    private PlaceDTO place;
-    private String associatedStationDtoName;
+    private Long gpsLat;
+    private Long gpsLong;
+    private String stationName;
 
     public Long getId() {
         return id;
@@ -46,19 +45,27 @@ public class EventDTO {
         this.endTime = endTime;
     }
 
-    public PlaceDTO getPlace() {
-        return place;
+    public Long getGpsLat() {
+        return gpsLat;
     }
 
-    public void setPlace(PlaceDTO place) {
-        this.place = place;
+    public void setGpsLat(Long gpsLat) {
+        this.gpsLat = gpsLat;
     }
 
-    public String getAssociatedStationDtoName() {
-        return associatedStationDtoName;
+    public Long getGpsLong() {
+        return gpsLong;
     }
 
-    public void setAssociatedStationDtoName(String associatedStationDtoName) {
-        this.associatedStationDtoName = associatedStationDtoName;
+    public void setGpsLong(Long gpsLong) {
+        this.gpsLong = gpsLong;
+    }
+
+    public String getStationName() {
+        return stationName;
+    }
+
+    public void setStationName(String stationName) {
+        this.stationName = stationName;
     }
 }

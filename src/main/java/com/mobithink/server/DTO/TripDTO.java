@@ -18,28 +18,63 @@ public class TripDTO {
     private int temperature;
     private String weather;
     private int vehicleCapacity;
-    private String associatedBusLineDtoName;
-    private String associatedCityName;
+    private String busLineDtoName;
+    private String cityDtoName;
     private List<StationDataDTO> stationDataDTOList;
     private List<RollingPointDTO> rollingPointDTOList;
     private List<EventDTO> eventDTOList;
-    private PlaceDTO startPlace;
-    private PlaceDTO endPlace;
+    private Long startGpsLat;
+    private Long StartGpsLong;
+    private Long endGpsLat;
+    private Long endGpsLong;
 
-    public PlaceDTO getStartPlace() {
-        return startPlace;
+
+    public String getBusLineDtoName() {
+        return busLineDtoName;
     }
 
-    public void setStartPlace(PlaceDTO startPlace) {
-        this.startPlace = startPlace;
+    public void setBusLineDtoName(String busLineDtoName) {
+        this.busLineDtoName = busLineDtoName;
     }
 
-    public PlaceDTO getEndPlace() {
-        return endPlace;
+    public String getCityDtoName() {
+        return cityDtoName;
     }
 
-    public void setEndPlace(PlaceDTO endPlace) {
-        this.endPlace = endPlace;
+    public void setCityDtoName(String cityDtoName) {
+        this.cityDtoName = cityDtoName;
+    }
+
+    public Long getStartGpsLat() {
+        return startGpsLat;
+    }
+
+    public void setStartGpsLat(Long startGpsLat) {
+        this.startGpsLat = startGpsLat;
+    }
+
+    public Long getStartGpsLong() {
+        return StartGpsLong;
+    }
+
+    public void setStartGpsLong(Long startGpsLong) {
+        StartGpsLong = startGpsLong;
+    }
+
+    public Long getEndGpsLat() {
+        return endGpsLat;
+    }
+
+    public void setEndGpsLat(Long endGpsLat) {
+        this.endGpsLat = endGpsLat;
+    }
+
+    public Long getEndGpsLong() {
+        return endGpsLong;
+    }
+
+    public void setEndGpsLong(Long endGpsLong) {
+        this.endGpsLong = endGpsLong;
     }
 
     public Long getId() {
@@ -104,22 +139,6 @@ public class TripDTO {
 
     public void setVehicleCapacity(int vehicleCapacity) {
         this.vehicleCapacity = vehicleCapacity;
-    }
-
-    public String getAssociatedBusLineDtoName() {
-        return associatedBusLineDtoName;
-    }
-
-    public void setAssociatedBusLineDtoName(String associatedBusLineDtoName) {
-        this.associatedBusLineDtoName = associatedBusLineDtoName;
-    }
-
-    public String getAssociatedCityName() {
-        return associatedCityName;
-    }
-
-    public void setAssociatedCityName(String associatedCityName) {
-        this.associatedCityName = associatedCityName;
     }
 
     public List<StationDataDTO> getStationDataDTOList() {

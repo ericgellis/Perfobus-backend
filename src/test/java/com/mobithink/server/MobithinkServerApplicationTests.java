@@ -1,12 +1,6 @@
 package com.mobithink.server;
 
-import com.mobithink.server.DTO.BusLineDTO;
-import com.mobithink.server.DTO.CityDTO;
-import com.mobithink.server.DTO.StationDTO;
-import com.mobithink.server.DTO.TripDTO;
-import com.mobithink.server.entity.BusLine;
-import com.mobithink.server.entity.City;
-import com.mobithink.server.entity.Station;
+import com.mobithink.server.DTO.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -87,9 +81,86 @@ public class MobithinkServerApplicationTests {
 
 	@Test
 	public void testSavedNewTripDto() throws Exception{
-//		BusLineDTO
-//		TripDTO tripDTO = new TripDTO();
-//		tripDTO.setAssociatedBusLineDto();
+
+		EventDTO eventDTO1 = new EventDTO();
+		eventDTO1.setStationName("Station 121");
+		eventDTO1.setStartTime(111L);
+		eventDTO1.setEndTime(222L);
+		eventDTO1.setGpsLat(654L);
+		eventDTO1.setGpsLong(654L);
+		eventDTO1.setEventName("Type d'évènement");
+		EventDTO eventDTO2 = new EventDTO();
+		eventDTO2.setGpsLat(987L);
+		eventDTO2.setGpsLong(987L);
+		eventDTO2.setStartTime(111L);
+		eventDTO2.setEndTime(222L);
+		eventDTO2.setEventName("Type d'évènement");
+		List<EventDTO> eventDTOList = new ArrayList<>();
+		eventDTOList.add(eventDTO1);
+		eventDTOList.add(eventDTO2);
+
+		RollingPointDTO rollingPointDTO  = new RollingPointDTO();
+		rollingPointDTO.setGpsLat(321L);
+		rollingPointDTO.setGpsLong(321L);
+		rollingPointDTO.setPointTime(55555L);
+		rollingPointDTO.setTrafficIndex(4);
+		RollingPointDTO rollingPointDTO1  = new RollingPointDTO();
+		rollingPointDTO1.setGpsLat(963L);
+		rollingPointDTO1.setGpsLong(963L);
+		rollingPointDTO1.setPointTime(55555L);
+		rollingPointDTO1.setTrafficIndex(4);
+		List<RollingPointDTO> rollingPointDTOList = new ArrayList<>();
+		rollingPointDTOList.add(rollingPointDTO);
+		rollingPointDTOList.add(rollingPointDTO1);
+
+		StationDataDTO stationDataDTO = new StationDataDTO();
+		stationDataDTO.setStationName("Station 121");
+		stationDataDTO.setGpsLat(852L);
+		stationDataDTO.setGpsLong(852L);
+		stationDataDTO.setStartTime(111999L);
+		stationDataDTO.setEndTime(4446666L);
+		stationDataDTO.setNumberOfComeIn(6);
+		stationDataDTO.setNumberOfGoOut(8);
+		stationDataDTO.setStationStep(0);
+		StationDataDTO stationDataDTO2 = new StationDataDTO();
+		stationDataDTO2.setStationName("Station 122");
+		stationDataDTO2.setGpsLat(741L);
+		stationDataDTO2.setGpsLong(741L);
+		stationDataDTO2.setStartTime(555666L);
+		stationDataDTO2.setEndTime(999555L);
+		stationDataDTO2.setNumberOfComeIn(6);
+		stationDataDTO2.setNumberOfGoOut(8);
+		stationDataDTO2.setStationStep(1);
+		List<StationDataDTO> stationDataDTOList = new ArrayList<>();
+		stationDataDTOList.add(stationDataDTO);
+		stationDataDTOList.add(stationDataDTO2);
+
+		TripDTO tripDTO = new TripDTO();
+		tripDTO.setBusLineDtoName("Ligne DTO 1");
+		tripDTO.setCityDtoName("Toulouse");
+		tripDTO.setAtmo(5);
+		tripDTO.setStartGpsLat(951L);
+		tripDTO.setStartGpsLong(951L);
+		tripDTO.setEndGpsLat(753L);
+		tripDTO.setEndGpsLong(753L);
+		tripDTO.setStartTime(2222222L);
+		tripDTO.setEndTime(333333333L);
+		tripDTO.setTemperature(20);
+		tripDTO.setVehicleCapacity(55);
+		tripDTO.setTripName("Enregistrement 1");
+		tripDTO.setWeather("Ensoleillé");
+		tripDTO.setEventDTOList(eventDTOList);
+		tripDTO.setRollingPointDTOList(rollingPointDTOList);
+		tripDTO.setStationDataDTOList(stationDataDTOList);
+
+		restUserMockMvc.perform(post("/mobithink/trip/create")
+				.content(TestUtil.convertObjectToJsonBytes(tripDTO))
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
+				//.andExpect(content().string("exist"))
+				//.andExpect(content().string("succes"))
+				.andExpect(status().isOk());
+
 	}
 
 	@Test

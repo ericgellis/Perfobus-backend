@@ -15,9 +15,11 @@ public class RollingPoint {
     @Column(name="id")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "place_id")
-    private Place rollingPlace;
+    @Column(name = "gps_lat")
+    private Long gpsLat;
+
+    @Column(name = "gps_long")
+    private Long gpsLong;
 
     @Column(name = "point_time")
     private Long timeOfRollingPoint;
@@ -45,12 +47,20 @@ public class RollingPoint {
         this.id = id;
     }
 
-    public Place getRollingPlace() {
-        return rollingPlace;
+    public Long getGpsLat() {
+        return gpsLat;
     }
 
-    public void setRollingPlace(Place rollingPlace) {
-        this.rollingPlace = rollingPlace;
+    public void setGpsLat(Long gpsLat) {
+        this.gpsLat = gpsLat;
+    }
+
+    public Long getGpsLong() {
+        return gpsLong;
+    }
+
+    public void setGpsLong(Long gpsLong) {
+        this.gpsLong = gpsLong;
     }
 
     public Long getTimeOfRollingPoint() {

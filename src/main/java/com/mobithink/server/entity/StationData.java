@@ -33,9 +33,11 @@ public class StationData {
     @Column(name = "station_name")
     private String stationName;
 
-    @ManyToOne
-    @JoinColumn(name = "place_id")
-    private Place place;
+    @Column(name = "gps_lat")
+    private Long gpsLat;
+
+    @Column(name = "gps_long")
+    private Long gpsLong;
 
     @ManyToOne
     @JoinColumn(name = "trip_id")
@@ -49,12 +51,20 @@ public class StationData {
         this.trip = trip;
     }
 
-    public Place getPlace() {
-        return place;
+    public Long getGpsLat() {
+        return gpsLat;
     }
 
-    public void setPlace(Place place) {
-        this.place = place;
+    public void setGpsLat(Long gpsLat) {
+        this.gpsLat = gpsLat;
+    }
+
+    public Long getGpsLong() {
+        return gpsLong;
+    }
+
+    public void setGpsLong(Long gpsLong) {
+        this.gpsLong = gpsLong;
     }
 
     public String getStationName() {

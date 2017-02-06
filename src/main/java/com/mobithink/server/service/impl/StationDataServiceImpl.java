@@ -23,4 +23,11 @@ public class StationDataServiceImpl implements StationDataService{
     public StationData createStationData(StationData stationData) {
         return stationDataRepository.save(stationData);
     }
+
+    @Override
+    public StationData findStationDataByStationName(String stationName) {
+        return stationDataRepository.findByStationName(stationName);
+    }
+
+
 }
