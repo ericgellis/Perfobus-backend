@@ -3,7 +3,9 @@ package com.mobithink.server.service.impl;
 import com.mobithink.server.DTO.ConverterOfDTO;
 import com.mobithink.server.DTO.EventDTO;
 import com.mobithink.server.dao.EventRepository;
+import com.mobithink.server.dao.PictureRepository;
 import com.mobithink.server.entity.Event;
+import com.mobithink.server.entity.Picture;
 import com.mobithink.server.service.EventService;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +27,9 @@ public class EventServiceImpl implements EventService {
     @Resource
     EventRepository eventRepository;
 
+    @Resource
+    PictureRepository pictureRepository;
+
     @Override
     public Event createEvent(Event event) {
         return eventRepository.save(event);
@@ -36,7 +41,8 @@ public class EventServiceImpl implements EventService {
         if (eventList != null) {
             List<EventDTO> eventDTOList = new ArrayList<>();
             for (Event event : eventList){
-                eventDTOList.add(converterOfDTO.convertEventToDto(event));
+                List<Picture> pictureList = pictureRepository.findByEventId(event.getId());
+                eventDTOList.add(converterOfDTO.convertEventToDto(event, pictureList));
             }
             return eventDTOList;
         }else return null;

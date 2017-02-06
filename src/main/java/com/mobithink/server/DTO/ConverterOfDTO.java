@@ -2,6 +2,7 @@ package com.mobithink.server.DTO;
 
 import com.mobithink.server.entity.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -77,16 +78,32 @@ public class ConverterOfDTO {
         return tripDTO;
     }
 
-    public static StationDataDTO convertStationDataToDto(StationData stationData){
+    public static StationDataDTO convertStationDataToDto(StationData stationData, List<Picture> pictureList){
         StationDataDTO stationDataDTO = new StationDataDTO(stationData.getId(), stationData.getNumberOfComeIn(), stationData.getNumberOfGoOut(),
                 stationData.getStartTime(),stationData.getEndTime(),stationData.getStationStep(), stationData.getStationName(), stationData.getGpsLat(),
                 stationData.getGpsLong());
+        if (pictureList != null){
+            List<Long> pictureIdList = new ArrayList<>();
+            for (Picture picture : pictureList){
+                pictureIdList.add(picture.getPictureId());
+            }
+            stationDataDTO.setPictureIdList(pictureIdList);
+        }
         return stationDataDTO;
     }
 
-    public static EventDTO convertEventToDto(Event event){
+    public static EventDTO convertEventToDto(Event event, List<Picture> pictureList){
         EventDTO eventDTO = new EventDTO(event.getId(),event.getEventName(),event.getStartTime(),event.getEndTime(), event.getGpsLat(),
                 event.getGpsLong(), event.getStationData().getStationName());
+
+        if (pictureList != null){
+            List<Long> pictureIdList = new ArrayList<>();
+            for (Picture picture : pictureList){
+                pictureIdList.add(picture.getPictureId());
+            }
+            eventDTO.setPictureIdList(pictureIdList);
+        }
+
         return eventDTO;
     }
 

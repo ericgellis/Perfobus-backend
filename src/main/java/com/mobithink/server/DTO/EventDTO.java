@@ -1,5 +1,7 @@
 package com.mobithink.server.DTO;
 
+import java.util.List;
+
 /**
  * Created by athiel on 03/02/2017.
  */
@@ -12,6 +14,7 @@ public class EventDTO {
     private Long gpsLat;
     private Long gpsLong;
     private String stationName;
+    private List<Long> pictureIdList;
 
     public EventDTO() {
     }
@@ -24,6 +27,14 @@ public class EventDTO {
         this.gpsLat = gpsLat;
         this.gpsLong = gpsLong;
         this.stationName = stationName;
+    }
+
+    public List<Long> getPictureIdList() {
+        return pictureIdList;
+    }
+
+    public void setPictureIdList(List<Long> pictureIdList) {
+        this.pictureIdList = pictureIdList;
     }
 
     public Long getId() {

@@ -33,6 +33,9 @@ public class TripFacade {
     @Resource
     RollingPointService rollingPointService;
 
+    @Resource
+    PictureService pictureService;
+
 
     /**
      *
@@ -66,8 +69,6 @@ public class TripFacade {
     @GetMapping(path = "/find/{cityName}/{lineName}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
     public ResponseEntity<List<TripDTO>> create(@Valid @PathVariable String cityName , @PathVariable String lineName) throws MobithinkBusinessException {
 
-        String busLine = lineName;
-        String city = cityName;
         List<Trip> tripList = tripService.findTripListByBusLineNameAndcityName(lineName, cityName);
         List<TripDTO> tripDTOList = new ArrayList<>();
 
@@ -124,7 +125,16 @@ public class TripFacade {
             event.setGpsLat(eventDto.getGpsLat());
             event.setGpsLong(eventDto.getGpsLong());
 
-            eventService.createEvent(event);
+            Event savedEvent = eventService.createEvent(event);
+
+            if (eventDto.getPictureIdList() != null){
+                for (Long pictureID : eventDto.getPictureIdList()){
+                    Picture picture = new Picture();
+                    picture.setEventId(savedEvent.getId());
+                    picture.setPictureId(pictureID);
+                    pictureService.savedPicture(picture);
+                }
+            }
         }
     }
 
@@ -146,7 +156,18 @@ public class TripFacade {
             stationData.setStationStep(counter);
             stationData.setTrip(savedTrip);
 
-            stationDataList.add(stationDataService.createStationData(stationData));
+            StationData savedStationData = stationDataService.createStationData(stationData);
+
+            if (stationDataDTO.getPictureIdList() != null){
+                for (Long pictureID : stationDataDTO.getPictureIdList()){
+                    Picture picture = new Picture();
+                    picture.setEventId(savedStationData.getId());
+                    picture.setPictureId(pictureID);
+                    pictureService.savedPicture(picture);
+                }
+            }
+
+            stationDataList.add(savedStationData);
             counter++;
         }
         return stationDataList;

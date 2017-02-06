@@ -2,7 +2,9 @@ package com.mobithink.server.service.impl;
 
 import com.mobithink.server.DTO.ConverterOfDTO;
 import com.mobithink.server.DTO.StationDataDTO;
+import com.mobithink.server.dao.PictureRepository;
 import com.mobithink.server.dao.StationDataRepository;
+import com.mobithink.server.entity.Picture;
 import com.mobithink.server.entity.StationData;
 import com.mobithink.server.service.StationDataService;
 import org.springframework.stereotype.Component;
@@ -25,6 +27,9 @@ public class StationDataServiceImpl implements StationDataService{
     @Resource
     StationDataRepository stationDataRepository;
 
+    @Resource
+    PictureRepository pictureRepository;
+
     @Override
     public StationData createStationData(StationData stationData) {
         return stationDataRepository.save(stationData);
@@ -38,10 +43,12 @@ public class StationDataServiceImpl implements StationDataService{
     @Override
     public List<StationDataDTO> findAllStationDataDtoByTripId(Long tripId) {
         List<StationData> stationDataList = stationDataRepository.findAllByTripId(tripId);
+
         List<StationDataDTO> stationDataDTOList = new ArrayList<>();
         if (stationDataList != null) {
             for (StationData stationData : stationDataList) {
-                stationDataDTOList.add(converterOfDTO.convertStationDataToDto(stationData));
+                List<Picture> pictureList = pictureRepository.findByStationDataId(stationData.getId());
+                stationDataDTOList.add(converterOfDTO.convertStationDataToDto(stationData, pictureList));
             }
             return stationDataDTOList;
         } else return null;

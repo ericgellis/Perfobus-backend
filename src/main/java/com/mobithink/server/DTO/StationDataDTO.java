@@ -1,5 +1,7 @@
 package com.mobithink.server.DTO;
 
+import java.util.List;
+
 /**
  * Created by athiel on 03/02/2017.
  */
@@ -14,6 +16,7 @@ public class StationDataDTO {
     private String stationName;
     private Long gpsLat;
     private Long gpsLong;
+    private List<Long> pictureIdList;
 
     public StationDataDTO() {
     }
@@ -28,6 +31,14 @@ public class StationDataDTO {
         this.stationName = stationName;
         this.gpsLat = gpsLat;
         this.gpsLong = gpsLong;
+    }
+
+    public List<Long> getPictureIdList() {
+        return pictureIdList;
+    }
+
+    public void setPictureIdList(List<Long> pictureIdList) {
+        this.pictureIdList = pictureIdList;
     }
 
     public Long getId() {
