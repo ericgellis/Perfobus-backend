@@ -49,5 +49,4 @@ public class CityFacade {
             return ResponseEntity.ok(cityDTOList);
         } else return null;
     }
-
 }
