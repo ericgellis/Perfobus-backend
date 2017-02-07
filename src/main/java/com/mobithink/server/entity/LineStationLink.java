@@ -23,6 +23,17 @@ public class LineStationLink {
     @JoinColumn(name = "station_id")
     private Station station;
 
+    @Column(name = "step")
+    private int step;
+
+    public int getStep() {
+        return step;
+    }
+
+    public void setStep(int step) {
+        this.step = step;
+    }
+
     public Long getId() {
         return id;
     }

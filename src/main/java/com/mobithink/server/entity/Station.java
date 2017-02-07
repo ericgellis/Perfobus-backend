@@ -18,7 +18,6 @@ public class Station {
     @Column(name = "name")
     private String name;
 
-
     public Long getId() {
         return id;
     }

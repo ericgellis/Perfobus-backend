@@ -19,6 +19,8 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.bouncycastle.asn1.x500.style.RFC4519Style.l;
+
 /**
  * Created by athiel on 02/02/2017.
  */
@@ -51,13 +53,13 @@ public class BusLineFacade {
     public ResponseEntity<String> create(@Valid @RequestBody BusLineDTO busLineDto) throws MobithinkBusinessException{
         Long cityId = null;
 
-        if (busLineDto.getId() != null){
-            cityId = busLineDto.getId();
-        }
-
-        City city = cityService.findOneByName(busLineDto.getCityDto().getName());
-        if (city != null){
-            cityId = city.getId();
+        if ((busLineDto.getCityDto() != null) && (busLineDto.getCityDto().getId() != null)){
+            cityId = busLineDto.getCityDto().getId();
+        } else if (busLineDto.getCityDto() != null) {
+            City city = cityService.findOneByName(busLineDto.getCityDto().getName());
+            if (city != null){
+                cityId = city.getId();
+            }
         }
 
         BusLine searchedBusLine = busLineService.findByNameAndCityId(busLineDto.getName(), cityId);
@@ -65,10 +67,10 @@ public class BusLineFacade {
         if ( searchedBusLine != null){
             return ResponseEntity.ok("exist");
         } else {
-            List<Station> stationList = savedStationDTO(busLineDto.getStationDTOList());
+
             City savedCity = cityService.createOrLoadCity(ConverterOfDTO.convertCityDtoToCity(busLineDto.getCityDto()));
             BusLine savedBusLine = saveNewBusLine(busLineDto, savedCity);
-            savelineStationLink(savedBusLine, stationList);
+            savedStationDTO(busLineDto.getStationDTOList(), savedBusLine);
             return ResponseEntity.ok("success");
         }
     }
@@ -103,29 +105,26 @@ public class BusLineFacade {
     private BusLine saveNewBusLine(BusLineDTO busLineDto, City city){
         BusLine busLine = ConverterOfDTO.convertBusLineDtoToBusLine(busLineDto);
         busLine.setCity(city);
-       return busLineService.createBusLine(busLine);
+        return busLineService.createBusLine(busLine);
     }
 
-    private void savelineStationLink(BusLine savedBusLine, List<Station> stationList){
+    private void savelineStationLink(BusLine savedBusLine, Station station, int step){
 
-        for (Station station : stationList){
             LineStationLink lineStationLink = new LineStationLink();
             lineStationLink.setBusLine(savedBusLine);
             lineStationLink.setStation(station);
+            lineStationLink.setStep(step);
             stationService.createLineStationLink(lineStationLink);
-        }
     }
 
-    private List<Station> savedStationDTO(List<StationDTO> stationDTOList) {
-        List<Station> stationList = new ArrayList<>();
+    private void savedStationDTO(List<StationDTO> stationDTOList, BusLine savedBusLine) {
+
         for (StationDTO stationDTO : stationDTOList){
             Station station = stationService.findByName(stationDTO.getStationName());
             if (station == null){
-                station = stationService.createStation(stationDTO.getStationName());
+                station = stationService.createStation(stationDTO);
             }
-           stationList.add(station);
+            savelineStationLink(savedBusLine, station, stationDTO.getStep());
         }
-        return stationList;
     }
-
 }

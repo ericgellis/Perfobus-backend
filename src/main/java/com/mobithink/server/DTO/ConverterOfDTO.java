@@ -1,7 +1,10 @@
 package com.mobithink.server.DTO;
 
+import com.mobithink.server.dao.LineStationLinkRepository;
 import com.mobithink.server.entity.*;
+import com.mobithink.server.service.StationService;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,10 +31,11 @@ public class ConverterOfDTO {
         return cityDTO;
     }
 
-    public static StationDTO convertStationToDTO(Station station){
+    public static StationDTO convertStationToDTO(Station station, int step){
         StationDTO stationDTO = new StationDTO();
         stationDTO.setId(station.getId());
         stationDTO.setStationName(station.getName());
+        stationDTO.setStep(step);
 
         return stationDTO;
     }

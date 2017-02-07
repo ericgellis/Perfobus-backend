@@ -7,6 +7,15 @@ public class StationDTO {
 
     private Long id;
     private String stationName;
+    private int step;
+
+    public int getStep() {
+        return step;
+    }
+
+    public void setStep(int step) {
+        this.step = step;
+    }
 
     public Long getId() {
         return id;

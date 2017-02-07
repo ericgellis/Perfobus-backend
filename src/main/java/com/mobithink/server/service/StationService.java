@@ -11,9 +11,11 @@ import java.util.List;
  */
 public interface StationService {
 
-    Station createStation (String name);
+    Station createStation (StationDTO stationDTO);
 
     LineStationLink createLineStationLink (LineStationLink lineStationLink);
+
+    LineStationLink findByBusLineIdAndStationId (Long busLineId, Long stationId);
 
     Station findByName (String name);
 

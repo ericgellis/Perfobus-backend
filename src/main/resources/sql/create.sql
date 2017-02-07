@@ -55,6 +55,7 @@ CREATE TABLE public.line_station_link
     id bigint NOT NULL,
     bus_line_id bigint NOT NULL,
     station_id bigint NOT NULL,
+    step integer NOT NULL,
     CONSTRAINT line_sation_link_pkey PRIMARY KEY (id)
 );
 

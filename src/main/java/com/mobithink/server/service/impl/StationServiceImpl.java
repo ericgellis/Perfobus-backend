@@ -1,5 +1,6 @@
 package com.mobithink.server.service.impl;
 
+import com.mobithink.server.DTO.StationDTO;
 import com.mobithink.server.dao.LineStationLinkRepository;
 import com.mobithink.server.dao.StationRepository;
 import com.mobithink.server.entity.LineStationLink;
@@ -27,16 +28,21 @@ public class StationServiceImpl implements StationService{
     StationRepository stationRepository;
 
     @Override
-    public Station createStation(String name)
+    public Station createStation(StationDTO stationDTO)
     {
         Station station = new Station();
-        station.setName(name);
+        station.setName(stationDTO.getStationName());
         return stationRepository.save(station);
     }
 
     @Override
     public LineStationLink createLineStationLink(LineStationLink lineStationLink) {
         return lineStationLinkRepository.save(lineStationLink);
+    }
+
+    @Override
+    public LineStationLink findByBusLineIdAndStationId(Long busLineId, Long stationId) {
+        return lineStationLinkRepository.findByBusLineIdAndStationId(busLineId, stationId);
     }
 
     @Override

@@ -46,7 +46,9 @@ public class StationFacade {
         if (stationList != null){
             List<StationDTO> stationDTOList = new ArrayList<>();
             for (Station station : stationList){
-                stationDTOList.add(ConverterOfDTO.convertStationToDTO(station));
+                LineStationLink lineStationLink = stationService.findByBusLineIdAndStationId(lineId, station.getId());
+                int step = lineStationLink.getStep();
+                stationDTOList.add(ConverterOfDTO.convertStationToDTO(station, step));
             }return ResponseEntity.ok(stationDTOList);
         }else return null;
     }

@@ -49,15 +49,18 @@
 //	@Test
 //	public void testSavedNewBusLineDTO() throws Exception{
 //		CityDTO cityDTO = new CityDTO();
-//		cityDTO.setName("Toulouse");
+//		cityDTO.setName("Grenoble");
 //		//cityDTO.setId(117L);
 //
 //		StationDTO station1 = new StationDTO();
-//		station1.setStationName("station 1");
+//		station1.setStationName("station z1");
+//		station1.setStep(0);
 //		StationDTO station2 = new StationDTO();
-//		station2.setStationName("station 2");
+//		station2.setStationName("station z2");
+//		station2.setStep(1);
 //		StationDTO station3 = new StationDTO();
-//		station3.setStationName("station 3");
+//		station3.setStationName("station z3");
+//		station3.setStep(2);
 //
 //		List<StationDTO> stationDTOList = new ArrayList<>();
 //		stationDTOList.add(station1);
