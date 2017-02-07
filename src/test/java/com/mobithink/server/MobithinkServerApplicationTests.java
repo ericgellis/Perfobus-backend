@@ -136,7 +136,7 @@ public class MobithinkServerApplicationTests {
 		stationDataDTOList.add(stationDataDTO2);
 
 		TripDTO tripDTO = new TripDTO();
-		tripDTO.setBusLineDtoName("LigneDTO1");
+		tripDTO.setBusLineDtoName("Ligne DTO 1");
 		tripDTO.setCityDtoName("Toulouse");
 		tripDTO.setAtmo(5);
 		tripDTO.setStartGpsLat(951L);
@@ -164,8 +164,16 @@ public class MobithinkServerApplicationTests {
 	}
 
 	@Test
+	public void testFindListOfTripDtoByCityAndBulineNames() throws Exception {
+		restUserMockMvc.perform(get("/mobithink/trip/find/Toulouse/LigneDTO1")
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].cityDtoName").value("Toulouse"));
+	}
+
+	@Test
 	public void testFindAllCities() throws Exception {
-		ResultActions result = restUserMockMvc.perform(get("/mobithink/city/findAll")
+		restUserMockMvc.perform(get("/mobithink/city/findAll")
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
