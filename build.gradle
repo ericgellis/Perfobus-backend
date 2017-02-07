@@ -11,8 +11,13 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
+
+dependencyManagement {
+	imports {
+		mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Camden.SR2'
+	}
+}
 
 jar {
 	baseName = 'mobithink_server'
@@ -20,11 +25,29 @@ jar {
 }
 
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+	maven {
+		url 'https://repo.spring.io/libs-snapshot'
+	}
+
+	maven {
+		url 'https://jitpack.io'
+		//credentials { username authToken }
+	}
 }
 
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
+
+task copyToLib(type: Copy) {
+	into "$buildDir/lib"
+	from(configurations.compile)
+}
+
+stage.dependsOn(copyToLib)
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
