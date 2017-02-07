@@ -11,7 +11,6 @@ import com.mobithink.server.exeption.MobithinkBusinessException;
 import com.mobithink.server.service.BusLineService;
 import com.mobithink.server.service.CityService;
 import com.mobithink.server.service.StationService;
-import com.sun.activation.registries.MailcapParseException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
