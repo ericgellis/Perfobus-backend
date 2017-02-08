@@ -8,17 +8,15 @@ import com.mobithink.server.service.CityService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.annotation.Resource;
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by athiel on 31/01/2017.
+ *
  */
 
 @RestController

@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Created by athiel on 03/02/2017.
+ *
  */
 public class EventDTO {
 
@@ -15,9 +16,6 @@ public class EventDTO {
     private Long gpsLong;
     private String stationName;
     private List<Long> pictureIdList;
-
-    public EventDTO() {
-    }
 
     public EventDTO(Long id, String eventName, Long startTime, Long endTime, Long gpsLat, Long gpsLong, String stationName) {
         this.id = id;

@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 /**
  * Created by athiel on 31/01/2017.
+ *
  */
 
 @Entity

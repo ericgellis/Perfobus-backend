@@ -1,15 +1,12 @@
 package com.mobithink.server.DTO;
 
-import com.mobithink.server.dao.LineStationLinkRepository;
 import com.mobithink.server.entity.*;
-import com.mobithink.server.service.StationService;
-
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by athiel on 02/02/2017.
+ *
  */
 public class ConverterOfDTO {
 
@@ -62,24 +59,12 @@ public class ConverterOfDTO {
         return busLine;
     }
 
-    public static Station convertStationDtoToStation(StationDTO stationDTO){
-        Station station = new Station();
-        if (stationDTO.getId() != null){
-            station.setId(stationDTO.getId());
-        }
-        station.setName(stationDTO.getStationName());
-
-        return station;
-    }
-
     public static TripDTO convertTripToTripDTO(Trip trip, List<StationDataDTO> stationDataDTOList, List<EventDTO> eventDTOList,
                                         List<RollingPointDTO> rollingPointDTOList){
-        TripDTO tripDTO = new TripDTO(trip.getId(), trip.getTripName(),trip.getStartTime(),trip.getEndTime(),trip.getAtmo(),
+        return new TripDTO(trip.getId(), trip.getTripName(),trip.getStartTime(),trip.getEndTime(),trip.getAtmo(),
                 trip.getTemperature(),trip.getWeather(), trip.getVehicleCapacity(),trip.getBusLineName(), trip.getCityName(),
                 stationDataDTOList, rollingPointDTOList, eventDTOList, trip.getStartGpsLat(), trip.getStartGpsLong(), trip.getEndGpsLat(),
                 trip.getEndGpsLong() );
-
-        return tripDTO;
     }
 
     public static StationDataDTO convertStationDataToDto(StationData stationData, List<Picture> pictureList){
@@ -87,11 +72,7 @@ public class ConverterOfDTO {
                 stationData.getStartTime(),stationData.getEndTime(),stationData.getStationStep(), stationData.getStationName(), stationData.getGpsLat(),
                 stationData.getGpsLong());
         if (pictureList != null){
-            List<Long> pictureIdList = new ArrayList<>();
-            for (Picture picture : pictureList){
-                pictureIdList.add(picture.getPictureId());
-            }
-            stationDataDTO.setPictureIdList(pictureIdList);
+            stationDataDTO.setPictureIdList(findPictureIdList(pictureList));
         }
         return stationDataDTO;
     }
@@ -99,22 +80,23 @@ public class ConverterOfDTO {
     public static EventDTO convertEventToDto(Event event, List<Picture> pictureList){
         EventDTO eventDTO = new EventDTO(event.getId(),event.getEventName(),event.getStartTime(),event.getEndTime(), event.getGpsLat(),
                 event.getGpsLong(), event.getStationData().getStationName());
-
         if (pictureList != null){
-            List<Long> pictureIdList = new ArrayList<>();
-            for (Picture picture : pictureList){
-                pictureIdList.add(picture.getPictureId());
-            }
-            eventDTO.setPictureIdList(pictureIdList);
+            eventDTO.setPictureIdList(findPictureIdList(pictureList));
         }
 
         return eventDTO;
     }
 
     public static RollingPointDTO convretRollingPointToDto(RollingPoint rollingPoint){
-        RollingPointDTO rollingPointDTO = new RollingPointDTO(rollingPoint.getId(), rollingPoint.getTimeOfRollingPoint(), rollingPoint.getGpsLat(),
+        return new RollingPointDTO(rollingPoint.getId(), rollingPoint.getTimeOfRollingPoint(), rollingPoint.getGpsLat(),
                 rollingPoint.getGpsLong(), rollingPoint.getTraffic());
+    }
 
-        return rollingPointDTO;
+    private static List<Long> findPictureIdList(List<Picture> pictureList) {
+        List<Long> pictureIdList = new ArrayList<>();
+        for (Picture picture : pictureList){
+            pictureIdList.add(picture.getPictureId());
+        }
+        return pictureIdList;
     }
 }

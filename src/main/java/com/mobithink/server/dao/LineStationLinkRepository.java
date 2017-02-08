@@ -8,11 +8,11 @@ import java.util.List;
 
 /**
  * Created by athiel on 02/02/2017.
+ *
  */
 public interface LineStationLinkRepository extends CrudRepository<LineStationLink, Long> {
 
     List<LineStationLink> findByBusLineId(Long id);
 
     LineStationLink findByBusLineIdAndStationId (Long busLineId, Long stationId);
-
 }

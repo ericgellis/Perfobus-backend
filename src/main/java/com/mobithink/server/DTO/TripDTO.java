@@ -1,12 +1,10 @@
 package com.mobithink.server.DTO;
 
-import com.mobithink.server.entity.RollingPoint;
-import com.mobithink.server.entity.StationData;
-
 import java.util.List;
 
 /**
  * Created by athiel on 03/02/2017.
+ *
  */
 public class TripDTO {
 

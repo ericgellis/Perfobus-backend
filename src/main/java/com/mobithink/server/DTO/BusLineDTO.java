@@ -1,11 +1,10 @@
 package com.mobithink.server.DTO;
 
-import com.mobithink.server.entity.Station;
-
 import java.util.List;
 
 /**
  * Created by athiel on 02/02/2017.
+ *
  */
 public class BusLineDTO {
 
@@ -14,14 +13,6 @@ public class BusLineDTO {
     private Long dateOfCreation;
     private CityDTO cityDto;
     private List<StationDTO> stationDTOList;
-
-    public List<StationDTO> getStationDTOList() {
-        return stationDTOList;
-    }
-
-    public void setStationDTOList(List<StationDTO> stationDTOList) {
-        this.stationDTOList = stationDTOList;
-    }
 
     public Long getId() {
         return id;
@@ -53,5 +44,13 @@ public class BusLineDTO {
 
     public void setCityDto(CityDTO cityDto) {
         this.cityDto = cityDto;
+    }
+
+    public List<StationDTO> getStationDTOList() {
+        return stationDTOList;
+    }
+
+    public void setStationDTOList(List<StationDTO> stationDTOList) {
+        this.stationDTOList = stationDTOList;
     }
 }

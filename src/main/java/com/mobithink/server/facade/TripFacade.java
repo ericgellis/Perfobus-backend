@@ -7,7 +7,6 @@ import com.mobithink.server.service.*;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -15,6 +14,7 @@ import java.util.List;
 
 /**
  * Created by athiel on 03/02/2017.
+ *
  */
 
 @RestController
@@ -88,9 +88,7 @@ public class TripFacade {
         List<EventDTO> eventDTOList = eventService.findAllEventDTObyTripId(trip.getId());
         List<RollingPointDTO> rollingPointDTOList = rollingPointService.findRollingPOintDtoListByTripId(trip.getId());
 
-        TripDTO tripDTO = ConverterOfDTO.convertTripToTripDTO(trip, stationDataDTOList, eventDTOList, rollingPointDTOList);
-
-        return tripDTO;
+        return ConverterOfDTO.convertTripToTripDTO(trip, stationDataDTOList, eventDTOList, rollingPointDTOList);
     }
 
 
@@ -126,14 +124,24 @@ public class TripFacade {
             event.setGpsLong(eventDto.getGpsLong());
 
             Event savedEvent = eventService.createEvent(event);
+            savePictureList(eventDto.getPictureIdList(),savedEvent.getId(),null);
 
-            if (eventDto.getPictureIdList() != null){
-                for (Long pictureID : eventDto.getPictureIdList()){
-                    Picture picture = new Picture();
-                    picture.setEventId(savedEvent.getId());
-                    picture.setPictureId(pictureID);
-                    pictureService.savedPicture(picture);
+
+        }
+    }
+
+    private void savePictureList(List<Long> pictureIdList, Long savedEventId, Long savedStationDataId) {
+        if (pictureIdList != null){
+            for (Long pictureID : pictureIdList){
+                Picture picture = new Picture();
+                if (savedEventId != null){
+                    picture.setEventId(savedEventId);
                 }
+                if (savedStationDataId != null){
+                    picture.setStationDataId(savedStationDataId);
+                }
+                picture.setPictureId(pictureID);
+                pictureService.savedPicture(picture);
             }
         }
     }
@@ -157,17 +165,10 @@ public class TripFacade {
             stationData.setTrip(savedTrip);
 
             StationData savedStationData = stationDataService.createStationData(stationData);
-
-            if (stationDataDTO.getPictureIdList() != null){
-                for (Long pictureID : stationDataDTO.getPictureIdList()){
-                    Picture picture = new Picture();
-                    picture.setEventId(savedStationData.getId());
-                    picture.setPictureId(pictureID);
-                    pictureService.savedPicture(picture);
-                }
-            }
-
             stationDataList.add(savedStationData);
+
+            savePictureList(stationDataDTO.getPictureIdList(), null, savedStationData.getId());
+
             counter++;
         }
         return stationDataList;

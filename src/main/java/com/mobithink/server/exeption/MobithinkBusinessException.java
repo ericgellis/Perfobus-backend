@@ -2,6 +2,7 @@ package com.mobithink.server.exeption;
 
 /**
  * Created by athiel on 02/02/2017.
+ *
  */
 public class MobithinkBusinessException extends Exception {
 

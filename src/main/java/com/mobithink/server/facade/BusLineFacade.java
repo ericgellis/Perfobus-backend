@@ -19,10 +19,9 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.bouncycastle.asn1.x500.style.RFC4519Style.l;
-
 /**
  * Created by athiel on 02/02/2017.
+ *
  */
 
 @RestController
@@ -81,7 +80,7 @@ public class BusLineFacade {
      *
      * GET. find busline list in a city.
      *
-     * @param {cityName}
+     * @param cityName
      *
      * @return List<BusLine> or null
      *
