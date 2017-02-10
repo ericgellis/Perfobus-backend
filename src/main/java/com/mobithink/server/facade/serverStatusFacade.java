@@ -25,8 +25,8 @@ public class serverStatusFacade {
      *
      */
     @GetMapping(path = "/wakeup", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
-    public ResponseEntity<String> wakeup() throws MobithinkBusinessException {
-       return ResponseEntity.ok("success");
+    public ResponseEntity<Void> wakeup() throws MobithinkBusinessException {
+       return ResponseEntity.ok(null);
 
     }
 }
