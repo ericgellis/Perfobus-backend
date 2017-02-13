@@ -20,8 +20,6 @@ import java.util.List;
 @Transactional
 public class RollingPointServiceImpl implements RollingPointService {
 
-    ConverterOfDTO converterOfDTO;
-
     @Resource
     RollingPointRepository rollingPointRepository;
 
@@ -36,7 +34,7 @@ public class RollingPointServiceImpl implements RollingPointService {
         if (rollingPointList != null){
             List<RollingPointDTO> rollingPointDTOList = new ArrayList<>();
             for (RollingPoint rollingPoint : rollingPointList){
-                rollingPointDTOList.add(converterOfDTO.convretRollingPointToDto(rollingPoint));
+                rollingPointDTOList.add(ConverterOfDTO.convretRollingPointToDto(rollingPoint));
             }
             return rollingPointDTOList;
         }

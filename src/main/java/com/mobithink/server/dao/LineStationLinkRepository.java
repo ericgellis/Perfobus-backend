@@ -1,7 +1,6 @@
 package com.mobithink.server.dao;
 
 import com.mobithink.server.entity.LineStationLink;
-import com.mobithink.server.entity.Station;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

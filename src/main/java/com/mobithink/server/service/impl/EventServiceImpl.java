@@ -16,13 +16,12 @@ import java.util.List;
 
 /**
  * Created by athiel on 03/02/2017.
+ * 
  */
 
 @Component()
 @Transactional
 public class EventServiceImpl implements EventService {
-
-    ConverterOfDTO converterOfDTO;
 
     @Resource
     EventRepository eventRepository;
@@ -42,7 +41,7 @@ public class EventServiceImpl implements EventService {
             List<EventDTO> eventDTOList = new ArrayList<>();
             for (Event event : eventList){
                 List<Picture> pictureList = pictureRepository.findByEventId(event.getId());
-                eventDTOList.add(converterOfDTO.convertEventToDto(event, pictureList));
+                eventDTOList.add(ConverterOfDTO.convertEventToDto(event, pictureList));
             }
             return eventDTOList;
         }else return null;

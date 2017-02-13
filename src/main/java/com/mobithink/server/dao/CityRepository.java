@@ -1,6 +1,5 @@
 package com.mobithink.server.dao;
 
-import com.mobithink.server.entity.BusLine;
 import com.mobithink.server.entity.City;
 import org.springframework.data.repository.CrudRepository;
 

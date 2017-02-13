@@ -22,8 +22,6 @@ import java.util.List;
 @Transactional
 public class StationDataServiceImpl implements StationDataService{
 
-    ConverterOfDTO converterOfDTO = new ConverterOfDTO();
-
     @Resource
     StationDataRepository stationDataRepository;
 
@@ -48,7 +46,7 @@ public class StationDataServiceImpl implements StationDataService{
         if (stationDataList != null) {
             for (StationData stationData : stationDataList) {
                 List<Picture> pictureList = pictureRepository.findByStationDataId(stationData.getId());
-                stationDataDTOList.add(converterOfDTO.convertStationDataToDto(stationData, pictureList));
+                stationDataDTOList.add(ConverterOfDTO.convertStationDataToDto(stationData, pictureList));
             }
             return stationDataDTOList;
         } else return null;
