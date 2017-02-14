@@ -31,8 +31,7 @@ public class serverStatusFacade {
     @GetMapping(path = "/wakeup", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
     public ResponseEntity<Void> wakeup() throws MobithinkBusinessException {
     	
-    	HttpHeaders responseHeaders = new HttpHeaders();
-       return new ResponseEntity<>(null, responseHeaders, org.springframework.http.HttpStatus.OK);
+       return new ResponseEntity<>(null, new HttpHeaders(), org.springframework.http.HttpStatus.OK);
 
     }
 }

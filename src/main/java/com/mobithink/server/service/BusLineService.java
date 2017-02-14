@@ -1,6 +1,8 @@
 package com.mobithink.server.service;
 
 import com.mobithink.server.entity.BusLine;
+import com.mobithink.server.entity.LineStationLink;
+
 import java.util.List;
 
 /**
@@ -17,4 +19,8 @@ public interface BusLineService {
     BusLine findOneByName(String name);
 
     BusLine findByNameAndCityId(String name, Long cityId);
+    
+    List<LineStationLink> findLineStationLinkByBusLineId(Long id);
+    
+    void deleteLineStationLinkById(Long id);
 }

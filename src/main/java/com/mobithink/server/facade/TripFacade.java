@@ -4,6 +4,9 @@ import com.mobithink.server.DTO.*;
 import com.mobithink.server.entity.*;
 import com.mobithink.server.exeption.MobithinkBusinessException;
 import com.mobithink.server.service.*;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.ResponseEntity.BodyBuilder;
@@ -44,18 +47,18 @@ public class TripFacade {
      *
      * @param tripDTO object
      *
-     * @return text : "success" if save tripDTO
+     * @return status 201 if save tripDTO
      *
      */
     @PostMapping(path = "/create", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
-    public BodyBuilder create(@Valid @RequestBody TripDTO tripDTO) throws MobithinkBusinessException {
+    public ResponseEntity<Void> create(@Valid @RequestBody TripDTO tripDTO) throws MobithinkBusinessException {
 
         Trip savedTrip = saveNewTrip(tripDTO);
         List<StationData> stationDataList = saveStationDataList(savedTrip, tripDTO.getStationDataDTOList());
         saveEventList(savedTrip, tripDTO.getEventDTOList(), stationDataList);
         saveRollingPointList(savedTrip, tripDTO.getRollingPointDTOList());
 
-        return ResponseEntity.status(201);
+        return new ResponseEntity<>(null, new HttpHeaders(), HttpStatus.CREATED);
     }
 
     /**

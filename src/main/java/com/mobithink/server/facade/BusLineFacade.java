@@ -11,11 +11,17 @@ import com.mobithink.server.exeption.MobithinkBusinessException;
 import com.mobithink.server.service.BusLineService;
 import com.mobithink.server.service.CityService;
 import com.mobithink.server.service.StationService;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.validation.Valid;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,36 +50,74 @@ public class BusLineFacade {
      *
      * @param busLineDto object
      *
-     * @return text : "success" if create bus line
-     *          text : "exist" if association BusLine and City exist
+     * @return status 201 if create bus line
+     *          status 406 (and message) if association BusLine and City exist
      *
      */
     @PostMapping(path = "/create", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
-    public ResponseEntity<String> create(@Valid @RequestBody BusLineDTO busLineDto) throws MobithinkBusinessException{
-    	
-        Long cityId = null;
+    public ResponseEntity<Void> create(@Valid @RequestBody BusLineDTO busLineDto) throws MobithinkBusinessException{
 
-        if ((busLineDto.getCityDto() != null) && (busLineDto.getCityDto().getId() != null)){
-            cityId = busLineDto.getCityDto().getId();
-        } else if (busLineDto.getCityDto() != null) {
-            City city = cityService.findOneByName(busLineDto.getCityDto().getName());
-            if (city != null){
-                cityId = city.getId();
-            }
-        }
+    	City savedCity = new City();
 
-        BusLine searchedBusLine = busLineService.findByNameAndCityId(busLineDto.getName(), cityId);
+    	if (busLineDto.getCityDto() != null){
 
-        if ( searchedBusLine != null){
-            return ResponseEntity.ok("exist");
-        } else {
+    		if(busLineDto.getCityDto().getId() != null){
+    			
+    			savedCity = cityService.findOneCityById(busLineDto.getCityDto().getId());
 
-            City savedCity = cityService.createOrLoadCity(ConverterOfDTO.convertCityDtoToCity(busLineDto.getCityDto()));
-            BusLine savedBusLine = saveNewBusLine(busLineDto, savedCity);
-            savedStationDTO(busLineDto.getStationDTOList(), savedBusLine);
-            return ResponseEntity.ok("success");
-        }
+    		} else {
+
+    			savedCity = cityService.findOneByName(busLineDto.getCityDto().getName());
+    			
+    			if (savedCity == null){
+    				savedCity = cityService.createCity(ConverterOfDTO.convertCityDtoToCity(busLineDto.getCityDto()));
+    			}
+    		}
+    	}
+
+    	BusLine searchedBusLine = busLineService.findByNameAndCityId(busLineDto.getName(), savedCity.getId());
+
+    	if ( searchedBusLine != null){
+
+    		HttpHeaders httpHeaders = new HttpHeaders();
+    		httpHeaders.set("message", "Ligne existante");
+    		return new ResponseEntity<>(null, httpHeaders, HttpStatus.NOT_ACCEPTABLE);
+    		
+    	} else {
+
+    		BusLine savedBusLine = saveNewBusLine(busLineDto, savedCity);
+    		savedStationDTO(busLineDto.getStationDTOList(), savedBusLine);
+    		return new ResponseEntity<>(null, new HttpHeaders(), HttpStatus.CREATED);
+    		
+    	}
     }
+    
+    /**
+    *
+    * POST. Update busline.
+    *
+    * @param busLineDto object
+    *
+    * @return status 201 if Update bus line
+    *         
+    *
+    */
+   @PostMapping(path = "/update", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
+   public ResponseEntity<Void> update(@Valid @RequestBody BusLineDTO busLineDto) throws MobithinkBusinessException{
+
+   	List<LineStationLink> oldLineStationLinkList = busLineService.findLineStationLinkByBusLineId(busLineDto.getId());
+   	for (LineStationLink lineStationLink : oldLineStationLinkList){
+   		busLineService.deleteLineStationLinkById(lineStationLink.getId());
+   	}
+   	
+   	BusLine updateBusLine = ConverterOfDTO.convertBusLineDtoToBusLine(busLineDto);
+   	
+   	savedStationDTO(busLineDto.getStationDTOList(), updateBusLine);
+
+   	return new ResponseEntity<>(null, new HttpHeaders(), HttpStatus.CREATED);
+   
+   }
+
 
 
 

@@ -18,6 +18,4 @@ public interface CityService {
 
     City findOneByName(String name);
 
-    City createOrLoadCity (City city);
-
 }

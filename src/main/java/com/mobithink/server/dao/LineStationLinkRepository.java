@@ -14,4 +14,5 @@ public interface LineStationLinkRepository extends CrudRepository<LineStationLin
     List<LineStationLink> findByBusLineId(Long id);
 
     LineStationLink findByBusLineIdAndStationId (Long busLineId, Long stationId);
+    
 }
