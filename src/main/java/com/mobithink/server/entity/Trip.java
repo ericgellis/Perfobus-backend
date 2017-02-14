@@ -37,11 +37,9 @@ public class Trip {
     @Column(name = "vehicle_capacity")
     private int vehicleCapacity;
 
-    @Column(name = "bus_line_name")
-    private String busLineName;
-
-    @Column(name = "city_name")
-    private String cityName;
+    @JoinColumn
+    @Column(name = "bus_line_id")
+    private BusLine busLine;
 
     @Column(name = "start_gps_lat")
     private Long startGpsLat;
@@ -152,19 +150,13 @@ public class Trip {
         this.vehicleCapacity = vehicleCapacity;
     }
 
-    public String getBusLineName() {
-        return busLineName;
-    }
+	public BusLine getBusLine() {
+		return busLine;
+	}
 
-    public void setBusLineName(String busLineName) {
-        this.busLineName = busLineName;
-    }
+	public void setBusLine(BusLine busLine) {
+		this.busLine = busLine;
+	}
 
-    public String getCityName() {
-        return cityName;
-    }
-
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
-    }
+    
 }

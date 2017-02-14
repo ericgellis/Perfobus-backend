@@ -62,7 +62,7 @@ public class ConverterOfDTO {
     public static TripDTO convertTripToTripDTO(Trip trip, List<StationDataDTO> stationDataDTOList, List<EventDTO> eventDTOList,
                                         List<RollingPointDTO> rollingPointDTOList){
         return new TripDTO(trip.getId(), trip.getTripName(),trip.getStartTime(),trip.getEndTime(),trip.getAtmo(),
-                trip.getTemperature(),trip.getWeather(), trip.getVehicleCapacity(),trip.getBusLineName(), trip.getCityName(),
+                trip.getTemperature(),trip.getWeather(), trip.getVehicleCapacity(), convertBusLineToDTO(trip.getBusLine()),
                 stationDataDTOList, rollingPointDTOList, eventDTOList, trip.getStartGpsLat(), trip.getStartGpsLong(), trip.getEndGpsLat(),
                 trip.getEndGpsLong() );
     }

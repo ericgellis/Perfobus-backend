@@ -11,5 +11,5 @@ import java.util.List;
  */
 public interface TripRepository extends CrudRepository<Trip, Long> {
 
-    List<Trip> findByBusLineNameAndCityName(String busLineName, String ciyName);
+    List<Trip> findByBusLineId(Long busLineId);
 }

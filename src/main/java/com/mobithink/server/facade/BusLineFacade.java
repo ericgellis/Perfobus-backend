@@ -50,6 +50,7 @@ public class BusLineFacade {
      */
     @PostMapping(path = "/create", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
     public ResponseEntity<String> create(@Valid @RequestBody BusLineDTO busLineDto) throws MobithinkBusinessException{
+    	
         Long cityId = null;
 
         if ((busLineDto.getCityDto() != null) && (busLineDto.getCityDto().getId() != null)){

@@ -3,6 +3,7 @@ package com.mobithink.server.facade;
 import com.mobithink.server.exeption.MobithinkBusinessException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,8 +26,8 @@ public class serverStatusFacade {
      *
      */
     @GetMapping(path = "/wakeup", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
-    public ResponseEntity<Void> wakeup() throws MobithinkBusinessException {
-       return ResponseEntity.ok(null);
+    public BodyBuilder wakeup() throws MobithinkBusinessException {
+       return ResponseEntity.status(201);
 
     }
 }

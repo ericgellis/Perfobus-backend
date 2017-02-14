@@ -16,8 +16,7 @@ public class TripDTO {
     private int temperature;
     private String weather;
     private int vehicleCapacity;
-    private String busLineDtoName;
-    private String cityDtoName;
+    private BusLineDTO busLineDTO ;
     private List<StationDataDTO> stationDataDTOList;
     private List<RollingPointDTO> rollingPointDTOList;
     private List<EventDTO> eventDTOList;
@@ -28,44 +27,44 @@ public class TripDTO {
 
     public TripDTO() {
     }
+ 
+	public TripDTO(Long id, String tripName, Long startTime, Long endTime, int atmo, int temperature, String weather,
+			int vehicleCapacity, BusLineDTO busLineDTO, List<StationDataDTO> stationDataDTOList,
+			List<RollingPointDTO> rollingPointDTOList, List<EventDTO> eventDTOList, Long startGpsLat, Long startGpsLong,
+			Long endGpsLat, Long endGpsLong) {
+		super();
+		this.id = id;
+		this.tripName = tripName;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.atmo = atmo;
+		this.temperature = temperature;
+		this.weather = weather;
+		this.vehicleCapacity = vehicleCapacity;
+		this.busLineDTO = busLineDTO;
+		this.stationDataDTOList = stationDataDTOList;
+		this.rollingPointDTOList = rollingPointDTOList;
+		this.eventDTOList = eventDTOList;
+		this.startGpsLat = startGpsLat;
+		StartGpsLong = startGpsLong;
+		this.endGpsLat = endGpsLat;
+		this.endGpsLong = endGpsLong;
+	}
 
-    public TripDTO(Long id, String tripName, Long startTime, Long endTime, int atmo, int temperature, String weather, int vehicleCapacity, String busLineDtoName, String cityDtoName, List<StationDataDTO> stationDataDTOList, List<RollingPointDTO> rollingPointDTOList, List<EventDTO> eventDTOList, Long startGpsLat, Long startGpsLong, Long endGpsLat, Long endGpsLong) {
-        this.id = id;
-        this.tripName = tripName;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.atmo = atmo;
-        this.temperature = temperature;
-        this.weather = weather;
-        this.vehicleCapacity = vehicleCapacity;
-        this.busLineDtoName = busLineDtoName;
-        this.cityDtoName = cityDtoName;
-        this.stationDataDTOList = stationDataDTOList;
-        this.rollingPointDTOList = rollingPointDTOList;
-        this.eventDTOList = eventDTOList;
-        this.startGpsLat = startGpsLat;
-        StartGpsLong = startGpsLong;
-        this.endGpsLat = endGpsLat;
-        this.endGpsLong = endGpsLong;
-    }
 
-    public String getBusLineDtoName() {
-        return busLineDtoName;
-    }
+	public BusLineDTO getBusLineDTO() {
+		return busLineDTO;
+	}
 
-    public void setBusLineDtoName(String busLineDtoName) {
-        this.busLineDtoName = busLineDtoName;
-    }
 
-    public String getCityDtoName() {
-        return cityDtoName;
-    }
+	public void setBusLineDTO(BusLineDTO busLineDTO) {
+		this.busLineDTO = busLineDTO;
+	}
 
-    public void setCityDtoName(String cityDtoName) {
-        this.cityDtoName = cityDtoName;
-    }
 
-    public Long getStartGpsLat() {
+
+
+	public Long getStartGpsLat() {
         return startGpsLat;
     }
 

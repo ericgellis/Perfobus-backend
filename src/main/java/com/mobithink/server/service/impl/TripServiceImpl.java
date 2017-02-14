@@ -25,10 +25,10 @@ public class TripServiceImpl implements TripService {
         return tripRepository.save(trip);
     }
 
-    @Override
-    public List<Trip> findTripListByBusLineNameAndcityName(String busLineName, String cityName) {
-        return tripRepository.findByBusLineNameAndCityName(busLineName, cityName);
-    }
-
+	@Override
+	public List<Trip> findTripListByBusLineId(Long busLineId) {
+		// TODO Auto-generated method stub
+		return tripRepository.findByBusLineId(busLineId);
+	}
 
 }

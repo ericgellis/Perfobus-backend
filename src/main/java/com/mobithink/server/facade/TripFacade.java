@@ -6,6 +6,7 @@ import com.mobithink.server.exeption.MobithinkBusinessException;
 import com.mobithink.server.service.*;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -47,29 +48,29 @@ public class TripFacade {
      *
      */
     @PostMapping(path = "/create", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
-    public ResponseEntity<String> create(@Valid @RequestBody TripDTO tripDTO) throws MobithinkBusinessException {
+    public BodyBuilder create(@Valid @RequestBody TripDTO tripDTO) throws MobithinkBusinessException {
 
         Trip savedTrip = saveNewTrip(tripDTO);
         List<StationData> stationDataList = saveStationDataList(savedTrip, tripDTO.getStationDataDTOList());
         saveEventList(savedTrip, tripDTO.getEventDTOList(), stationDataList);
         saveRollingPointList(savedTrip, tripDTO.getRollingPointDTOList());
 
-        return ResponseEntity.ok("success");
+        return ResponseEntity.status(201);
     }
 
     /**
      *
-     * GET. find TripDTO associeted at city and line.
+     * GET. find TripDTO associated at city and line.
      *
      * @param cityName and lineName
      *
      * @return List<TripDTO> or null if not exist Trip saved for this busLine
      *
      */
-    @GetMapping(path = "/find/{cityName}/{lineName}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
-    public ResponseEntity<List<TripDTO>> create(@Valid @PathVariable String cityName , @PathVariable String lineName) throws MobithinkBusinessException {
+    @GetMapping(path = "/find/{busLineId}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
+    public ResponseEntity<List<TripDTO>> create(@Valid @PathVariable Long busLineId) throws MobithinkBusinessException {
 
-        List<Trip> tripList = tripService.findTripListByBusLineNameAndcityName(lineName, cityName);
+        List<Trip> tripList = tripService.findTripListByBusLineId(busLineId);
         List<TripDTO> tripDTOList = new ArrayList<>();
 
         if (tripList != null){
@@ -179,8 +180,7 @@ public class TripFacade {
         Trip savedTrip = new Trip();
         savedTrip.setWeather(tripDTO.getWeather());
         savedTrip.setAtmo(tripDTO.getAtmo());
-        savedTrip.setBusLineName(tripDTO.getBusLineDtoName());
-        savedTrip.setCityName(tripDTO.getCityDtoName());
+        savedTrip.setBusLine(ConverterOfDTO.convertBusLineDtoToBusLine(tripDTO.getBusLineDTO()));
         savedTrip.setStartGpsLat(tripDTO.getStartGpsLat());
         savedTrip.setStartGpsLong(tripDTO.getStartGpsLong());
         savedTrip.setEndGpsLat(tripDTO.getEndGpsLat());

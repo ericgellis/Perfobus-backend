@@ -11,5 +11,5 @@ public interface TripService {
 
     Trip createTrip(Trip trip);
 
-    List<Trip> findTripListByBusLineNameAndcityName (String busLineName, String cityName);
+    List<Trip> findTripListByBusLineId(Long busLineId);
 }

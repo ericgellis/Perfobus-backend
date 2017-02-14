@@ -111,11 +111,10 @@ CREATE TABLE public.trip
     temperature integer,
     weather text COLLATE pg_catalog."default",
     vehicle_capacity integer,
-    bus_line_name text COLLATE pg_catalog."default" NOT NULL,
-    city_name text COLLATE pg_catalog."default" NOT NULL,
     start_gps_lat bigint,
     start_gps_long bigint,
     end_gps_lat bigint,
     end_gps_long bigint,
+    bus_line_id bigint,
     CONSTRAINT trip_pkey PRIMARY KEY (id)
 );
