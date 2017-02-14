@@ -39,6 +39,9 @@ public class TripFacade {
     @Resource
     PictureService pictureService;
 
+    @Resource
+    BusLineService busLineService;
+
 
     /**
      *
@@ -182,7 +185,7 @@ public class TripFacade {
         Trip savedTrip = new Trip();
         savedTrip.setWeather(tripDTO.getWeather());
         savedTrip.setAtmo(tripDTO.getAtmo());
-        savedTrip.setBusLine(ConverterOfDTO.convertBusLineDtoToBusLine(tripDTO.getBusLineDTO()));
+        savedTrip.setBusLine(busLineService.findOneById(tripDTO.getBusLineid()));
         savedTrip.setStartGpsLat(tripDTO.getStartGpsLat());
         savedTrip.setStartGpsLong(tripDTO.getStartGpsLong());
         savedTrip.setEndGpsLat(tripDTO.getEndGpsLat());

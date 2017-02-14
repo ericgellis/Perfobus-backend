@@ -18,6 +18,8 @@ public interface BusLineService {
 
     BusLine findOneByName(String name);
 
+    BusLine findOneById(Long id);
+
     BusLine findByNameAndCityId(String name, Long cityId);
     
     List<LineStationLink> findLineStationLinkByBusLineId(Long id);
