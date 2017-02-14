@@ -1,6 +1,9 @@
 package com.mobithink.server.facade;
 
 import com.mobithink.server.exeption.MobithinkBusinessException;
+
+import org.eclipse.jetty.http.HttpStatus;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.ResponseEntity.BodyBuilder;
@@ -26,8 +29,10 @@ public class serverStatusFacade {
      *
      */
     @GetMapping(path = "/wakeup", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
-    public BodyBuilder wakeup() throws MobithinkBusinessException {
-       return ResponseEntity.status(201);
+    public ResponseEntity<Void> wakeup() throws MobithinkBusinessException {
+    	
+    	HttpHeaders responseHeaders = new HttpHeaders();
+       return new ResponseEntity<>(null, responseHeaders, org.springframework.http.HttpStatus.OK);
 
     }
 }
