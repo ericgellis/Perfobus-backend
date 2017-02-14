@@ -37,8 +37,8 @@ public class Trip {
     @Column(name = "vehicle_capacity")
     private int vehicleCapacity;
 
-    @JoinColumn
-    @Column(name = "bus_line_id")
+    @ManyToOne
+    @JoinColumn(name = "bus_line_id")
     private BusLine busLine;
 
     @Column(name = "start_gps_lat")
