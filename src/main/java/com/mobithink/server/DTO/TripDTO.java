@@ -16,7 +16,7 @@ public class TripDTO {
     private int temperature;
     private String weather;
     private int vehicleCapacity;
-    private BusLineDTO busLineDTO ;
+    private Long busLineid;
     private List<StationDataDTO> stationDataDTOList;
     private List<RollingPointDTO> rollingPointDTOList;
     private List<EventDTO> eventDTOList;
@@ -29,9 +29,9 @@ public class TripDTO {
     }
  
 	public TripDTO(Long id, String tripName, Long startTime, Long endTime, int atmo, int temperature, String weather,
-			int vehicleCapacity, BusLineDTO busLineDTO, List<StationDataDTO> stationDataDTOList,
-			List<RollingPointDTO> rollingPointDTOList, List<EventDTO> eventDTOList, Long startGpsLat, Long startGpsLong,
-			Long endGpsLat, Long endGpsLong) {
+                   int vehicleCapacity, Long busLineid, List<StationDataDTO> stationDataDTOList,
+                   List<RollingPointDTO> rollingPointDTOList, List<EventDTO> eventDTOList, Long startGpsLat, Long startGpsLong,
+                   Long endGpsLat, Long endGpsLong) {
 		super();
 		this.id = id;
 		this.tripName = tripName;
@@ -41,7 +41,7 @@ public class TripDTO {
 		this.temperature = temperature;
 		this.weather = weather;
 		this.vehicleCapacity = vehicleCapacity;
-		this.busLineDTO = busLineDTO;
+		this.busLineid = busLineid;
 		this.stationDataDTOList = stationDataDTOList;
 		this.rollingPointDTOList = rollingPointDTOList;
 		this.eventDTOList = eventDTOList;
@@ -52,13 +52,13 @@ public class TripDTO {
 	}
 
 
-	public BusLineDTO getBusLineDTO() {
-		return busLineDTO;
+	public Long getBusLineid() {
+		return busLineid;
 	}
 
 
-	public void setBusLineDTO(BusLineDTO busLineDTO) {
-		this.busLineDTO = busLineDTO;
+	public void setBusLineid(Long busLineid) {
+		this.busLineid = busLineid;
 	}
 
 

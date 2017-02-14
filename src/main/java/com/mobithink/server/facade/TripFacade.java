@@ -9,7 +9,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -39,6 +38,9 @@ public class TripFacade {
 
     @Resource
     PictureService pictureService;
+
+    @Resource
+    BusLineService busLineService;
 
 
     /**
@@ -183,7 +185,7 @@ public class TripFacade {
         Trip savedTrip = new Trip();
         savedTrip.setWeather(tripDTO.getWeather());
         savedTrip.setAtmo(tripDTO.getAtmo());
-        savedTrip.setBusLine(ConverterOfDTO.convertBusLineDtoToBusLine(tripDTO.getBusLineDTO()));
+        savedTrip.setBusLine(busLineService.findOneById(tripDTO.getBusLineid()));
         savedTrip.setStartGpsLat(tripDTO.getStartGpsLat());
         savedTrip.setStartGpsLong(tripDTO.getStartGpsLong());
         savedTrip.setEndGpsLat(tripDTO.getEndGpsLat());

@@ -51,6 +51,12 @@ public class BusLineServiceImpl implements BusLineService {
     }
 
     @Override
+    public BusLine findOneById(Long id) {
+
+        return busLigneRepository.findOne(id);
+    }
+
+    @Override
     public BusLine findByNameAndCityId(String name, Long cityId) {
     	
         return busLigneRepository.findByNameAndCityId(name, cityId);
