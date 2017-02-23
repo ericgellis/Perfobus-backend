@@ -216,17 +216,45 @@ public class TripFacade {
 	private Trip saveNewTrip(TripDTO tripDTO) {
 
 		Trip savedTrip = new Trip();
-		savedTrip.setWeather(tripDTO.getWeather());
+		
+		if(tripDTO.getWeather() != null){
+			savedTrip.setWeather(tripDTO.getWeather());
+		}
+	
+		if(tripDTO.getBusLineid() != null){
+			savedTrip.setBusLine(busLineService.findOneById(tripDTO.getBusLineid()));
+		}
+		
+		if(tripDTO.getStartGpsLat() != null ){
+			savedTrip.setStartGpsLat(tripDTO.getStartGpsLat());
+		}
+		
+		if(tripDTO.getStartGpsLong() != null ){
+			savedTrip.setStartGpsLong(tripDTO.getStartGpsLong());
+		}
+		
+		if(tripDTO.getEndGpsLat() != null ){
+			savedTrip.setEndGpsLat(tripDTO.getEndGpsLat());
+		}
+		
+		if(tripDTO.getEndGpsLong() != null ){
+			savedTrip.setEndGpsLong(tripDTO.getEndGpsLong());
+		}
+		
+		if(tripDTO.getStartTime() != null ){
+			savedTrip.setStartTime(tripDTO.getStartTime());
+		}
+		
+		if(tripDTO.getEndTime() != null ){
+			savedTrip.setEndTime(tripDTO.getEndTime());
+		}
+
+		if(tripDTO.getTripName() != null ){
+			savedTrip.setTripName(tripDTO.getTripName());
+		}
+		
 		savedTrip.setAtmo(tripDTO.getAtmo());
-		savedTrip.setBusLine(busLineService.findOneById(tripDTO.getBusLineid()));
-		savedTrip.setStartGpsLat(tripDTO.getStartGpsLat());
-		savedTrip.setStartGpsLong(tripDTO.getStartGpsLong());
-		savedTrip.setEndGpsLat(tripDTO.getEndGpsLat());
-		savedTrip.setEndGpsLong(tripDTO.getEndGpsLong());
-		savedTrip.setStartTime(tripDTO.getStartTime());
-		savedTrip.setEndTime(tripDTO.getEndTime());
 		savedTrip.setTemperature(tripDTO.getTemperature());
-		savedTrip.setTripName(tripDTO.getTripName());
 		savedTrip.setVehicleCapacity(tripDTO.getVehicleCapacity());
 
 		return tripService.createTrip(savedTrip);
