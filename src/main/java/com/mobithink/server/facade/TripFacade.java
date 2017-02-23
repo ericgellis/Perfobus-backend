@@ -58,6 +58,7 @@ public class TripFacade {
 
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(tripDTO.getStartTime());
+		List<StationData> stationDataList = new ArrayList<>();
 		
 		BusLine busLine = busLineService.findOneById(tripDTO.getBusLineid());
 		StringBuilder sb = new StringBuilder();
@@ -74,10 +75,19 @@ public class TripFacade {
 		
 		tripDTO.setTripName(sb.toString());
 		Trip savedTrip = saveNewTrip(tripDTO);
-		List<StationData> stationDataList = saveStationDataList(savedTrip, tripDTO.getStationDataDTOList());
-		saveEventList(savedTrip, tripDTO.getEventDTOList(), stationDataList);
-		saveRollingPointList(savedTrip, tripDTO.getRollingPointDTOList());
-
+		
+		if(tripDTO.getStationDataDTOList() != null){
+			stationDataList = saveStationDataList(savedTrip, tripDTO.getStationDataDTOList());
+		}
+		
+		if(tripDTO.getEventDTOList() != null && stationDataList != null){
+			saveEventList(savedTrip, tripDTO.getEventDTOList(), stationDataList);
+		}
+		
+		if(tripDTO.getRollingPointDTOList() != null){
+			saveRollingPointList(savedTrip, tripDTO.getRollingPointDTOList());
+		}
+	
 		return new ResponseEntity<>(null, new HttpHeaders(), HttpStatus.CREATED);
 	}
 
@@ -134,7 +144,6 @@ public class TripFacade {
 
 	private void saveEventList(Trip savedTrip, List<EventDTO> eventDTOList, List<StationData> stationDataList) {
 
-		if(savedTrip!=null && eventDTOList!=null && stationDataList!=null){
 			Event event = new Event();
 			event.setTrip(savedTrip);
 			for (EventDTO eventDto : eventDTOList) {
@@ -154,9 +163,7 @@ public class TripFacade {
 				Event savedEvent = eventService.createEvent(event);
 				savePictureList(eventDto.getPictureIdList(),savedEvent.getId(),null);
 			}
-		} 
-
-
+	
 	}
 
 	private void savePictureList(List<Long> pictureIdList, Long savedEventId, Long savedStationDataId) {
