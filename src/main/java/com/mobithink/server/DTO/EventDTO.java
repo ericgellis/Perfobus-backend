@@ -16,8 +16,11 @@ public class EventDTO {
     private Long gpsLong;
     private String stationName;
     private List<Long> pictureIdList;
+    
+    public EventDTO() {
+	}
 
-    public EventDTO(Long id, String eventName, Long startTime, Long endTime, Long gpsLat, Long gpsLong, String stationName) {
+	public EventDTO(Long id, String eventName, Long startTime, Long endTime, Long gpsLat, Long gpsLong, String stationName) {
         this.id = id;
         this.eventName = eventName;
         this.startTime = startTime;
