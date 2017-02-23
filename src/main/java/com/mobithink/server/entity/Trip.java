@@ -29,7 +29,7 @@ public class Trip {
     private int atmo;
 
     @Column(name = "temperature")
-    private int temperature;
+    private String temperature;
 
     @Column(name = "weather")
     private String weather;
@@ -94,11 +94,11 @@ public class Trip {
         this.atmo = atmo;
     }
 
-    public int getTemperature() {
+    public String getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(int temperature) {
+    public void setTemperature(String temperature) {
         this.temperature = temperature;
     }
 

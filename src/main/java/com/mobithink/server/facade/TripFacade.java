@@ -253,8 +253,11 @@ public class TripFacade {
 			savedTrip.setTripName(tripDTO.getTripName());
 		}
 		
+		if(tripDTO.getTemperature() != null){
+			savedTrip.setTemperature(tripDTO.getTemperature());
+		}
+		
 		savedTrip.setAtmo(tripDTO.getAtmo());
-		savedTrip.setTemperature(tripDTO.getTemperature());
 		savedTrip.setVehicleCapacity(tripDTO.getVehicleCapacity());
 
 		return tripService.createTrip(savedTrip);

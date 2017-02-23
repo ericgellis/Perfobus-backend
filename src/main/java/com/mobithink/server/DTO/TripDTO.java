@@ -13,7 +13,7 @@ public class TripDTO {
     private Long startTime;
     private Long endTime;
     private int atmo;
-    private int temperature;
+    private String temperature;
     private String weather;
     private int vehicleCapacity;
     private Long busLineid;
@@ -28,7 +28,7 @@ public class TripDTO {
     public TripDTO() {
     }
  
-	public TripDTO(Long id, String tripName, Long startTime, Long endTime, int atmo, int temperature, String weather,
+	public TripDTO(Long id, String tripName, Long startTime, Long endTime, int atmo, String temperature, String weather,
                    int vehicleCapacity, Long busLineid, List<StationDataDTO> stationDataDTOList,
                    List<RollingPointDTO> rollingPointDTOList, List<EventDTO> eventDTOList, Long startGpsLat, Long startGpsLong,
                    Long endGpsLat, Long endGpsLong) {
@@ -136,11 +136,11 @@ public class TripDTO {
         this.atmo = atmo;
     }
 
-    public int getTemperature() {
+    public String getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(int temperature) {
+    public void setTemperature(String temperature) {
         this.temperature = temperature;
     }
 
