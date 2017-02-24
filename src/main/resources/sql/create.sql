@@ -108,7 +108,7 @@ CREATE TABLE public.trip
     start_time bigint NOT NULL,
     end_time bigint NOT NULL,
     atmo integer,
-    temperature integer,
+    temperature text,
     weather text COLLATE pg_catalog."default",
     vehicle_capacity integer,
     start_gps_lat bigint,
