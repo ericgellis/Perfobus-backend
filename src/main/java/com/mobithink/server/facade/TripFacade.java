@@ -144,9 +144,9 @@ public class TripFacade {
 
 	private void saveEventList(Trip savedTrip, List<EventDTO> eventDTOList, List<StationData> stationDataList) {
 
-			Event event = new Event();
-			event.setTrip(savedTrip);
 			for (EventDTO eventDto : eventDTOList) {
+				Event event = new Event();
+				event.setTrip(savedTrip);
 				event.setEndTime(eventDto.getEndTime());
 				event.setStartTime(eventDto.getStartTime());
 				event.setEventName(eventDto.getEventName());
