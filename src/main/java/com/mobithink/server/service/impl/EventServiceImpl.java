@@ -37,7 +37,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<EventDTO> findAllEventDTObyTripId(Long id) {
         List<Event> eventList = eventRepository.findAllByTripId(id);
-        if (eventList != null) {
+        if (!(eventList.isEmpty())) {
             List<EventDTO> eventDTOList = new ArrayList<>();
             for (Event event : eventList){
                 List<Picture> pictureList = pictureRepository.findByEventId(event.getId());

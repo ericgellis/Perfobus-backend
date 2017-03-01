@@ -145,18 +145,21 @@ public class TripFacade {
 	private void saveEventList(Trip savedTrip, List<EventDTO> eventDTOList, List<StationData> stationDataList) {
 
 			for (EventDTO eventDto : eventDTOList) {
+				
 				Event event = new Event();
 				event.setTrip(savedTrip);
 				event.setEndTime(eventDto.getEndTime());
 				event.setStartTime(eventDto.getStartTime());
 				event.setEventName(eventDto.getEventName());
+				
 				if (eventDto.getStationName() != null) {
 					for (StationData stationData : stationDataList){
 						if(stationData.getStationName().equals(eventDto.getStationName())){
 							event.setStationData(stationData);
 						}
 					}
-				}
+				} else event.setStationData(null);
+				
 				event.setGpsLat(eventDto.getGpsLat());
 				event.setGpsLong(eventDto.getGpsLong());
 

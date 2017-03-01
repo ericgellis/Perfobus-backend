@@ -31,7 +31,7 @@ public class RollingPointServiceImpl implements RollingPointService {
     @Override
     public List<RollingPointDTO> findRollingPOintDtoListByTripId(Long tripId) {
         List<RollingPoint> rollingPointList = rollingPointRepository.findAllByTripId(tripId);
-        if (rollingPointList != null){
+        if (!(rollingPointList.isEmpty())){
             List<RollingPointDTO> rollingPointDTOList = new ArrayList<>();
             for (RollingPoint rollingPoint : rollingPointList){
                 rollingPointDTOList.add(ConverterOfDTO.convretRollingPointToDto(rollingPoint));
