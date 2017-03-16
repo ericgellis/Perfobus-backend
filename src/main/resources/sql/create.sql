@@ -45,8 +45,8 @@ CREATE TABLE public.event
     end_time bigint,
     station_data_id bigint,
     trip_id bigint NOT NULL,
-    gps_lat bigint,
-    gps_long bigint,
+    gps_lat DOUBLE PRECISION,
+    gps_long DOUBLE PRECISION,
     CONSTRAINT event_pkey PRIMARY KEY (id)
 );
 
@@ -74,8 +74,8 @@ CREATE TABLE public.rolling_point
     point_time bigint,
     traffic integer,
     trip_id bigint NOT NULL,
-    gps_lat bigint,
-    gps_long bigint,
+    gps_lat DOUBLE PRECISION,
+    gps_long DOUBLE PRECISION,
     CONSTRAINT rolling_point_pkey PRIMARY KEY (id)
 );
 
@@ -96,8 +96,8 @@ CREATE TABLE public.station_data
     step integer,
     station_name text COLLATE pg_catalog."default",
     trip_id bigint NOT NULL,
-    gps_lat bigint,
-    gps_long bigint,
+    gps_lat DOUBLE PRECISION,
+    gps_long DOUBLE PRECISION,
     CONSTRAINT station_data_pkey PRIMARY KEY (id)
 );
 
@@ -111,10 +111,10 @@ CREATE TABLE public.trip
     temperature text,
     weather text COLLATE pg_catalog."default",
     vehicle_capacity integer,
-    start_gps_lat bigint,
-    start_gps_long bigint,
-    end_gps_lat bigint,
-    end_gps_long bigint,
+    start_gps_lat DOUBLE PRECISION,
+    start_gps_long DOUBLE PRECISION,
+    end_gps_lat DOUBLE PRECISION,
+    end_gps_long DOUBLE PRECISION,
     bus_line_id bigint,
     CONSTRAINT trip_pkey PRIMARY KEY (id)
 );
