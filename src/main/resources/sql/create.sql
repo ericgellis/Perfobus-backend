@@ -47,6 +47,8 @@ CREATE TABLE public.event
     trip_id bigint NOT NULL,
     gps_lat DOUBLE PRECISION,
     gps_long DOUBLE PRECISION,
+    gps_endlat DOUBLE PRECISION,
+    gps_endlong DOUBLE PRECISION,
     CONSTRAINT event_pkey PRIMARY KEY (id)
 );
 

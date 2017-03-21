@@ -25,11 +25,17 @@ public class Event {
     @Column(name = "end_time")
     private Long endTime;
 
-   @Column(name = "gps_lat")
-   private Long gpsLat;
+    @Column(name = "gps_lat")
+    private Long gpsLat;
 
-   @Column(name = "gps_long")
-   private Long gpsLong;
+    @Column(name = "gps_long")
+    private Long gpsLong;
+
+    @Column(name = "gps_endlat")
+    private Long gpsEndLat;
+
+    @Column(name = "gps_endlong")
+    private Long gpsEndLong;
 
     @ManyToOne
     @JoinColumn(name = "station_data_id")
@@ -103,4 +109,12 @@ public class Event {
     public void setStationData(StationData stationData) {
         this.stationData = stationData;
     }
+
+    public Long getGpsEndLat() {return gpsEndLat;}
+
+    public void setGpsEndLat(Long gpsEndLat) {this.gpsEndLat = gpsEndLat;}
+
+    public Long getGpsEndLong() {return gpsEndLong;}
+
+    public void setGpsEndLong(Long gpsEndLong) {this.gpsEndLong = gpsEndLong;}
 }

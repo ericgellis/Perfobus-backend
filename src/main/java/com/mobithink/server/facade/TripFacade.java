@@ -162,6 +162,8 @@ public class TripFacade {
 				
 				event.setGpsLat(eventDto.getGpsLat());
 				event.setGpsLong(eventDto.getGpsLong());
+				event.setGpsEndLat(eventDto.getGpsEndLat());
+				event.setGpsEndLong(eventDto.getGpsEndLong());
 
 				Event savedEvent = eventService.createEvent(event);
 				savePictureList(eventDto.getPictureIdList(),savedEvent.getId(),null);
