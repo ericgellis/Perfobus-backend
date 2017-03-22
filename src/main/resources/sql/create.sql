@@ -49,6 +49,7 @@ CREATE TABLE public.event
     gps_long DOUBLE PRECISION,
     gps_endlat DOUBLE PRECISION,
     gps_endlong DOUBLE PRECISION,
+    time_saving DOUBLE PRECISION,
     CONSTRAINT event_pkey PRIMARY KEY (id)
 );
 

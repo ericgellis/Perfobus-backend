@@ -18,6 +18,7 @@ public class EventDTO {
     private Long gpsEndLong;
     private String stationName;
     private List<Long> pictureIdList;
+    private Long timeSavingString;
     
     public EventDTO() {
 	}
@@ -98,11 +99,15 @@ public class EventDTO {
         this.stationName = stationName;
     }
 
-    public Long getGpsEndLat() {return gpsEndLat;}
+    public Long getGpsEndLat() { return gpsEndLat; }
 
-    public void setGpsEndLat(Long gpsEndLat) {this.gpsEndLat = gpsEndLat;}
+    public void setGpsEndLat(Long gpsEndLat) { this.gpsEndLat = gpsEndLat; }
 
-    public Long getGpsEndLong() {return gpsEndLong;}
+    public Long getGpsEndLong() { return gpsEndLong; }
 
-    public void setGpsEndLong(Long gpsEndLong) {this.gpsEndLong = gpsEndLong;}
+    public void setGpsEndLong(Long gpsEndLong) { this.gpsEndLong = gpsEndLong; }
+
+    public Long getTimeSavingString() { return timeSavingString; }
+
+    public void setTimeSavingString(Long timeSavingString) { this.timeSavingString = timeSavingString; }
 }
