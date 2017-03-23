@@ -5,6 +5,7 @@ import com.mobithink.server.entity.*;
 import com.mobithink.server.exeption.MobithinkBusinessException;
 import com.mobithink.server.service.*;
 
+import com.mobithink.server.utils.Mathematics;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -81,12 +82,14 @@ public class TripFacade {
 		}
 		
 		if(tripDTO.getEventDTOList() != null && stationDataList != null){
-			saveEventList(savedTrip, tripDTO.getEventDTOList(), stationDataList);
+			saveEventList(savedTrip, tripDTO, stationDataList);
 		}
 		
 		if(tripDTO.getRollingPointDTOList() != null){
-			saveRollingPointList(savedTrip, tripDTO.getRollingPointDTOList());
+			saveRollingPointList(savedTrip, tripDTO.getRollingPointDTOList(), tripDTO);
 		}
+
+
 	
 		return new ResponseEntity<>(null, new HttpHeaders(), HttpStatus.CREATED);
 	}
@@ -126,10 +129,12 @@ public class TripFacade {
 	}
 
 
-	private void saveRollingPointList(Trip savedTrip, List<RollingPointDTO> rollingPointDTOList) {
+	private void saveRollingPointList(Trip savedTrip, List<RollingPointDTO> rollingPointDTOList, TripDTO tripDTO) {
+		Mathematics mathematics = new Mathematics();
 
 		if(savedTrip!=null && rollingPointDTOList!=null){
 			for (RollingPointDTO rollingPointDto : rollingPointDTOList){
+				rollingPointDto = mathematics.speedBetweenRollingPointsCalculation(rollingPointDto,tripDTO);
 				RollingPoint rollingPoint = new RollingPoint();
 				rollingPoint.setTrip(savedTrip);
 				rollingPoint.setGpsLat(rollingPointDto.getGpsLat());
@@ -142,10 +147,11 @@ public class TripFacade {
 		}
 	}
 
-	private void saveEventList(Trip savedTrip, List<EventDTO> eventDTOList, List<StationData> stationDataList) {
+	private void saveEventList(Trip savedTrip, TripDTO tripDTO, List<StationData> stationDataList) {
+		Mathematics mathematics = new Mathematics();
 
-			for (EventDTO eventDto : eventDTOList) {
-				
+			for (EventDTO eventDto : tripDTO.getEventDTOList()) {
+				eventDto = mathematics.timeSavingCalculation(eventDto, tripDTO);
 				Event event = new Event();
 				event.setTrip(savedTrip);
 				event.setEndTime(eventDto.getEndTime());

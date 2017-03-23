@@ -28,6 +28,9 @@ public class RollingPoint {
     @Column(name = "traffic")
     private int traffic;
 
+    @Column(name = "speed")
+    private Double speed;
+
     @ManyToOne
     @JoinColumn(name = "trip_id")
     private Trip trip;
@@ -78,5 +81,13 @@ public class RollingPoint {
 
     public void setTraffic(int traffic) {
         this.traffic = traffic;
+    }
+
+    public Double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(Double speed) {
+        this.speed = speed;
     }
 }

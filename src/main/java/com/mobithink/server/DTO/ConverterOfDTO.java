@@ -80,7 +80,7 @@ public class ConverterOfDTO {
     public static EventDTO convertEventToDto(Event event, List<Picture> pictureList){
         EventDTO eventDTO = new EventDTO(event.getId(),event.getEventName(),event.getStartTime(),event.getEndTime(), event.getGpsLat(),
                 event.getGpsLong(),  event.getGpsEndLat(),
-                event.getGpsEndLong(), null);
+                event.getGpsEndLong(),  null, event.getTimeSaving());
         
         if (event.getStationData() != null){
         	eventDTO.setStationName(event.getStationData().getStationName());
@@ -95,7 +95,7 @@ public class ConverterOfDTO {
 
     public static RollingPointDTO convretRollingPointToDto(RollingPoint rollingPoint){
         return new RollingPointDTO(rollingPoint.getId(), rollingPoint.getTimeOfRollingPoint(), rollingPoint.getGpsLat(),
-                rollingPoint.getGpsLong(), rollingPoint.getTraffic());
+                rollingPoint.getGpsLong(), rollingPoint.getTraffic(), rollingPoint.getSpeed());
     }
 
     private static List<Long> findPictureIdList(List<Picture> pictureList) {

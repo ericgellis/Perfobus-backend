@@ -11,17 +11,19 @@ public class RollingPointDTO {
     private Long gpsLat;
     private Long gpsLong;
     private int trafficIndex;
+    private Double speed;
 
 
     public RollingPointDTO() {
     }
 
-    public RollingPointDTO(Long id, Long pointTime, Long gpsLat, Long gpsLong, int trafficIndex) {
+    public RollingPointDTO(Long id, Long pointTime, Long gpsLat, Long gpsLong, int trafficIndex, Double speed) {
         this.id = id;
         this.pointTime = pointTime;
         this.gpsLat = gpsLat;
         this.gpsLong = gpsLong;
         this.trafficIndex = trafficIndex;
+        this.speed = speed;
     }
 
     public Long getId() {
@@ -62,5 +64,13 @@ public class RollingPointDTO {
 
     public void setTrafficIndex(int trafficIndex) {
         this.trafficIndex = trafficIndex;
+    }
+
+    public Double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(Double speed) {
+        this.speed = speed;
     }
 }
