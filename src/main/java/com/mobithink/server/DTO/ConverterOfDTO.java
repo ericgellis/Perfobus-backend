@@ -67,17 +67,15 @@ public class ConverterOfDTO {
                 trip.getEndGpsLong() );
     }
 
-    public static StationDataDTO convertStationDataToDto(StationData stationData, List<Picture> pictureList){
+    public static StationDataDTO convertStationDataToDto(StationData stationData){
         StationDataDTO stationDataDTO = new StationDataDTO(stationData.getId(), stationData.getNumberOfComeIn(), stationData.getNumberOfGoOut(),
                 stationData.getStartTime(),stationData.getEndTime(),stationData.getStationStep(), stationData.getStationName(), stationData.getGpsLat(),
                 stationData.getGpsLong());
-        if (pictureList != null){
-            stationDataDTO.setPictureIdList(findPictureIdList(pictureList));
-        }
+
         return stationDataDTO;
     }
 
-    public static EventDTO convertEventToDto(Event event, List<Picture> pictureList){
+    public static EventDTO convertEventToDto(Event event, List<Picture> pictureList, List<VoiceMemo> voiceMemoList){
         EventDTO eventDTO = new EventDTO(event.getId(),event.getEventName(),event.getStartTime(),event.getEndTime(), event.getGpsLat(),
                 event.getGpsLong(),  event.getGpsEndLat(),
                 event.getGpsEndLong(),  null, event.getTimeSaving());
@@ -87,7 +85,11 @@ public class ConverterOfDTO {
         }
         
         if (pictureList != null){
-            eventDTO.setPictureIdList(findPictureIdList(pictureList));
+            eventDTO.setPictureNameList(findPictureNameList(pictureList));
+        }
+
+        if (voiceMemoList != null){
+            eventDTO.setVoiceMemoNameList(findVoiceMemoNameList(voiceMemoList));
         }
 
         return eventDTO;
@@ -98,11 +100,19 @@ public class ConverterOfDTO {
                 rollingPoint.getGpsLong(), rollingPoint.getTraffic(), rollingPoint.getSpeed());
     }
 
-    private static List<Long> findPictureIdList(List<Picture> pictureList) {
-        List<Long> pictureIdList = new ArrayList<>();
+    private static List<String> findPictureNameList(List<Picture> pictureList) {
+        List<String> pictureNameList = new ArrayList<>();
         for (Picture picture : pictureList){
-            pictureIdList.add(picture.getPictureId());
+            pictureNameList.add(picture.getPictureName());
         }
-        return pictureIdList;
+        return pictureNameList;
+    }
+
+    private static List<String> findVoiceMemoNameList (List<VoiceMemo> voiceMemoList){
+        List<String> voiceMemoNameList = new ArrayList<>();
+        for(VoiceMemo voiceMemo : voiceMemoList){
+            voiceMemoNameList.add(voiceMemo.getVoiceMemoName());
+        }
+        return voiceMemoNameList;
     }
 }

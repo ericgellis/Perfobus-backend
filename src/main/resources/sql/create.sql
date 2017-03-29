@@ -14,6 +14,7 @@ DROP TABLE IF EXISTS public."bus_line";
 DROP TABLE IF EXISTS public."city";
 DROP TABLE IF EXISTS public."event";
 DROP TABLE IF EXISTS public."picture";
+DROP TABLE IF EXISTS public."voice_memo";
 DROP TABLE IF EXISTS public."rolling_point";
 DROP TABLE IF EXISTS public."station";
 DROP TABLE IF EXISTS public."station_data";
@@ -71,6 +72,15 @@ CREATE TABLE public.picture
     CONSTRAINT picture_pkey PRIMARY KEY (id)
 );
 
+CREATE TABLE public.voice_memo
+(
+    id bigint NOT NULL,
+    voice_memo_name text,
+    event_id bigint,
+    voice_memo_id bigint NOT NULL,
+    CONSTRAINT voice_memo_pkey PRIMARY KEY (id)
+);
+
 CREATE TABLE public.rolling_point
 (
     id bigint NOT NULL,
@@ -79,6 +89,7 @@ CREATE TABLE public.rolling_point
     trip_id bigint NOT NULL,
     gps_lat DOUBLE PRECISION,
     gps_long DOUBLE PRECISION,
+    speed DOUBLE PRECISION,
     CONSTRAINT rolling_point_pkey PRIMARY KEY (id)
 );
 

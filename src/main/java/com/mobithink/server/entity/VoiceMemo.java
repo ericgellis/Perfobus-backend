@@ -3,12 +3,11 @@ package com.mobithink.server.entity;
 import javax.persistence.*;
 
 /**
- * Created by athiel on 06/02/2017.
- *
+ * Created by mplaton on 29/03/2017.
  */
 
 @Entity
-public class Picture {
+public class VoiceMemo {
 
     @Id
     @SequenceGenerator(name = "mobithink_uid", sequenceName = "mobithink_uid", allocationSize = 1)
@@ -16,23 +15,14 @@ public class Picture {
     @Column(name="id")
     private Long id;
 
-   @Column (name = "station_data_id")
-    private Long stationDataId;
+    @Column (name = "voice_memo_id")
+    private Long voiceMemoId;
+
+    @Column(name = "voice_memo_name")
+    private String voiceMemoName;
 
     @Column(name = "event_id")
     private Long eventId;
-
-    @Column(name = "picture_name")
-    private String pictureName;
-
-
-    public String getPictureName() {
-        return pictureName;
-    }
-
-    public void setPictureName(String pictureName) {
-        this.pictureName = pictureName;
-    }
 
     public Long getId() {
         return id;
@@ -42,12 +32,20 @@ public class Picture {
         this.id = id;
     }
 
-    public Long getStationDataId() {
-        return stationDataId;
+    public Long getVoiceMemoId() {
+        return voiceMemoId;
     }
 
-    public void setStationDataId(Long stationDataId) {
-        this.stationDataId = stationDataId;
+    public void setVoiceMemoId(Long voiceMemoId) {
+        this.voiceMemoId = voiceMemoId;
+    }
+
+    public String getVoiceMemoName() {
+        return voiceMemoName;
+    }
+
+    public void setVoiceMemoName(String voiceMemoName) {
+        this.voiceMemoName = voiceMemoName;
     }
 
     public Long getEventId() {

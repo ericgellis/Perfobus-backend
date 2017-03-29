@@ -45,8 +45,7 @@ public class StationDataServiceImpl implements StationDataService{
         List<StationDataDTO> stationDataDTOList = new ArrayList<>();
         if (stationDataList != null) {
             for (StationData stationData : stationDataList) {
-                List<Picture> pictureList = pictureRepository.findByStationDataId(stationData.getId());
-                stationDataDTOList.add(ConverterOfDTO.convertStationDataToDto(stationData, pictureList));
+                stationDataDTOList.add(ConverterOfDTO.convertStationDataToDto(stationData));
             }
             return stationDataDTOList;
         } else return null;
