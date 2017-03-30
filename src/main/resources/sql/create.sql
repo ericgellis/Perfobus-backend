@@ -68,16 +68,15 @@ CREATE TABLE public.picture
     id bigint NOT NULL,
     station_data_id bigint,
     event_id bigint,
-    picture_id bigint NOT NULL,
+    picture_name TEXT,
     CONSTRAINT picture_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE public.voice_memo
 (
     id bigint NOT NULL,
-    voice_memo_name text,
+    voice_memo_name TEXT,
     event_id bigint,
-    voice_memo_id bigint NOT NULL,
     CONSTRAINT voice_memo_pkey PRIMARY KEY (id)
 );
 

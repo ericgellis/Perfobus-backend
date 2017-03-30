@@ -15,9 +15,6 @@ public class VoiceMemo {
     @Column(name="id")
     private Long id;
 
-    @Column (name = "voice_memo_id")
-    private Long voiceMemoId;
-
     @Column(name = "voice_memo_name")
     private String voiceMemoName;
 
@@ -30,14 +27,6 @@ public class VoiceMemo {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getVoiceMemoId() {
-        return voiceMemoId;
-    }
-
-    public void setVoiceMemoId(Long voiceMemoId) {
-        this.voiceMemoId = voiceMemoId;
     }
 
     public String getVoiceMemoName() {
