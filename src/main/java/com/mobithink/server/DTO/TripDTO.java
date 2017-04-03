@@ -24,6 +24,9 @@ public class TripDTO {
     private Long StartGpsLong;
     private Long endGpsLat;
     private Long endGpsLong;
+    private String cityName;
+    private String lineName;
+    private String direction;
 
     public TripDTO() {
     }
@@ -31,7 +34,7 @@ public class TripDTO {
 	public TripDTO(Long id, String tripName, Long startTime, Long endTime, int atmo, String temperature, String weather,
                    int vehicleCapacity, Long busLineid, List<StationDataDTO> stationDataDTOList,
                    List<RollingPointDTO> rollingPointDTOList, List<EventDTO> eventDTOList, Long startGpsLat, Long startGpsLong,
-                   Long endGpsLat, Long endGpsLong) {
+                   Long endGpsLat, Long endGpsLong, String cityName, String lineName, String direction) {
 		super();
 		this.id = id;
 		this.tripName = tripName;
@@ -46,9 +49,12 @@ public class TripDTO {
 		this.rollingPointDTOList = rollingPointDTOList;
 		this.eventDTOList = eventDTOList;
 		this.startGpsLat = startGpsLat;
-		StartGpsLong = startGpsLong;
+		this.StartGpsLong = startGpsLong;
 		this.endGpsLat = endGpsLat;
 		this.endGpsLong = endGpsLong;
+		this.cityName = cityName;
+		this.lineName = lineName;
+		this.direction = direction;
 	}
 
 

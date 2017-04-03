@@ -16,9 +16,6 @@ public class Picture {
     @Column(name="id")
     private Long id;
 
-   @Column (name = "station_data_id")
-    private Long stationDataId;
-
     @Column(name = "event_id")
     private Long eventId;
 
@@ -40,14 +37,6 @@ public class Picture {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getStationDataId() {
-        return stationDataId;
-    }
-
-    public void setStationDataId(Long stationDataId) {
-        this.stationDataId = stationDataId;
     }
 
     public Long getEventId() {

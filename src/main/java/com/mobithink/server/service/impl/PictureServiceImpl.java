@@ -30,8 +30,5 @@ public class PictureServiceImpl implements PictureService {
         return pictureRepository.findByEventId(eventId);
     }
 
-    @Override
-    public List<Picture> findByStationDataId(Long stationDataId) {
-        return pictureRepository.findByStationDataId(stationDataId);
-    }
+
 }

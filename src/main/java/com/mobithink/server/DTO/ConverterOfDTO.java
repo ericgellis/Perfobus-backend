@@ -64,7 +64,7 @@ public class ConverterOfDTO {
         return new TripDTO(trip.getId(), trip.getTripName(),trip.getStartTime(),trip.getEndTime(),trip.getAtmo(),
                 trip.getTemperature(),trip.getWeather(), trip.getVehicleCapacity(), trip.getBusLine().getId(),
                 stationDataDTOList, rollingPointDTOList, eventDTOList, trip.getStartGpsLat(), trip.getStartGpsLong(), trip.getEndGpsLat(),
-                trip.getEndGpsLong() );
+                trip.getEndGpsLong(), trip.getBusLine().getCity().getName(), trip.getBusLine().getName(), stationDataDTOList.get(stationDataDTOList.size()-1).getStationName() );
     }
 
     public static StationDataDTO convertStationDataToDto(StationData stationData){
@@ -75,7 +75,7 @@ public class ConverterOfDTO {
         return stationDataDTO;
     }
 
-    public static EventDTO convertEventToDto(Event event, List<Picture> pictureList, List<VoiceMemo> voiceMemoList){
+    public static EventDTO convertEventToDto(Event event, List<Picture> pictureList){
         EventDTO eventDTO = new EventDTO(event.getId(),event.getEventName(),event.getStartTime(),event.getEndTime(), event.getGpsLat(),
                 event.getGpsLong(),  event.getGpsEndLat(),
                 event.getGpsEndLong(),  null, event.getTimeSaving());
@@ -86,10 +86,6 @@ public class ConverterOfDTO {
         
         if (pictureList != null){
             eventDTO.setPictureNameList(findPictureNameList(pictureList));
-        }
-
-        if (voiceMemoList != null){
-            eventDTO.setVoiceMemoNameList(findVoiceMemoNameList(voiceMemoList));
         }
 
         return eventDTO;
@@ -108,11 +104,4 @@ public class ConverterOfDTO {
         return pictureNameList;
     }
 
-    private static List<String> findVoiceMemoNameList (List<VoiceMemo> voiceMemoList){
-        List<String> voiceMemoNameList = new ArrayList<>();
-        for(VoiceMemo voiceMemo : voiceMemoList){
-            voiceMemoNameList.add(voiceMemo.getVoiceMemoName());
-        }
-        return voiceMemoNameList;
-    }
 }

@@ -13,5 +13,4 @@ public interface PictureService {
 
     List<Picture> findByEventId (Long eventId);
 
-    List<Picture> findByStationDataId (Long stationDataId);
 }

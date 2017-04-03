@@ -12,6 +12,5 @@ import java.util.List;
 public interface PictureRepository extends CrudRepository<Picture, Long> {
 
     List<Picture> findByEventId (Long eventId);
-
-    List<Picture> findByStationDataId (Long stationDataId);
+    
 }

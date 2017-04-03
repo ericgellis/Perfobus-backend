@@ -19,7 +19,7 @@ public class EventDTO {
     private String stationName;
     private Long timeSaving;
     private List<String> pictureNameList;
-    private List<String> voiceMemoNameList;
+    private String voiceMemo;
 
     
     public EventDTO() {
@@ -114,11 +114,11 @@ public class EventDTO {
         this.pictureNameList = pictureNameList;
     }
 
-    public List<String> getVoiceMemoNameList() {
-        return voiceMemoNameList;
+    public String getVoiceMemo() {
+        return voiceMemo;
     }
 
-    public void setVoiceMemoNameList(List<String> voiceMemoNameList) {
-        this.voiceMemoNameList = voiceMemoNameList;
+    public void setVoiceMemo(String voiceMemo) {
+        this.voiceMemo = voiceMemo;
     }
 }

@@ -25,10 +25,7 @@ public class StationDataServiceImpl implements StationDataService{
     @Resource
     StationDataRepository stationDataRepository;
 
-    @Resource
-    PictureRepository pictureRepository;
-
-    @Override
+      @Override
     public StationData createStationData(StationData stationData) {
         return stationDataRepository.save(stationData);
     }
