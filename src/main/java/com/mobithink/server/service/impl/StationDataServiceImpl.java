@@ -2,9 +2,7 @@ package com.mobithink.server.service.impl;
 
 import com.mobithink.server.DTO.ConverterOfDTO;
 import com.mobithink.server.DTO.StationDataDTO;
-import com.mobithink.server.dao.PictureRepository;
 import com.mobithink.server.dao.StationDataRepository;
-import com.mobithink.server.entity.Picture;
 import com.mobithink.server.entity.StationData;
 import com.mobithink.server.service.StationDataService;
 import org.springframework.stereotype.Component;
