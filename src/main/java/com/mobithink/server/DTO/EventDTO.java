@@ -18,14 +18,14 @@ public class EventDTO {
     private Long gpsEndLong;
     private String stationName;
     private Long timeSaving;
-    private List<String> pictureNameList;
     private String voiceMemo;
+    private String picture;
 
     
     public EventDTO() {
 	}
 
-	public EventDTO(Long id, String eventName, Long startTime, Long endTime, Long gpsLat, Long gpsLong, Long gpsEndLat, Long gpsEndLong, String stationName, Long timeSaving) {
+	public EventDTO(Long id, String eventName, Long startTime, Long endTime, Long gpsLat, Long gpsLong, Long gpsEndLat, Long gpsEndLong, String stationName, Long timeSaving, String voiceMemo, String picture) {
         this.id = id;
         this.eventName = eventName;
         this.startTime = startTime;
@@ -36,6 +36,8 @@ public class EventDTO {
         this.gpsEndLong = gpsEndLong;
         this.stationName = stationName;
         this.timeSaving = timeSaving;
+        this.voiceMemo = voiceMemo;
+        this.picture = picture;
     }
 
     public Long getId() {
@@ -106,19 +108,19 @@ public class EventDTO {
 
     public void setTimeSaving(Long timeSaving) { this.timeSaving = timeSaving; }
 
-    public List<String> getPictureNameList() {
-        return pictureNameList;
-    }
-
-    public void setPictureNameList(List<String> pictureNameList) {
-        this.pictureNameList = pictureNameList;
-    }
-
     public String getVoiceMemo() {
         return voiceMemo;
     }
 
     public void setVoiceMemo(String voiceMemo) {
         this.voiceMemo = voiceMemo;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 }

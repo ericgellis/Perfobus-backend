@@ -75,17 +75,12 @@ public class ConverterOfDTO {
         return stationDataDTO;
     }
 
-    public static EventDTO convertEventToDto(Event event, List<Picture> pictureList){
+    public static EventDTO convertEventToDto(Event event){
         EventDTO eventDTO = new EventDTO(event.getId(),event.getEventName(),event.getStartTime(),event.getEndTime(), event.getGpsLat(),
-                event.getGpsLong(),  event.getGpsEndLat(),
-                event.getGpsEndLong(),  null, event.getTimeSaving());
+                event.getGpsLong(),  event.getGpsEndLat(), event.getGpsEndLong(),  null, event.getTimeSaving(), event.getVoiceMemo(), event.getPicture());
         
         if (event.getStationData() != null){
         	eventDTO.setStationName(event.getStationData().getStationName());
-        }
-        
-        if (pictureList != null){
-            eventDTO.setPictureNameList(findPictureNameList(pictureList));
         }
 
         return eventDTO;
@@ -96,12 +91,5 @@ public class ConverterOfDTO {
                 rollingPoint.getGpsLong(), rollingPoint.getTraffic(), rollingPoint.getSpeed());
     }
 
-    private static List<String> findPictureNameList(List<Picture> pictureList) {
-        List<String> pictureNameList = new ArrayList<>();
-        for (Picture picture : pictureList){
-            pictureNameList.add(picture.getPictureName());
-        }
-        return pictureNameList;
-    }
 
 }

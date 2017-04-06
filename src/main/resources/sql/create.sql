@@ -13,7 +13,6 @@ DROP TABLE IF EXISTS public."line_station_link";
 DROP TABLE IF EXISTS public."bus_line";
 DROP TABLE IF EXISTS public."city";
 DROP TABLE IF EXISTS public."event";
-DROP TABLE IF EXISTS public."picture";
 DROP TABLE IF EXISTS public."rolling_point";
 DROP TABLE IF EXISTS public."station";
 DROP TABLE IF EXISTS public."station_data";
@@ -50,6 +49,7 @@ CREATE TABLE public.event
     gps_endlat DOUBLE PRECISION,
     gps_endlong DOUBLE PRECISION,
     voice_memo TEXT,
+    picture TEXT,
     time_saving DOUBLE PRECISION,
     CONSTRAINT event_pkey PRIMARY KEY (id)
 );
@@ -61,14 +61,6 @@ CREATE TABLE public.line_station_link
     station_id bigint NOT NULL,
     step integer NOT NULL,
     CONSTRAINT line_sation_link_pkey PRIMARY KEY (id)
-);
-
-CREATE TABLE public.picture
-(
-    id bigint NOT NULL,
-    event_id bigint,
-    picture_name TEXT,
-    CONSTRAINT picture_pkey PRIMARY KEY (id)
 );
 
 
