@@ -57,4 +57,14 @@ public class BusLine {
     public void setDateOfCreation(Long dateOfCreation) {
         this.dateOfCreation = dateOfCreation;
     }
+
+    @Override
+    public String toString() {
+        return "BusLine{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", dateOfCreation=" + dateOfCreation +
+                ", city=" + city +
+                '}';
+    }
 }

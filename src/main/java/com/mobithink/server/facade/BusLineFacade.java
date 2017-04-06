@@ -12,6 +12,8 @@ import com.mobithink.server.service.BusLineService;
 import com.mobithink.server.service.CityService;
 import com.mobithink.server.service.StationService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -30,6 +32,8 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/mobithink/busline" )
 public class BusLineFacade {
+
+    private final Logger log = LoggerFactory.getLogger(BusLineFacade.class);
 
     @Resource
     private BusLineService busLineService;
@@ -53,6 +57,8 @@ public class BusLineFacade {
      */
     @PostMapping(path = "/create", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
     public ResponseEntity<Void> create(@Valid @RequestBody BusLineDTO busLineDto) throws MobithinkBusinessException{
+
+        log.info("create busline : {}" , busLineDto);
 
     	City savedCity = new City();
 
@@ -130,12 +136,16 @@ public class BusLineFacade {
      */
     @GetMapping(path = "/find/{cityName}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
     public ResponseEntity<List<BusLineDTO>> findAllByCity(@Valid @PathVariable String cityName) throws MobithinkBusinessException {
+
+        log.info("findAllByCity with cityName {}",cityName);
+
         City city = cityService.findOneByName(cityName);
         if (city != null){
             List<BusLine> busLineIterable = busLineService.findByCityId(city.getId());
             if (busLineIterable != null) {
                 List<BusLineDTO> busLineDTOList = new ArrayList<>();
                 for (BusLine busLine : busLineIterable) {
+                    log.info("busLine {}",busLine);
                     busLineDTOList.add(ConverterOfDTO.convertBusLineToDTO(busLine));
                 }
                 return ResponseEntity.ok(busLineDTOList);

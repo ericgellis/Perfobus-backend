@@ -6,6 +6,8 @@ import com.mobithink.server.exeption.MobithinkBusinessException;
 import com.mobithink.server.service.*;
 
 import com.mobithink.server.utils.Mathematics;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,6 +28,8 @@ import java.util.List;
 @RequestMapping(value = "/mobithink/trip" )
 public class TripFacade {
 
+	private final Logger log = LoggerFactory.getLogger(TripFacade.class);
+
 	@Resource
 	TripService tripService;
 
@@ -40,7 +44,7 @@ public class TripFacade {
 
 	@Resource
 	PictureService pictureService;
-	
+
 	@Resource
 	BusLineService busLineService;
 
@@ -60,7 +64,7 @@ public class TripFacade {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(tripDTO.getStartTime());
 		List<StationData> stationDataList = new ArrayList<>();
-		
+
 		BusLine busLine = busLineService.findOneById(tripDTO.getBusLineid());
 		StringBuilder sb = new StringBuilder();
 		sb.append(busLine.getCity().getName())
@@ -73,24 +77,24 @@ public class TripFacade {
 		.append("/")
 		.append(calendar.get(Calendar.YEAR))
 		.append(")");
-		
+
 		tripDTO.setTripName(sb.toString());
 		Trip savedTrip = saveNewTrip(tripDTO);
-		
+
 		if(tripDTO.getStationDataDTOList() != null){
 			stationDataList = saveStationDataList(savedTrip, tripDTO.getStationDataDTOList());
 		}
-		
+
 		if(tripDTO.getEventDTOList() != null && stationDataList != null){
 			saveEventList(savedTrip, tripDTO, stationDataList);
 		}
-		
+
 		if(tripDTO.getRollingPointDTOList() != null){
 			saveRollingPointList(savedTrip, tripDTO.getRollingPointDTOList(), tripDTO);
 		}
 
 
-	
+
 		return new ResponseEntity<>(null, new HttpHeaders(), HttpStatus.CREATED);
 	}
 
@@ -98,13 +102,14 @@ public class TripFacade {
 	 *
 	 * GET. find TripDTO associated at city and line.
 	 *
-	 * @param cityName and lineName
+	 * @param busLineId and lineName
 	 *
 	 * @return List<TripDTO> or null if not exist Trip saved for this busLine
 	 *
 	 */
 	@GetMapping(path = "/find/{busLineId}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
-	public ResponseEntity<List<TripDTO>> create(@Valid @PathVariable Long busLineId) throws MobithinkBusinessException {
+	public ResponseEntity<List<TripDTO>> findTrip(@Valid @PathVariable Long busLineId) throws MobithinkBusinessException {
+		log.info("findTrip with id {}",busLineId);
 
 		List<Trip> tripList = tripService.findTripListByBusLineId(busLineId);
 		List<TripDTO> tripDTOList = new ArrayList<>();

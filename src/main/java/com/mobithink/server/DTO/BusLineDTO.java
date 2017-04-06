@@ -53,4 +53,15 @@ public class BusLineDTO {
     public void setStationDTOList(List<StationDTO> stationDTOList) {
         this.stationDTOList = stationDTOList;
     }
+
+    @Override
+    public String toString() {
+        return "BusLineDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", dateOfCreation=" + dateOfCreation +
+                ", cityDto=" + cityDto +
+                ", stationDTOList=" + stationDTOList +
+                '}';
+    }
 }
