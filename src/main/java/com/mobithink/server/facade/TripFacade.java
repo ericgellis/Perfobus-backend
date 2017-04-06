@@ -43,9 +43,6 @@ public class TripFacade {
 	RollingPointService rollingPointService;
 
 	@Resource
-	PictureService pictureService;
-
-	@Resource
 	BusLineService busLineService;
 
 
@@ -175,24 +172,15 @@ public class TripFacade {
 				event.setGpsLong(eventDto.getGpsLong());
 				event.setGpsEndLat(eventDto.getGpsEndLat());
 				event.setGpsEndLong(eventDto.getGpsEndLong());
+				event.setVoiceMemo(eventDto.getVoiceMemo());
+				event.setPicture(eventDto.getPicture());
 
 				Event savedEvent = eventService.createEvent(event);
-				savePictureList(eventDto.getPictureNameList(),savedEvent.getId());
+
 			}
 	}
 
-	private void savePictureList(List<String> pictureNameList, Long savedEventId) {
-		if (pictureNameList != null){
-			for (String pictureName : pictureNameList){
-				Picture picture = new Picture();
-				if (savedEventId != null){
-					picture.setEventId(savedEventId);
-				}
-				picture.setPictureName(pictureName);
-				pictureService.savedPicture(picture);
-			}
-		}
-	}
+
 
 	private List<StationData> saveStationDataList(Trip savedTrip, List<StationDataDTO> stationDataDTOList) {
 

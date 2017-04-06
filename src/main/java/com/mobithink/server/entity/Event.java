@@ -38,7 +38,10 @@ public class Event {
     private Long gpsEndLong;
 
     @Column(name = "voice_memo")
-    private String voice_memo;
+    private String voiceMemo;
+
+    @Column(name = "picture")
+    private String picture;
 
     @Column(name = "time_saving")
     private Long timeSaving;
@@ -128,11 +131,19 @@ public class Event {
 
     public void setTimeSaving(Long timeSaving) { this.timeSaving = timeSaving; }
 
-    public String getVoice_memo() {
-        return voice_memo;
+    public String getVoiceMemo() {
+        return voiceMemo;
     }
 
-    public void setVoice_memo(String voice_memo) {
-        this.voice_memo = voice_memo;
+    public void setVoiceMemo(String voiceMemo) {
+        this.voiceMemo = voiceMemo;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 }
