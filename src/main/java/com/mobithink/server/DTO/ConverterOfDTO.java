@@ -87,7 +87,7 @@ public class ConverterOfDTO {
     }
 
     public static RollingPointDTO convretRollingPointToDto(RollingPoint rollingPoint){
-        return new RollingPointDTO(rollingPoint.getId(), rollingPoint.getTimeOfRollingPoint(), rollingPoint.getGpsLat(),
+        return new RollingPointDTO(rollingPoint.getId(),rollingPoint.getTrip().getId(), rollingPoint.getTimeOfRollingPoint(), rollingPoint.getGpsLat(),
                 rollingPoint.getGpsLong(), rollingPoint.getTraffic(), rollingPoint.getSpeed());
     }
 

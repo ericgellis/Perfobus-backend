@@ -172,11 +172,11 @@ public class Mathematics {
         return rollingPointDTO;
     }
 
-    public static Double convertRad(float input){
+    private static Double convertRad(Double input){
         return (Math.PI * input)/180;
     }
 
-    public static Double calculateGPSDistance(long lat_a_degre, long lon_a_degre, long lat_b_degre, long lon_b_degre){
+    private static Double calculateGPSDistance(Double lat_a_degre, Double lon_a_degre, Double lat_b_degre, Double lon_b_degre){
         Double distance;
         int R = 6378000; //Earth radius in meter
 
@@ -189,20 +189,21 @@ public class Mathematics {
         return distance;
     }
 
-    public double timeSavingEasyCalculation(EventDTO eventDTO){
-        double time = 0;
-        time = eventDTO.getEndTime()-eventDTO.getStartTime();
-        return time;
+    private double timeSavingEasyCalculation(EventDTO eventDTO){
+        return (double) (eventDTO.getEndTime()-eventDTO.getStartTime());
     }
 
-    public double timeSavingComplexCalculation(EventDTO eventDTO, TripDTO tripDTO){
+    private double timeSavingComplexCalculation(EventDTO eventDTO, TripDTO tripDTO){
         double time = 0;
 
             for (int i = 1 ; i<tripDTO.getStationDataDTOList().size(); i++) {
                 StationDataDTO currentStationDataDTO = tripDTO.getStationDataDTOList().get(i-1);
                 StationDataDTO nextStationDataDTO = tripDTO.getStationDataDTOList().get(i);
                 if (eventDTO.getStartTime() > currentStationDataDTO.getEndTime() && eventDTO.getStartTime() < nextStationDataDTO.getStartTime()){
-                    time = (eventDTO.getEndTime() - eventDTO.getStartTime()) - ((calculateGPSDistance(eventDTO.getGpsLat(), eventDTO.getGpsLong(), eventDTO.getGpsEndLat(), eventDTO.getGpsEndLong())) / (calculateGPSDistance(currentStationDataDTO.getGpsLat(), currentStationDataDTO.getGpsLong(), nextStationDataDTO.getGpsLat(), nextStationDataDTO.getGpsLong()) / (nextStationDataDTO.getEndTime() - currentStationDataDTO.getStartTime())));
+                    time = (eventDTO.getEndTime() - eventDTO.getStartTime()) - ((calculateGPSDistance(eventDTO.getGpsLat()
+                            , eventDTO.getGpsLong(), eventDTO.getGpsEndLat(), eventDTO.getGpsEndLong())) /
+                            (calculateGPSDistance(currentStationDataDTO.getGpsLat(), currentStationDataDTO.getGpsLong(), nextStationDataDTO.getGpsLat(), nextStationDataDTO.getGpsLong())
+                                    / (nextStationDataDTO.getEndTime() - currentStationDataDTO.getStartTime())));
                 }
             }
 
