@@ -193,7 +193,7 @@ public class Mathematics {
         return (double) (eventDTO.getEndTime()-eventDTO.getStartTime());
     }
 
-    private double timeSavingComplexCalculation(EventDTO eventDTO, TripDTO tripDTO){
+    private int timeSavingComplexCalculation(EventDTO eventDTO, TripDTO tripDTO){
         double time = 0;
 
             for (int i = 1 ; i<tripDTO.getStationDataDTOList().size(); i++) {
@@ -206,7 +206,7 @@ public class Mathematics {
                                     / (nextStationDataDTO.getEndTime() - currentStationDataDTO.getStartTime())));
                 }
             }
-
-        return time;
+        int minutes = (int) ((time / (1000*60)) % 60);
+        return minutes;
     }
 }

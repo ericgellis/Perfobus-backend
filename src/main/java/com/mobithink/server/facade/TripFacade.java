@@ -138,6 +138,7 @@ public class TripFacade {
 				rollingPoint.setGpsLong(rollingPointDto.getGpsLong());
 				rollingPoint.setTimeOfRollingPoint(rollingPointDto.getPointTime());
 				rollingPoint.setTraffic(rollingPointDto.getTrafficIndex());
+				rollingPoint.setSpeed(rollingPointDto.getSpeed());
 
 				rollingPointService.createRollingPoint(rollingPoint);
 			}
@@ -169,6 +170,7 @@ public class TripFacade {
 				event.setGpsEndLong(eventDto.getGpsEndLong());
 				event.setVoiceMemo(eventDto.getVoiceMemo());
 				event.setPicture(eventDto.getPicture());
+				event.setTimeSaving(eventDto.getTimeSaving());
 
 				Event savedEvent = eventService.createEvent(event);
 			}
