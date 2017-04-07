@@ -35,10 +35,10 @@ public class StationData {
     private String stationName;
 
     @Column(name = "gps_lat")
-    private Long gpsLat;
+    private Double gpsLat;
 
     @Column(name = "gps_long")
-    private Long gpsLong;
+    private Double gpsLong;
 
     @ManyToOne
     @JoinColumn(name = "trip_id")
@@ -52,19 +52,19 @@ public class StationData {
         this.trip = trip;
     }
 
-    public Long getGpsLat() {
+    public Double getGpsLat() {
         return gpsLat;
     }
 
-    public void setGpsLat(Long gpsLat) {
+    public void setGpsLat(Double gpsLat) {
         this.gpsLat = gpsLat;
     }
 
-    public Long getGpsLong() {
+    public Double getGpsLong() {
         return gpsLong;
     }
 
-    public void setGpsLong(Long gpsLong) {
+    public void setGpsLong(Double gpsLong) {
         this.gpsLong = gpsLong;
     }
 
@@ -122,5 +122,21 @@ public class StationData {
 
     public void setStationStep(int stationStep) {
         this.stationStep = stationStep;
+    }
+
+    @Override
+    public String toString() {
+        return "StationData{" +
+                "id=" + id +
+                ", numberOfComeIn=" + numberOfComeIn +
+                ", numberOfGoOut=" + numberOfGoOut +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", stationStep=" + stationStep +
+                ", stationName='" + stationName + '\'' +
+                ", gpsLat=" + gpsLat +
+                ", gpsLong=" + gpsLong +
+                ", trip=" + trip +
+                '}';
     }
 }

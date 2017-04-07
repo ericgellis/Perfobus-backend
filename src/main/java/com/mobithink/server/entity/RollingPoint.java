@@ -17,10 +17,10 @@ public class RollingPoint {
     private Long id;
 
     @Column(name = "gps_lat")
-    private Long gpsLat;
+    private Double gpsLat;
 
     @Column(name = "gps_long")
-    private Long gpsLong;
+    private Double gpsLong;
 
     @Column(name = "point_time")
     private Long timeOfRollingPoint;
@@ -51,19 +51,19 @@ public class RollingPoint {
         this.id = id;
     }
 
-    public Long getGpsLat() {
+    public Double getGpsLat() {
         return gpsLat;
     }
 
-    public void setGpsLat(Long gpsLat) {
+    public void setGpsLat(Double gpsLat) {
         this.gpsLat = gpsLat;
     }
 
-    public Long getGpsLong() {
+    public Double getGpsLong() {
         return gpsLong;
     }
 
-    public void setGpsLong(Long gpsLong) {
+    public void setGpsLong(Double gpsLong) {
         this.gpsLong = gpsLong;
     }
 

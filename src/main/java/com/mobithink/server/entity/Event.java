@@ -26,16 +26,16 @@ public class Event {
     private Long endTime;
 
     @Column(name = "gps_lat")
-    private Long gpsLat;
+    private Double gpsLat;
 
     @Column(name = "gps_long")
-    private Long gpsLong;
+    private Double gpsLong;
 
     @Column(name = "gps_endlat")
-    private Long gpsEndLat;
+    private Double gpsEndLat;
 
     @Column(name = "gps_endlong")
-    private Long gpsEndLong;
+    private Double gpsEndLong;
 
     @Column(name = "voice_memo")
     private String voiceMemo;
@@ -95,19 +95,19 @@ public class Event {
         this.endTime = endTime;
     }
 
-    public Long getGpsLat() {
+    public Double getGpsLat() {
         return gpsLat;
     }
 
-    public void setGpsLat(Long gpsLat) {
+    public void setGpsLat(Double gpsLat) {
         this.gpsLat = gpsLat;
     }
 
-    public Long getGpsLong() {
+    public Double getGpsLong() {
         return gpsLong;
     }
 
-    public void setGpsLong(Long gpsLong) {
+    public void setGpsLong(Double gpsLong) {
         this.gpsLong = gpsLong;
     }
 
@@ -119,13 +119,13 @@ public class Event {
         this.stationData = stationData;
     }
 
-    public Long getGpsEndLat()  {return gpsEndLat; }
+    public Double getGpsEndLat()  {return gpsEndLat; }
 
-    public void setGpsEndLat(Long gpsEndLat) { this.gpsEndLat = gpsEndLat; }
+    public void setGpsEndLat(Double gpsEndLat) { this.gpsEndLat = gpsEndLat; }
 
-    public Long getGpsEndLong() { return gpsEndLong; }
+    public Double getGpsEndLong() { return gpsEndLong; }
 
-    public void setGpsEndLong(Long gpsEndLong) { this.gpsEndLong = gpsEndLong; }
+    public void setGpsEndLong(Double gpsEndLong) { this.gpsEndLong = gpsEndLong; }
 
     public Long getTimeSaving() { return timeSaving; }
 

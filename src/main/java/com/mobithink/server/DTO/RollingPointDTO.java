@@ -1,24 +1,27 @@
 package com.mobithink.server.DTO;
 
+import java.io.Serializable;
+
 /**
  * Created by athiel on 03/02/2017.
  *
  */
-public class RollingPointDTO {
+public class RollingPointDTO implements Serializable {
 
     private Long id;
+    private Long tripId;
     private Long pointTime;
-    private Long gpsLat;
-    private Long gpsLong;
+    private Double gpsLat;
+    private Double gpsLong;
     private int trafficIndex;
     private Double speed;
-
 
     public RollingPointDTO() {
     }
 
-    public RollingPointDTO(Long id, Long pointTime, Long gpsLat, Long gpsLong, int trafficIndex, Double speed) {
+    public RollingPointDTO(Long id, Long tripId, Long pointTime, Double gpsLat, Double gpsLong, int trafficIndex, Double speed) {
         this.id = id;
+        this.tripId = tripId;
         this.pointTime = pointTime;
         this.gpsLat = gpsLat;
         this.gpsLong = gpsLong;
@@ -34,6 +37,14 @@ public class RollingPointDTO {
         this.id = id;
     }
 
+    public Long getTripId() {
+        return tripId;
+    }
+
+    public void setTripId(Long tripId) {
+        this.tripId = tripId;
+    }
+
     public Long getPointTime() {
         return pointTime;
     }
@@ -42,19 +53,19 @@ public class RollingPointDTO {
         this.pointTime = pointTime;
     }
 
-    public Long getGpsLat() {
+    public Double getGpsLat() {
         return gpsLat;
     }
 
-    public void setGpsLat(Long gpsLat) {
+    public void setGpsLat(Double gpsLat) {
         this.gpsLat = gpsLat;
     }
 
-    public Long getGpsLong() {
+    public Double getGpsLong() {
         return gpsLong;
     }
 
-    public void setGpsLong(Long gpsLong) {
+    public void setGpsLong(Double gpsLong) {
         this.gpsLong = gpsLong;
     }
 
@@ -74,3 +85,4 @@ public class RollingPointDTO {
         this.speed = speed;
     }
 }
+
