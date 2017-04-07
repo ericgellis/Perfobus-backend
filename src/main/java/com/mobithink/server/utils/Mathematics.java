@@ -189,8 +189,11 @@ public class Mathematics {
         return distance;
     }
 
-    private double timeSavingEasyCalculation(EventDTO eventDTO){
-        return (double) (eventDTO.getEndTime()-eventDTO.getStartTime());
+    private int timeSavingEasyCalculation(EventDTO eventDTO){
+        double time = 0;
+        time = (eventDTO.getEndTime()-eventDTO.getStartTime());
+        int minutes = (int) ((time / (1000*60)) % 60);
+        return minutes;
     }
 
     private int timeSavingComplexCalculation(EventDTO eventDTO, TripDTO tripDTO){
