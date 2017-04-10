@@ -70,7 +70,7 @@ public class ConverterOfDTO {
     public static StationDataDTO convertStationDataToDto(StationData stationData){
         StationDataDTO stationDataDTO = new StationDataDTO(stationData.getId(), stationData.getNumberOfComeIn(), stationData.getNumberOfGoOut(),
                 stationData.getStartTime(),stationData.getEndTime(),stationData.getStationStep(), stationData.getStationName(), stationData.getGpsLat(),
-                stationData.getGpsLong());
+                stationData.getGpsLong(), stationData.getSpeed());
 
         return stationDataDTO;
     }

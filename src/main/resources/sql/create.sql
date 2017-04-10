@@ -95,6 +95,7 @@ CREATE TABLE public.station_data
     trip_id bigint NOT NULL,
     gps_lat DOUBLE PRECISION,
     gps_long DOUBLE PRECISION,
+    speed DOUBLE PRECISION,
     CONSTRAINT station_data_pkey PRIMARY KEY (id)
 );
 

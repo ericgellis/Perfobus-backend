@@ -40,6 +40,9 @@ public class StationData {
     @Column(name = "gps_long")
     private Double gpsLong;
 
+    @Column(name = "speed")
+    private Double speed;
+
     @ManyToOne
     @JoinColumn(name = "trip_id")
     private Trip trip;
@@ -122,6 +125,14 @@ public class StationData {
 
     public void setStationStep(int stationStep) {
         this.stationStep = stationStep;
+    }
+
+    public Double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(Double speed) {
+        this.speed = speed;
     }
 
     @Override

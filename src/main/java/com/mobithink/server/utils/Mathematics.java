@@ -165,12 +165,25 @@ public class Mathematics {
         for (int i = 1 ; i<tripDTO.getRollingPointDTOList().size(); i++){
             RollingPointDTO currentRollingPointDTO = tripDTO.getRollingPointDTOList().get(i-1);
             RollingPointDTO nextRollingPointDTO = tripDTO.getRollingPointDTOList().get(i);
-            speed = (calculateGPSDistance(currentRollingPointDTO.getGpsLat(), currentRollingPointDTO.getGpsLong(), nextRollingPointDTO.getGpsLat(), nextRollingPointDTO.getGpsLong())/(nextRollingPointDTO.getPointTime()-currentRollingPointDTO.getPointTime()));
+            speed = (calculateGPSDistance(currentRollingPointDTO.getGpsLat(), currentRollingPointDTO.getGpsLong(), nextRollingPointDTO.getGpsLat(), nextRollingPointDTO.getGpsLong())*0.001/((nextRollingPointDTO.getPointTime()-currentRollingPointDTO.getPointTime())*0.00000027778));
         }
 
         rollingPointDTO.setSpeed(speed);
         return rollingPointDTO;
     }
+
+    public StationDataDTO speedBetweenStationsCalculation (StationDataDTO stationDataDTO, TripDTO tripDTO) {
+        double speed = 0;
+        for (int i = 1 ; i<tripDTO.getStationDataDTOList().size(); i++){
+            StationDataDTO currentStationDataDTO = tripDTO.getStationDataDTOList().get(i-1);
+            StationDataDTO nextStationDataDTO = tripDTO.getStationDataDTOList().get(i);
+            speed = (calculateGPSDistance(currentStationDataDTO.getGpsLat(), currentStationDataDTO.getGpsLong(), nextStationDataDTO.getGpsLat(), nextStationDataDTO.getGpsLong())*0.001/((nextStationDataDTO.getStartTime()-currentStationDataDTO.getEndTime())*0.00000027778));
+        }
+
+        stationDataDTO.setSpeed(speed);
+        return stationDataDTO;
+    }
+
 
     private static Double convertRad(Double input){
         return (Math.PI * input)/180;

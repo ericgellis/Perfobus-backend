@@ -75,7 +75,7 @@ public class TripFacade {
 		Trip savedTrip = saveNewTrip(tripDTO);
 		
 		if(tripDTO.getStationDataDTOList() != null){
-			stationDataList = saveStationDataList(savedTrip, tripDTO.getStationDataDTOList());
+			stationDataList = saveStationDataList(savedTrip, tripDTO.getStationDataDTOList(), tripDTO);
 		}
 		
 		if(tripDTO.getEventDTOList() != null && stationDataList != null){
@@ -176,8 +176,9 @@ public class TripFacade {
 			}
 	}
 
-	private List<StationData> saveStationDataList(Trip savedTrip, List<StationDataDTO> stationDataDTOList) {
+	private List<StationData> saveStationDataList(Trip savedTrip, List<StationDataDTO> stationDataDTOList, TripDTO tripDTO) {
 
+		Mathematics mathematics = new Mathematics();
 		if(savedTrip != null && stationDataDTOList != null){
 			int counter = 0;
 
@@ -185,6 +186,7 @@ public class TripFacade {
 
 			for (StationDataDTO stationDataDTO : stationDataDTOList ){
 
+				stationDataDTO = mathematics.speedBetweenStationsCalculation(stationDataDTO,tripDTO);
 				StationData stationData = new StationData();
 				stationData.setStationName(stationDataDTO.getStationName());
 				stationData.setEndTime(stationDataDTO.getEndTime());
@@ -194,6 +196,7 @@ public class TripFacade {
 				stationData.setGpsLat(stationDataDTO.getGpsLat());
 				stationData.setGpsLong(stationDataDTO.getGpsLong());
 				stationData.setStationStep(counter);
+				stationData.setSpeed(stationDataDTO.getSpeed());
 				stationData.setTrip(savedTrip);
 
 				StationData savedStationData = stationDataService.createStationData(stationData);

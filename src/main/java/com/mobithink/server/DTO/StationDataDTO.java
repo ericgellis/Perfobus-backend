@@ -14,11 +14,12 @@ public class StationDataDTO {
     private String stationName;
     private Double gpsLat;
     private Double gpsLong;
+    private Double speed;
 
     public StationDataDTO() {
     }
 
-    public StationDataDTO(Long id, int numberOfComeIn, int numberOfGoOut, Long startTime, Long endTime, int stationStep, String stationName, Double gpsLat, Double gpsLong) {
+    public StationDataDTO(Long id, int numberOfComeIn, int numberOfGoOut, Long startTime, Long endTime, int stationStep, String stationName, Double gpsLat, Double gpsLong, Double speed) {
         this.id = id;
         this.numberOfComeIn = numberOfComeIn;
         this.numberOfGoOut = numberOfGoOut;
@@ -28,6 +29,7 @@ public class StationDataDTO {
         this.stationName = stationName;
         this.gpsLat = gpsLat;
         this.gpsLong = gpsLong;
+        this.speed = speed;
     }
 
     public Long getId() {
@@ -100,6 +102,14 @@ public class StationDataDTO {
 
     public void setGpsLong(Double gpsLong) {
         this.gpsLong = gpsLong;
+    }
+
+    public Double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(Double speed) {
+        this.speed = speed;
     }
 
     @Override
