@@ -166,9 +166,10 @@ public class Mathematics {
             RollingPointDTO currentRollingPointDTO = tripDTO.getRollingPointDTOList().get(i-1);
             RollingPointDTO nextRollingPointDTO = tripDTO.getRollingPointDTOList().get(i);
             speed = (calculateGPSDistance(currentRollingPointDTO.getGpsLat(), currentRollingPointDTO.getGpsLong(), nextRollingPointDTO.getGpsLat(), nextRollingPointDTO.getGpsLong())*0.001/((nextRollingPointDTO.getPointTime()-currentRollingPointDTO.getPointTime())*0.00000027778));
+            rollingPointDTO.setSpeed(speed);
         }
 
-        rollingPointDTO.setSpeed(speed);
+
         return rollingPointDTO;
     }
 
@@ -178,9 +179,10 @@ public class Mathematics {
             StationDataDTO currentStationDataDTO = tripDTO.getStationDataDTOList().get(i-1);
             StationDataDTO nextStationDataDTO = tripDTO.getStationDataDTOList().get(i);
             speed = (calculateGPSDistance(currentStationDataDTO.getGpsLat(), currentStationDataDTO.getGpsLong(), nextStationDataDTO.getGpsLat(), nextStationDataDTO.getGpsLong())*0.001/((nextStationDataDTO.getStartTime()-currentStationDataDTO.getEndTime())*0.00000027778));
+            stationDataDTO.setSpeed(speed);
         }
 
-        stationDataDTO.setSpeed(speed);
+
         return stationDataDTO;
     }
 
