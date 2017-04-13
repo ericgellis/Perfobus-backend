@@ -131,7 +131,6 @@ public class TripFacade {
 
 		if(savedTrip!=null && rollingPointDTOList!=null){
 			for (RollingPointDTO rollingPointDto : rollingPointDTOList){
-				rollingPointDto = mathematics.speedBetweenRollingPointsCalculation(rollingPointDto,tripDTO);
 				RollingPoint rollingPoint = new RollingPoint();
 				rollingPoint.setTrip(savedTrip);
 				rollingPoint.setGpsLat(rollingPointDto.getGpsLat());
@@ -185,24 +184,40 @@ public class TripFacade {
 			List<StationData> stationDataList = new ArrayList<>();
 
 			for (StationDataDTO stationDataDTO : stationDataDTOList ){
+				if (counter < stationDataDTOList.size()-1) {
+					stationDataDTO = mathematics.speedBetweenStationsCalculation(stationDataDTO, tripDTO.getStationDataDTOList().get(counter + 1), tripDTO);
+					StationData stationData = new StationData();
+					stationData.setStationName(stationDataDTO.getStationName());
+					stationData.setEndTime(stationDataDTO.getEndTime());
+					stationData.setStartTime(stationDataDTO.getStartTime());
+					stationData.setNumberOfComeIn(stationDataDTO.getNumberOfComeIn());
+					stationData.setNumberOfGoOut(stationDataDTO.getNumberOfGoOut());
+					stationData.setGpsLat(stationDataDTO.getGpsLat());
+					stationData.setGpsLong(stationDataDTO.getGpsLong());
+					stationData.setStationStep(counter);
+					stationData.setSpeed(stationDataDTO.getSpeed());
+					stationData.setTrip(savedTrip);
 
-				stationDataDTO = mathematics.speedBetweenStationsCalculation(stationDataDTO,tripDTO);
-				StationData stationData = new StationData();
-				stationData.setStationName(stationDataDTO.getStationName());
-				stationData.setEndTime(stationDataDTO.getEndTime());
-				stationData.setStartTime(stationDataDTO.getStartTime());
-				stationData.setNumberOfComeIn(stationDataDTO.getNumberOfComeIn());
-				stationData.setNumberOfGoOut(stationDataDTO.getNumberOfGoOut());
-				stationData.setGpsLat(stationDataDTO.getGpsLat());
-				stationData.setGpsLong(stationDataDTO.getGpsLong());
-				stationData.setStationStep(counter);
-				stationData.setSpeed(stationDataDTO.getSpeed());
-				stationData.setTrip(savedTrip);
+					StationData savedStationData = stationDataService.createStationData(stationData);
+					stationDataList.add(savedStationData);
 
-				StationData savedStationData = stationDataService.createStationData(stationData);
-				stationDataList.add(savedStationData);
+					counter++;
+				}else {
+					StationData stationData = new StationData();
+					stationData.setStationName(stationDataDTO.getStationName());
+					stationData.setEndTime(stationDataDTO.getEndTime());
+					stationData.setStartTime(stationDataDTO.getStartTime());
+					stationData.setNumberOfComeIn(stationDataDTO.getNumberOfComeIn());
+					stationData.setNumberOfGoOut(stationDataDTO.getNumberOfGoOut());
+					stationData.setGpsLat(stationDataDTO.getGpsLat());
+					stationData.setGpsLong(stationDataDTO.getGpsLong());
+					stationData.setStationStep(counter);
+					stationData.setSpeed(0.0);
+					stationData.setTrip(savedTrip);
 
-				counter++;
+					StationData savedStationData = stationDataService.createStationData(stationData);
+					stationDataList.add(savedStationData);
+				}
 			}
 			return stationDataList;
 		} else return null;
