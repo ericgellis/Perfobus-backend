@@ -51,6 +51,7 @@ CREATE TABLE public.event
     voice_memo TEXT,
     picture TEXT,
     time_saving DOUBLE PRECISION,
+    event_type TEXT,
     CONSTRAINT event_pkey PRIMARY KEY (id)
 );
 

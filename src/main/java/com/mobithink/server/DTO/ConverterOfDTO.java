@@ -77,7 +77,7 @@ public class ConverterOfDTO {
 
     public static EventDTO convertEventToDto(Event event){
         EventDTO eventDTO = new EventDTO(event.getId(),event.getEventName(),event.getStartTime(),event.getEndTime(), event.getGpsLat(),
-                event.getGpsLong(),  event.getGpsEndLat(), event.getGpsEndLong(),  null, event.getTimeSaving(), event.getPicture(), event.getVoiceMemo());
+                event.getGpsLong(),  event.getGpsEndLat(), event.getGpsEndLong(),  null, event.getTimeSaving(), event.getPicture(), event.getVoiceMemo(), event.getEventType());
         
         if (event.getStationData() != null){
         	eventDTO.setStationName(event.getStationData().getStationName());

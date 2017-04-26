@@ -169,6 +169,7 @@ public class TripFacade {
 				event.setGpsEndLong(eventDto.getGpsEndLong());
 				event.setVoiceMemo(eventDto.getVoiceMemo());
 				event.setPicture(eventDto.getPicture());
+				event.setEventType(eventDto.getEventType());
 				event.setTimeSaving(eventDto.getTimeSaving());
 
 				Event savedEvent = eventService.createEvent(event);

@@ -46,6 +46,9 @@ public class Event {
     @Column(name = "time_saving")
     private Long timeSaving;
 
+    @Column(name = "event_type")
+    private String eventType;
+
     @ManyToOne
     @JoinColumn(name = "station_data_id")
     private StationData stationData;
@@ -145,5 +148,13 @@ public class Event {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public String getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
     }
 }
