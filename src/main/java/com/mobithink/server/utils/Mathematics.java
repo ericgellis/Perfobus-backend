@@ -192,14 +192,13 @@ public class Mathematics {
         return distance;
     }
 
-    private int timeSavingEasyCalculation(EventDTO eventDTO){
+    private double timeSavingEasyCalculation(EventDTO eventDTO){
         double time = 0;
         time = (eventDTO.getEndTime()-eventDTO.getStartTime());
-        int minutes = (int) ((time / (1000*60)) % 60);
-        return minutes;
+        return time;
     }
 
-    private int timeSavingComplexCalculation(EventDTO eventDTO, TripDTO tripDTO){
+    private double timeSavingComplexCalculation(EventDTO eventDTO, TripDTO tripDTO){
         double time = 0;
 
             for (int i = 1 ; i<tripDTO.getStationDataDTOList().size(); i++) {
@@ -212,7 +211,6 @@ public class Mathematics {
                                     / (nextStationDataDTO.getEndTime() - currentStationDataDTO.getStartTime())));
                 }
             }
-        int minutes = (int) ((time / (1000*60)) % 60);
-        return minutes;
+        return time;
     }
 }
